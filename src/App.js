@@ -1,4 +1,5 @@
 import './App.css';
+import  React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";  // Necessary to use the router with React
 import Approche from './components/Approche';
 import Article from './components/Article';
@@ -8,12 +9,30 @@ import Form from './components/Form';
 import HomePage from './components/HomePage';
 import Humain from './components/Humain';
 import NavBar from './components/NavBar';
+import ProjectList from './components/ProjectList';
 import Project from './components/Project';
+import axios from 'axios';
+
 
 
 
 
 function App() {
+
+  const [quote, setQuote] = React.useState("");
+
+  const fetchInspi = () => {
+    axios.get("http://localhost:1993/inspiration", { crossdomain: true } )
+    .then(fancyWords => {
+      setQuote(fancyWords.data.quote);
+      console.log(quote);
+    })
+  }
+  React.useEffect(() => {
+    fetchInspi()
+  })
+
+
 
   return (
     <Router>
@@ -39,12 +58,15 @@ function App() {
             <Route path="/who">
               <Humain/>
             </Route>
-            <Route path="/projects">
+            <Route path="/projectsList">
+              <ProjectList/>
+            </Route>
+            <Route path="/project">
               <Project/>
             </Route>
         </Switch> 
         </div>
-        <Footer/>
+        <Footer citation={quote}/>
       </div>
     </Router>
   );
