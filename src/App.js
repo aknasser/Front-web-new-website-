@@ -16,22 +16,69 @@ import axios from 'axios';
 
 
 
+const projectsReducer = (state, action) => {
+  switch(action.type) {
+    case "PROJECT_FETCH_START":
+      return {
+        ...state,
+        isLoading : true,
+        isError : false
+      };
+    case "PROJECT_FETCH_SUCCESS":
+      return {
+        ...state,
+        isLoading : false,
+        isError: false,
+        data : action.payload
+      };
+    case "PROJECT_FETCH_ERROR":
+      return {
+        ...state,
+        isLoading : false,
+        isError : true
+      };
+    default :
+      throw new Error();
+
+
+  }
+}
+
+
+
 
 function App() {
 
-  const [quote, setQuote] = React.useState("");
 
-  const fetchInspi = () => {
-    axios.get("http://localhost:1993/inspiration", { crossdomain: true } )
-    .then(fancyWords => {
-      setQuote(fancyWords.data.quote);
-      console.log(quote);
-    })
-  }
-  React.useEffect(() => {
-    fetchInspi()
-  })
+// REDUCER PROJECTS
+  const [projectList, dispatchProjectList] = React.useReducer(
+    projectsReducer,                                    // REDUCER
+    {data: [], isLoading : false, isError :false}       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
+  );
 
+
+     React.useEffect(() => {
+        const projectMgmt = async() => {
+          try {
+            dispatchProjectList({type: "PROJECT_FETCH_START"});
+  
+          
+            const allProjects = await axios.get("http://localhost:1993/project", { crossdomain: true })
+            dispatchProjectList({
+              type: "PROJECT_FETCH_SUCCESS",
+              payload : allProjects.data,
+            });
+              
+          } catch {
+            dispatchProjectList ({
+              type: "PROJECT_FETCH_ERROR"
+            })
+          }
+        }
+
+      projectMgmt();
+    }, []);
+  
 
 
   return (
@@ -59,14 +106,19 @@ function App() {
               <Humain/>
             </Route>
             <Route path="/projectsList">
-              <ProjectList/>
+              {projectList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+              {projectList.isLoading ? (
+                <p> Chargement...</p>
+              ) : (
+                <ProjectList projets={projectList.data}/>
+              )}
             </Route>
             <Route path="/project">
               <Project/>
             </Route>
         </Switch> 
         </div>
-        <Footer citation={quote}/>
+{        <Footer/>}
       </div>
     </Router>
   );
