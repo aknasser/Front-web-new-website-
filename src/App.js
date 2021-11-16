@@ -1,5 +1,5 @@
 import './App.css';
-import  React from 'react';
+import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";  // Necessary to use the router with React
 import Approche from './components/Approche';
 import Article from './components/Article';
@@ -32,6 +32,34 @@ const projectsReducer = (state, action) => {
         data : action.payload
       };
     case "PROJECT_FETCH_ERROR":
+      return {
+        ...state,
+        isLoading : false,
+        isError : true
+      };
+    default :
+      throw new Error();
+
+
+  }
+}
+
+const articlesReducer = (state, action) => {
+  switch(action.type) {
+    case "ARTICLE_FETCH_START":
+      return {
+        ...state,
+        isLoading : true,
+        isError : false
+      };
+    case "ARTICLE_FETCH_SUCCESS":
+      return {
+        ...state,
+        isLoading : false,
+        isError: false,
+        data : action.payload
+      };
+    case "ARTICLE_FETCH_ERROR":
       return {
         ...state,
         isLoading : false,
@@ -80,6 +108,37 @@ function App() {
     }, []);
   
 
+// REDUCER MENU BLOG
+
+    const [articlesList, dispatchArticles] = React.useReducer(
+      articlesReducer,
+      {data: [], isLoading : false, isError :false}
+    )
+
+
+    React.useEffect( () => {
+      const articleManagement = async() => {
+        try {
+          dispatchArticles({type :"ARTICLE_FETCH_START"})
+
+          const allArticles = await axios.get("http://localhost:1993/blog", { crossdomain: true })
+          await console.log(allArticles);
+          dispatchArticles({
+            type : "ARTICLE_FETCH_SUCCESS",
+            payload : allArticles.data,
+          });
+
+        } catch {
+          dispatchArticles({type: "ARTICLE_FETCH_ERROR"})
+        }
+
+      }
+      articleManagement();
+  
+    }, [])
+
+
+
 
   return (
     <Router>
@@ -93,11 +152,16 @@ function App() {
             <Route path="/approche">
               <Approche/>
             </Route>
-            <Route path="/article">
-              <Article/>
+            <Route path="/article/:id">
+              <Article />
             </Route>
             <Route path="/blog">
-              <Blog/>
+              {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+              {articlesList.isLoading ? (
+                <p> Chargement des articles...</p>
+              ) : (
+                <Blog articles={articlesList.data} /* setArticleId={setArticleId()} */ />
+              )}
             </Route>
             <Route path="/contact">
               <Form/>
@@ -108,12 +172,12 @@ function App() {
             <Route path="/projectsList">
               {projectList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
               {projectList.isLoading ? (
-                <p> Chargement...</p>
+                <p> Chargement des projets...</p>
               ) : (
                 <ProjectList projets={projectList.data}/>
               )}
             </Route>
-            <Route path="/project">
+            <Route path="/project/:id">
               <Project/>
             </Route>
         </Switch> 

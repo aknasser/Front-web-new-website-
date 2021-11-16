@@ -1,14 +1,14 @@
 import PageTitle from "./parts/PageTitle";
-import SectionTitle from "./parts/SectionTitle";
-import Picture from "./parts/Picture";
 import InputForm from "./parts/InputForm";
 import { Link } from "react-router-dom"
+import ItemArticle from "./parts/ItemArticle";
 
 
 
-const Blog = () => {
+const Blog = ({articles}) => {
+    
     return (
-        <div>                                 {/* On utilisera array.map pour balayer l'ensemble des objects facilement */}
+        <div>                                 
             <PageTitle pageTitle="Le Blog"/>
             <h3>Mes conseils pour trouver des clients et aussi quelques réflexions. Web developer ? Oui. Mais humain avant tout.</h3>
             <div className="filter">
@@ -17,12 +17,17 @@ const Blog = () => {
                     <input type ="submit" value = "Chercher"/>
                 </form>
             </div>
-            <Link to="/article">
-                <SectionTitle sectionTitle ="Article1"/>
-                <p>{/* {descriptionProject} */}Description de L'article</p>
-                <Picture imageLink="" imageDescription="L'image correspondant à l'article"/>
-            </Link>
+            {articles.map(article => (
+                <Link to={`/article/${article._id}`}>
+                    <ItemArticle
+                        key = {article._id}
+                        title = {article.title}
+                        subtitle = {article.subtitle}
+                        heroPicture = {article.heroPicture}
+                     />
+                </Link>
 
+            ))}
         </div>
     );
 }
