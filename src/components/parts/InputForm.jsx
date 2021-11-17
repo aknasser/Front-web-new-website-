@@ -1,7 +1,7 @@
-const InputForm = ({id, type, labelValue, value}) => {
+const InputForm = ({id, type, labelValue, value, inputHandler}) => {
     return (
         <label> {labelValue}
-            <input id={id} type={type} value={value}/>
+            <input id={id} type={type} value={value} onChange={inputHandler} />
         </label>
     );
 }
