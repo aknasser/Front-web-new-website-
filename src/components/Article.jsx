@@ -6,7 +6,7 @@ import Picture from "./parts/Picture";
 
 const Article = () => {
 
-    const { id } = useParams();
+    const { id } = useParams();  // permet de récupérer la valeur du paramètre utilisée pour arriver surc cette page
 
 
 

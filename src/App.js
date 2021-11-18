@@ -12,7 +12,14 @@ import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import Project from './components/Project';
 import axios from 'axios';
+import AdminMainPage from './components/AdminMainPage';
+import CategorieMenu from './components/CategorieMenu';
+import ReadProspect from './components/ReadProspect';
 
+
+
+const categories = ["prospect", "article", "project", "inspiration"]; 
+// On passe cette variable dans le component AdminMainPage pour récupérer les noms des categories
 
 
 
@@ -60,6 +67,35 @@ const articlesReducer = (state, action) => {
         data : action.payload
       };
     case "ARTICLE_FETCH_ERROR":
+      return {
+        ...state,
+        isLoading : false,
+        isError : true
+      };
+    default :
+      throw new Error();
+
+
+  }
+}
+
+
+const prospectReducer = (state, action) => {
+  switch(action.type) {
+    case "PROSPECT_FETCH_START":
+      return {
+        ...state,
+        isLoading : true,
+        isError : false
+      };
+    case "PROSPECT_FETCH_SUCCESS":
+      return {
+        ...state,
+        isLoading : false,
+        isError: false,
+        data : action.payload
+      };
+    case "PROSPECT_FETCH_ERROR":
       return {
         ...state,
         isLoading : false,
@@ -137,6 +173,36 @@ function App() {
   
     }, [])
 
+// REDUCER PROSPECTS
+
+
+
+  const [prospectsList, dispatchProspect] = React.useReducer(
+    prospectReducer,
+    {data : [], isLoading : false, isError: false}
+  )
+
+  React.useEffect( () => {
+    const articleManagement = async() => {
+      try {
+        dispatchProspect({type :"PROSPECT_FETCH_START"})
+
+        const allProspects = await axios.get("http://localhost:1993/prospect", { crossdomain: true })
+        await console.log(allProspects);
+        dispatchProspect({
+          type : "PROSPECT_FETCH_SUCCESS",
+          payload : allProspects.data,
+        });
+
+      } catch {
+        dispatchProspect({type: "PROSPECT_FETCH_ERROR"})
+      }
+
+    }
+    articleManagement();
+
+  }, [])
+
 
 
 
@@ -180,9 +246,32 @@ function App() {
             <Route path="/project/:id">
               <Project/>
             </Route>
+            <Route exact path="/admin">
+              <AdminMainPage categories = {categories}/>
+            </Route>
+            <Route exact path="/admin/:categorie">
+              <CategorieMenu/>
+            </Route>
+            <Route path="/admin/prospect/all">
+            {prospectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+              {prospectsList.isLoading ? (
+                <p> Chargement des projets...</p>
+              ) : (
+                <ReadProspect prospects={prospectsList.data}/>
+                )}
+            </Route>
+            <Route path="/admin/article/all">
+              <ReadProspect/>
+            </Route>
+            <Route path="/admin/project/all">
+              <ReadProspect/>
+            </Route>
+            <Route path="/admin/inspiration/all">
+              <ReadProspect/>
+            </Route>
         </Switch> 
         </div>
-{        <Footer/>}
+        <Footer/>
       </div>
     </Router>
   );
