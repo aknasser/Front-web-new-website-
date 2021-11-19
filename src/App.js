@@ -11,10 +11,17 @@ import Humain from './components/Humain';
 import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import Project from './components/Project';
-import axios from 'axios';
 import AdminMainPage from './components/AdminMainPage';
 import CategorieMenu from './components/CategorieMenu';
 import ReadProspect from './components/ReadProspect';
+import useFetchModel from './components/parts/customHooks/useFetchModel';
+import ReadArticle from './components/ReadArticle';
+import ReadProject from './components/ReadProject';
+import ReadInspiration from './components/ReadInspiration';
+import CreateArticle from './components/CreateArticle';
+import CreateProject from './components/CreateProject';
+import CreateInspiration from './components/CreateInspiration';
+
 
 
 
@@ -23,185 +30,17 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const projectsReducer = (state, action) => {
-  switch(action.type) {
-    case "PROJECT_FETCH_START":
-      return {
-        ...state,
-        isLoading : true,
-        isError : false
-      };
-    case "PROJECT_FETCH_SUCCESS":
-      return {
-        ...state,
-        isLoading : false,
-        isError: false,
-        data : action.payload
-      };
-    case "PROJECT_FETCH_ERROR":
-      return {
-        ...state,
-        isLoading : false,
-        isError : true
-      };
-    default :
-      throw new Error();
-
-
-  }
-}
-
-const articlesReducer = (state, action) => {
-  switch(action.type) {
-    case "ARTICLE_FETCH_START":
-      return {
-        ...state,
-        isLoading : true,
-        isError : false
-      };
-    case "ARTICLE_FETCH_SUCCESS":
-      return {
-        ...state,
-        isLoading : false,
-        isError: false,
-        data : action.payload
-      };
-    case "ARTICLE_FETCH_ERROR":
-      return {
-        ...state,
-        isLoading : false,
-        isError : true
-      };
-    default :
-      throw new Error();
-
-
-  }
-}
-
-
-const prospectReducer = (state, action) => {
-  switch(action.type) {
-    case "PROSPECT_FETCH_START":
-      return {
-        ...state,
-        isLoading : true,
-        isError : false
-      };
-    case "PROSPECT_FETCH_SUCCESS":
-      return {
-        ...state,
-        isLoading : false,
-        isError: false,
-        data : action.payload
-      };
-    case "PROSPECT_FETCH_ERROR":
-      return {
-        ...state,
-        isLoading : false,
-        isError : true
-      };
-    default :
-      throw new Error();
-
-
-  }
-}
-
 
 
 
 function App() {
 
-
-// REDUCER PROJECTS
-  const [projectList, dispatchProjectList] = React.useReducer(
-    projectsReducer,                                    // REDUCER
-    {data: [], isLoading : false, isError :false}       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
-  );
+  const [prospectsList, dispatchProspect] = useFetchModel("prospect")
+  const [articlesList, dispatchArticle] = useFetchModel("blog")
+  const [projectsList, dispatchProject] = useFetchModel("project")
+  const [inspirationsList, dispatchInspiration] = useFetchModel("inspiration")
 
 
-     React.useEffect(() => {
-        const projectMgmt = async() => {
-          try {
-            dispatchProjectList({type: "PROJECT_FETCH_START"});
-  
-          
-            const allProjects = await axios.get("http://localhost:1993/project", { crossdomain: true })
-            dispatchProjectList({
-              type: "PROJECT_FETCH_SUCCESS",
-              payload : allProjects.data,
-            });
-              
-          } catch {
-            dispatchProjectList ({
-              type: "PROJECT_FETCH_ERROR"
-            })
-          }
-        }
-
-      projectMgmt();
-    }, []);
-  
-
-// REDUCER MENU BLOG
-
-    const [articlesList, dispatchArticles] = React.useReducer(
-      articlesReducer,
-      {data: [], isLoading : false, isError :false}
-    )
-
-
-    React.useEffect( () => {
-      const articleManagement = async() => {
-        try {
-          dispatchArticles({type :"ARTICLE_FETCH_START"})
-
-          const allArticles = await axios.get("http://localhost:1993/blog", { crossdomain: true })
-          await console.log(allArticles);
-          dispatchArticles({
-            type : "ARTICLE_FETCH_SUCCESS",
-            payload : allArticles.data,
-          });
-
-        } catch {
-          dispatchArticles({type: "ARTICLE_FETCH_ERROR"})
-        }
-
-      }
-      articleManagement();
-  
-    }, [])
-
-// REDUCER PROSPECTS
-
-
-
-  const [prospectsList, dispatchProspect] = React.useReducer(
-    prospectReducer,
-    {data : [], isLoading : false, isError: false}
-  )
-
-  React.useEffect( () => {
-    const articleManagement = async() => {
-      try {
-        dispatchProspect({type :"PROSPECT_FETCH_START"})
-
-        const allProspects = await axios.get("http://localhost:1993/prospect", { crossdomain: true })
-        await console.log(allProspects);
-        dispatchProspect({
-          type : "PROSPECT_FETCH_SUCCESS",
-          payload : allProspects.data,
-        });
-
-      } catch {
-        dispatchProspect({type: "PROSPECT_FETCH_ERROR"})
-      }
-
-    }
-    articleManagement();
-
-  }, [])
 
 
 
@@ -236,11 +75,11 @@ function App() {
               <Humain/>
             </Route>
             <Route path="/projectsList">
-              {projectList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
-              {projectList.isLoading ? (
+              {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+              {projectsList.isLoading ? (
                 <p> Chargement des projets...</p>
               ) : (
-                <ProjectList projets={projectList.data}/>
+                <ProjectList projets={projectsList.data}/>
               )}
             </Route>
             <Route path="/project/:id">
@@ -252,22 +91,53 @@ function App() {
             <Route exact path="/admin/:categorie">
               <CategorieMenu/>
             </Route>
+
+{/* LES ROUTES POUR LE R DU CRUD */}
             <Route path="/admin/prospect/all">
-            {prospectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
-              {prospectsList.isLoading ? (
-                <p> Chargement des projets...</p>
-              ) : (
-                <ReadProspect prospects={prospectsList.data}/>
-                )}
+              {prospectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                {prospectsList.isLoading ? (
+                  <p> Chargement des projets...</p>
+                ) : (
+                  <ReadProspect prospects={prospectsList.data}/>
+                  )}
             </Route>
             <Route path="/admin/article/all">
-              <ReadProspect/>
+              {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                {articlesList.isLoading ? (
+                  <p> Chargement des projets...</p>
+                ) : (
+                  <ReadArticle articles={articlesList.data}/>
+                  )}            
             </Route>
             <Route path="/admin/project/all">
-              <ReadProspect/>
+              {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                {projectsList.isLoading ? (
+                  <p> Chargement des projets...</p>
+                ) : (
+                  <ReadProject projects={projectsList.data}/>
+                  )} 
             </Route>
             <Route path="/admin/inspiration/all">
-              <ReadProspect/>
+              {inspirationsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                {inspirationsList.isLoading ? (
+                  <p> Chargement des projets...</p>
+                ) : (
+                  <ReadInspiration inspirations={inspirationsList.data}/>
+                  )}
+            </Route>
+
+{/* LES ROUTES POUR LE C DU CRUD */}
+            <Route path="/admin/prospect/create">
+              <Form/>
+            </Route>
+            <Route path="/admin/article/create">
+              <CreateArticle />       
+            </Route>
+            <Route path="/admin/project/create">
+              <CreateProject />       
+            </Route>
+            <Route path="/admin/inspiration/create">
+              <CreateInspiration />       
             </Route>
         </Switch> 
         </div>

@@ -1,11 +1,42 @@
 import * as React from 'react';
+import axios from 'axios';
 
 
 
 const useFetchModel = (categorie) => {
 
+    const modelReducer = (state, action) => {
+        switch(action.type) {
+          case "FETCH_START":
+            return {
+              ...state,
+              isLoading : true,
+              isError : false
+            };
+          case "FETCH_SUCCESS":
+            return {
+              ...state,
+              isLoading : false,
+              isError: false,
+              data : action.payload
+            };
+          case "FETCH_ERROR":
+            return {
+              ...state,
+              isLoading : false,
+              isError : true
+            };
+          default :
+            throw new Error();
+      
+      
+        }
+      }
+      
+
+
     const [dataModel, dispatchData] = React.useReducer(
-        projectsReducer,                                    // REDUCER
+        modelReducer,                                    // REDUCER
         {data: [], isLoading : false, isError :false}       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
       );
     
@@ -30,8 +61,10 @@ const useFetchModel = (categorie) => {
             }
     
           projectMgmt();
-        }, []);
+        }, [categorie]);
 
     return [dataModel, dispatchData];
 }
 
+
+export default useFetchModel;

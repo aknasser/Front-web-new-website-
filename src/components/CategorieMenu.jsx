@@ -9,7 +9,7 @@ const CategorieMenu = () => {
     const { categorie } = useParams();
     return ( 
         <div>
-        <Link to={`/admin/${categorie}/ajout`}>
+        <Link to={`/admin/${categorie}/create`}>
             <h2>Ajouter {categorie}</h2>
         </Link>
         <Link to={`/admin/${categorie}/all`}>
