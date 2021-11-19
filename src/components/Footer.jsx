@@ -7,7 +7,7 @@ const Footer = () => {
     const [quote, setQuote] = React.useState("Wait..");
 
     const fetchInspi = () => {
-      axios.get("http://localhost:1993/inspiration", { crossdomain: true } )
+      axios.get("http://localhost:1993/inspiration/random", { crossdomain: true } )
       .then(fancyWords => {
         setQuote(fancyWords.data.quote);
         console.log(quote);

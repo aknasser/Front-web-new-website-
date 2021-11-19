@@ -50,7 +50,7 @@ const Form = () => {
         };
         console.log("Here we go!!!")
         const leadPosted = await axios.post("http://localhost:1993/prospect", newProspect)
-        console.log(leadPosted);
+        console.log(leadPosted.data);
     }
 
 
