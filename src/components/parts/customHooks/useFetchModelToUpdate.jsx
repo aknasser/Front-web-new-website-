@@ -3,13 +3,18 @@ import axios from 'axios';
 
 
 
-const useFetchModel = (categorie) => {
+
+
+const useFetchModelToUpdate = (categorie) => {
+
+
+
 
     const modelReducer = (state, action) => {
         switch(action.type) {
           case "FETCH_START":
             return {
-              ...state,       // Spread operator : Les propriétés de l'object state restent identiques sauf celles qui suivent (isLoading et isError en l'occurence)
+              ...state,
               isLoading : true,
               isError : false
             };
@@ -45,9 +50,9 @@ const useFetchModel = (categorie) => {
             const projectMgmt = async() => {
               try {
                 dispatchData({type: "FETCH_START"});
-      
+
               
-                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}`, { crossdomain: true })
+                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}/6187294f9a5efcfcaa8b2aec`, { crossdomain: true })
                 dispatchData({
                   type: "FETCH_SUCCESS",
                   payload : objectsFetched.data,
@@ -67,4 +72,4 @@ const useFetchModel = (categorie) => {
 }
 
 
-export default useFetchModel;
+export default useFetchModelToUpdate;
