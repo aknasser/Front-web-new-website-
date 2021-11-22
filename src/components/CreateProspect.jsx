@@ -4,49 +4,69 @@ import InputForm from "./parts/InputForm";
 import InputSubmit from './parts/InputSubmit';
 
 
-const Form = () => {
+const CreateProspect = () => {
 
-    const [prenomValue, setPrenomValue] = React.useState("");
-    const [nomValue, setNomValue] = React.useState("");
-    const [demandeValue, setDemandeValue] = React.useState("");
-    const [activiteValue, setActiviteValue] = React.useState("");
-    const [phoneValue, setPhoneValue] = React.useState("");
-    const [emailValue, setEmailValue] = React.useState("");
+    const [state, setState] = React.useState({
+        prenom: "",
+        nom :"",
+        demande :"",
+        activite : "",
+        numero :"",
+        email : ""
+    });
 
     const inputHandlerName = (event) => {
-        setPrenomValue(event.target.value);
+        setState(state => ({
+            ...state,
+            prenom : event.target.value
+        }))
     };
 
     const inputHandlerSurname = (event) => {
-        setNomValue(event.target.value);
+        setState(state => ({
+            ...state,
+            nom : event.target.value
+        }))
     };
 
     const inputHandlerDemande = (event) => {
-        setDemandeValue(event.target.value);
+        setState(state => ({
+            ...state,
+            demande : event.target.value
+        }))
     };
 
     const inputHandlerActivite = (event) => {
-        setActiviteValue(event.target.value);
+        setState(state => ({
+            ...state,
+            activite : event.target.value
+        }))
     };
 
     const inputHandlerPhone = (event) => {
-        setPhoneValue(event.target.value);
+        setState(state => ({
+            ...state,
+            numero : event.target.value
+        }))
     };
 
     const inputHandlerEmail = (event) => {
-        setEmailValue(event.target.value);
+        setState(state => ({
+            ...state,
+            email : event.target.value
+        }))
     };
 
 
     const submitHandler = async(event) => {
         event.preventDefault();                // Pour empêcher le comportement par défaut du form
         const newProspect = {                   // on définit la variable contenant les datas du prospect
-            prenom : prenomValue,
-            nom : nomValue,
-            demande : demandeValue,
-            activite :activiteValue,
-            numero : phoneValue, 
-            email : emailValue
+            prenom : state.prenom,
+            nom : state.nom,
+            demande : state.demande,
+            activite :state.activite,
+            numero : state.numero, 
+            email : state.email
         };
         console.log("Here we go!!!")
         const leadPosted = await axios.post("http://localhost:1993/prospect", newProspect)
@@ -61,7 +81,7 @@ const Form = () => {
                     id="prenom" 
                     type="text" 
                     labelValue="Prénom" 
-                    value={prenomValue} 
+                    value={state.prenom} 
                     inputHandler={inputHandlerName}
                  />   
 
@@ -69,7 +89,7 @@ const Form = () => {
                     id="nom" 
                     type="text" 
                     labelValue="Nom" 
-                    value={nomValue} 
+                    value={state.nom} 
                     inputHandler={inputHandlerSurname}
                 />
 
@@ -77,7 +97,7 @@ const Form = () => {
                     id="demande" 
                     type="textarea" 
                     labelValue="Demande" 
-                    value={demandeValue} 
+                    value={state.demande} 
                     inputHandler={inputHandlerDemande}
                 />
 
@@ -85,7 +105,7 @@ const Form = () => {
                     id="activite" 
                     type="text" 
                     labelValue="Activité" 
-                    value={activiteValue} 
+                    value={state.activite} 
                     inputHandler={inputHandlerActivite}
                 />
                 
@@ -93,7 +113,7 @@ const Form = () => {
                     id="email" 
                     type="email" 
                     labelValue="Email" 
-                    value={emailValue} 
+                    value={state.email} 
                     inputHandler={inputHandlerEmail}
                 />
 
@@ -101,7 +121,7 @@ const Form = () => {
                     id="téléphone" 
                     type="text" 
                     labelValue="Téléphone" 
-                    value={phoneValue} 
+                    value={state.numero} 
                     inputHandler={inputHandlerPhone}
                 />
 
@@ -113,4 +133,4 @@ const Form = () => {
     );
 }
  
-export default Form;
+export default CreateProspect;

@@ -5,7 +5,7 @@ import Approche from './components/Approche';
 import Article from './components/Article';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
-import Form from './components/Form';
+import Form from './components/CreateProspect';
 import HomePage from './components/HomePage';
 import Humain from './components/Humain';
 import NavBar from './components/NavBar';
@@ -21,6 +21,8 @@ import ReadInspiration from './components/ReadInspiration';
 import CreateArticle from './components/CreateArticle';
 import CreateProject from './components/CreateProject';
 import CreateInspiration from './components/CreateInspiration';
+import CreateProspect from './components/CreateProspect';
+import UpdateArticle from './components/UpdateArticle';
 
 
 
@@ -33,15 +35,15 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
+
+
 function App() {
 
-  const [prospectsList, dispatchProspect] = useFetchModel("prospect")
-  const [articlesList, dispatchArticle] = useFetchModel("blog")
-  const [projectsList, dispatchProject] = useFetchModel("project")
-  const [inspirationsList, dispatchInspiration] = useFetchModel("inspiration")
-
-
-
+  const [prospectsList, dispatchProspect] = useFetchModel("prospect");
+  const [articlesList, dispatchArticle] = useFetchModel("blog");
+  const [projectsList, dispatchProject] = useFetchModel("project");
+  const [inspirationsList, dispatchInspiration] = useFetchModel("inspiration");
+  
 
 
 
@@ -128,7 +130,7 @@ function App() {
 
 {/* LES ROUTES POUR LE C DU CRUD */}
             <Route path="/admin/prospect/create">
-              <Form/>
+              <CreateProspect/>
             </Route>
             <Route path="/admin/article/create">
               <CreateArticle />       
@@ -137,6 +139,20 @@ function App() {
               <CreateProject />       
             </Route>
             <Route path="/admin/inspiration/create">
+              <CreateInspiration />       
+            </Route>
+
+{/* LES ROUTES POUR LE U DU CRUD */}
+            <Route path="/admin/prospect/update/:id">
+              <CreateProspect/>
+            </Route>
+            <Route path="/admin/article/update/:id">
+                  <UpdateArticle/>
+            </Route>
+            <Route path="/admin/project/update/:id">
+              <CreateProject />       
+            </Route>
+            <Route path="/admin/inspiration/update/:id">
               <CreateInspiration />       
             </Route>
         </Switch> 

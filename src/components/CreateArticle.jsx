@@ -6,32 +6,49 @@ import axios from "axios";
 
 const CreateArticle = () => {
     
-    const [titleValue , setTitleValue ] = React.useState("")
-    const [subtitleValue , setSubtitleValue ] = React.useState("")
-    const [heroPictureValue , setHeroPictureValue ] = React.useState("")
-    const [keywordsValue , ssetKeywordsValue ] = React.useState("")
-    const [contentValue , setContentValue ] = React.useState("")
+    const [state, setState] = React.useState({
+        title: "",
+        subtitle :"",
+        heroPicture :"",
+        keywords : "",
+        content :""
+    });
 
     
     const inputHandlerTitle = (event) => {
-        setTitleValue(event.target.value)
-    }
+        setState(state => ({
+            ...state,
+            title : event.target.value
+        }))
+    };
 
     const inputHandlerSubtitle = (event) => {
-        setSubtitleValue(event.target.value)
-    }
+        setState(state => ({
+            ...state,
+            subtitle : event.target.value
+         }))
+    };
 
     const inputHandlerHeroPicture = (event) => {
-        setHeroPictureValue(event.target.value)
-    }
+        setState(state => ({
+            ...state,
+            heroPicture : event.target.value
+         }))
+    };
 
     const inputHandlerKeywords = (event) => {
-        ssetKeywordsValue(event.target.value)
-    }
+        setState(state => ({
+            ...state,
+            keywords : event.target.value
+         }))
+    };
 
     const inputHandlerContent = (event) => {
-        setContentValue(event.target.value)
-    }
+        setState(state => ({
+            ...state,
+            content : event.target.value
+         }))
+    };
     
 
 
@@ -39,11 +56,11 @@ const CreateArticle = () => {
         event.preventDefault();
         console.log("C'est parti")
         const newObject = {
-            title: titleValue,
-            subtitle: subtitleValue,
-            heroPicture : heroPictureValue,
-            keywords : keywordsValue,
-            content : contentValue,
+            title: state.title,
+            subtitle: state.subtitle,
+            heroPicture : state.heroPicture,
+            keywords : state.keywords,
+            content : state.content,
         }
         const ObjectPosted = await axios.post("http://localhost:1993/blog/create", newObject)
         console.log(ObjectPosted)
@@ -57,7 +74,7 @@ const CreateArticle = () => {
                     id="title" 
                     type="text" 
                     labelValue="Titre" 
-                    value={titleValue} 
+                    value={state.title} 
                     inputHandler={inputHandlerTitle}
                  />   
 
@@ -65,7 +82,7 @@ const CreateArticle = () => {
                     id="subtitle" 
                     type="text" 
                     labelValue="Sous-titre" 
-                    value={subtitleValue} 
+                    value={state.subtitle} 
                     inputHandler={inputHandlerSubtitle} 
                 />
 
@@ -73,7 +90,7 @@ const CreateArticle = () => {
                     id="heroPicture" 
                     type="text" 
                     labelValue="Hero Picture" 
-                    value={heroPictureValue} 
+                    value={state.heroPicture} 
                     inputHandler={inputHandlerHeroPicture}
                 />
 
@@ -81,7 +98,7 @@ const CreateArticle = () => {
                     id="keywords" 
                     type="text" 
                     labelValue="Keywords" 
-                    value={keywordsValue} 
+                    value={state.keywords} 
                     inputHandler={inputHandlerKeywords}
                 />
                 
@@ -89,7 +106,7 @@ const CreateArticle = () => {
                     id="content" 
                     type="textarea" 
                     labelValue="Corps de Texte" 
-                    value={contentValue} 
+                    value={state.content} 
                     inputHandler={inputHandlerContent}
                 />
 

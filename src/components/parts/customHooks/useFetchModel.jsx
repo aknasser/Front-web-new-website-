@@ -9,7 +9,7 @@ const useFetchModel = (categorie) => {
         switch(action.type) {
           case "FETCH_START":
             return {
-              ...state,
+              ...state,       // Spread operator : Les propriétés de l'object state restent identiques sauf celles qui suivent (isLoading et isError en l'occurence)
               isLoading : true,
               isError : false
             };
@@ -47,10 +47,10 @@ const useFetchModel = (categorie) => {
                 dispatchData({type: "FETCH_START"});
       
               
-                const allObjects = await axios.get(`http://localhost:1993/${categorie}`, { crossdomain: true })
+                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}`, { crossdomain: true })
                 dispatchData({
                   type: "FETCH_SUCCESS",
-                  payload : allObjects.data,
+                  payload : objectsFetched.data,
                 });
                   
               } catch {
