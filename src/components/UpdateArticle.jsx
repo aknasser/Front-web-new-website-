@@ -22,42 +22,14 @@ const UpdateArticle = () => {
                 isError: false,
                 data : action.payload
                 };
-            case "UPDATE_TITLE":
+            case "UPDATE_INPUT":
                 return {
                   ...state,             
                   data : {
                       ...state.data,                     // "conserve l'ensemble de tes données  SAUF POUR...
-                      title : action.payload            // ...cette propriété que update "
+                      [action.field] : action.payload            // ...cette propriété que update "
                   }
                 };
-            case "UPDATE_SUBTITLE":
-                return {
-                  ...state,             
-                  data : {
-                    ...state.data,                     // "conserve l'ensemble de tes données  SAUF POUR...
-                    subtitle : action.payload            // ...cette propriété que update "
-                }                };            
-            case "UPDATE_HEROPICTURE":
-                return {
-                  ...state,             
-                  data : {
-                    ...state.data,                     // "conserve l'ensemble de tes données  SAUF POUR...
-                    heroPicture : action.payload            // ...cette propriété que update "
-                }                };
-            case "UPDATE_KEYWORDS":
-                return {
-                  ...state,             
-                  data : {
-                    ...state.data,                     // "conserve l'ensemble de tes données  SAUF POUR...
-                    keywords : action.payload            // ...cette propriété que update "
-                }                };
-            case "UPDATE_CONTENT":
-                return {
-                  ...state,             
-                  data : {
-                    ...state.data,                     // "conserve l'ensemble de tes données  SAUF POUR...
-                    content : action.payload            // ...cette propriété que update "
-                }                };
             case "FETCH_ERROR":
                 return {
                 ...state,
@@ -117,48 +89,14 @@ const UpdateArticle = () => {
    
     const inputHandlerTitle = (event) => {
         dispatchArticleToUpdate({
-            type : "UPDATE_TITLE",
+            type : "UPDATE_INPUT",
             field : event.target.id,
             payload: event.target.value
         })
         console.log(event.target.id)
     };
 
-    const inputHandlerSubtitle = (event) => {
-        dispatchArticleToUpdate({
-            type : "UPDATE_SUBTITLE",
-            field : "subtitle",
-            payload: event.target.value
-        })
-    };
-
-    const inputHandlerHeroPicture = (event) => {
-        dispatchArticleToUpdate({
-            type : "UPDATE_HEROPICTURE",
-            field : "heroPicture",
-            payload: event.target.value
-        })
-    };
-
-    const inputHandlerKeywords = (event) => {
-        dispatchArticleToUpdate({
-            type : "UPDATE_KEYWORDS",
-            field : "keywords",
-            payload: event.target.value
-        })
-    };
-
-    const inputHandlerContent = (event) => {
-        dispatchArticleToUpdate({
-            type : "UPDATE_CONTENT",
-            field : "content",
-            payload: event.target.value
-        })
-    };
-
     
-
-
     const submitHandler = async(event) => {
         event.preventDefault();
         console.log("C'est parti")
@@ -196,7 +134,7 @@ const UpdateArticle = () => {
                             type="text" 
                             labelValue="Sous-titre" 
                             value={articleToUpdate.data.subtitle} 
-                            inputHandler={inputHandlerSubtitle} 
+                            inputHandler={inputHandlerTitle} 
                         />
         
                         <InputForm 
@@ -204,7 +142,7 @@ const UpdateArticle = () => {
                             type="text" 
                             labelValue="Hero Picture" 
                             value={articleToUpdate.data.heroPicture} 
-                            inputHandler={inputHandlerHeroPicture}
+                            inputHandler={inputHandlerTitle}
                         />
         
                         <InputForm 
@@ -212,7 +150,7 @@ const UpdateArticle = () => {
                             type="text" 
                             labelValue="Keywords" 
                             value={articleToUpdate.data.keywords} 
-                            inputHandler={inputHandlerKeywords}
+                            inputHandler={inputHandlerTitle}
                         />
                         
                         <InputForm 
@@ -220,7 +158,7 @@ const UpdateArticle = () => {
                             type="textarea" 
                             labelValue="Corps de Texte" 
                             value={articleToUpdate.data.content} 
-                            inputHandler={inputHandlerContent}
+                            inputHandler={inputHandlerTitle}
                         />
                         
         
