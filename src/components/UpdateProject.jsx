@@ -6,10 +6,8 @@ import { useParams } from 'react-router';
 
 
 
-const UpdateArticle = ({categorie}) => {
+const UpdateProject = ({categorie}) => {
     const { id } = useParams();
-
-
 
     const  modelReducer = (state, action) => {
         switch(action.type) {
@@ -52,11 +50,10 @@ const UpdateArticle = ({categorie}) => {
     const [modelToUpdate, dispatchModelToUpdate] = React.useReducer(
         modelReducer,                                    // REDUCER
         {
-            data: 
-                {},
-        isLoading : false,
-        isError :false
-        }       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
+            data: {},
+            isLoading : false,
+            isError :false
+        }       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList    // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
       );
     
     
@@ -80,7 +77,7 @@ const UpdateArticle = ({categorie}) => {
             }
     
             fetchExistingEntry();
-        }, [categorie , id]);
+        }, [categorie, id]);
 
 
 
@@ -101,10 +98,9 @@ const UpdateArticle = ({categorie}) => {
         console.log("C'est parti")
         const updatedObject = {
             title: modelToUpdate.data.title,
-            subtitle: modelToUpdate.data.subtitle,
-            heroPicture : modelToUpdate.data.heroPicture,
-            keywords : modelToUpdate.data.keywords,
-            content : modelToUpdate.data.content,
+            picture: modelToUpdate.data.picture,
+            link : modelToUpdate.data.link,
+            description : modelToUpdate.data.description,
         }
         const ObjectPosted = await axios.post(`http://localhost:1993/${categorie}/update/${id}`, updatedObject)
         console.log(ObjectPosted)
@@ -113,9 +109,9 @@ const UpdateArticle = ({categorie}) => {
     
     return (
         <>
-            {modelToUpdate.isError && <p>une erreur dans le fetch de l'article à updater</p>}
+            {modelToUpdate.isError && <p>une erreur dans le fetch de le project à updater</p>}
             {modelToUpdate.isLoading ? (
-                <p> Chargement de l'article à updater</p>
+                <p> Chargement du project à updater</p>
               ) : (
                 <div class="formUpdate">
                 <h2>{modelToUpdate.data.title}</h2>
@@ -129,40 +125,33 @@ const UpdateArticle = ({categorie}) => {
                         />   
         
                         <InputForm 
-                            id="subtitle" 
+                            id="picture" 
                             type="text" 
-                            labelValue="Sous-titre" 
-                            value={modelToUpdate.data.subtitle} 
+                            labelValue="Picture" 
+                            value={modelToUpdate.data.picture} 
                             inputHandler={inputHandler} 
                         />
         
                         <InputForm 
-                            id="heroPicture" 
+                            id="link" 
                             type="text" 
-                            labelValue="Hero Picture" 
-                            value={modelToUpdate.data.heroPicture} 
+                            labelValue="Lien" 
+                            value={modelToUpdate.data.link} 
                             inputHandler={inputHandler}
                         />
         
                         <InputForm 
-                            id="keywords" 
+                            id="description" 
                             type="text" 
-                            labelValue="Keywords" 
-                            value={modelToUpdate.data.keywords} 
+                            labelValue="Description" 
+                            value={modelToUpdate.data.description} 
                             inputHandler={inputHandler}
                         />
                         
-                        <InputForm 
-                            id="content" 
-                            type="textarea" 
-                            labelValue="Corps de Texte" 
-                            value={modelToUpdate.data.content} 
-                            inputHandler={inputHandler}
-                        />
                         
         
                         <InputSubmit
-                            cta = "Mettre à jour l'article"
+                            cta = "Mettre à jour le project"
                         />
                     </form>
                 </div>
@@ -173,4 +162,4 @@ const UpdateArticle = ({categorie}) => {
     );
 }
  
-export default UpdateArticle;
+export default UpdateProject;

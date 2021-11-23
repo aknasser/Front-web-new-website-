@@ -14,10 +14,10 @@ const ReadProspect = ({prospects}) => {
                 <span>{prospect.activite}</span>
                 <span>{prospect.numero}</span>
                 <span>{prospect.email}</span>
-                <Link to={`/admin/project/update/${prospect._id}`}>
+                <Link to={`/admin/prospect/update/${prospect._id}`}>
                     <span>Modifier</span>
                 </Link>
-                <Link to={`/admin/project/delete/${prospect._id}`}>
+                <Link to={`/admin/prospect/delete/${prospect._id}`}>
                     <span>Supprimer</span>
                 </Link>
             </div>
