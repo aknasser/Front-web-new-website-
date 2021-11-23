@@ -23,7 +23,11 @@ import CreateProject from './components/CreateProject';
 import CreateInspiration from './components/CreateInspiration';
 import CreateProspect from './components/CreateProspect';
 import UpdateArticle from './components/UpdateArticle';
-
+import UpdateProject from './components/UpdateProject';
+import UpdateProspect from './components/UpdateProspect';
+import UpdateInspiration from './components/UpdateInspiration';
+import DeleteObject from './components/DeleteObject';
+import DeleteArticle from './components/DeleteArticle';
 
 
 
@@ -144,16 +148,24 @@ function App() {
 
 {/* LES ROUTES POUR LE U DU CRUD */}
             <Route path="/admin/prospect/update/:id">
-              <CreateProspect/>
+              <UpdateProspect categorie = "prospect"/>
             </Route>
             <Route path="/admin/article/update/:id">
-                  <UpdateArticle/>
+                   <UpdateArticle categorie = "blog" />
             </Route>
             <Route path="/admin/project/update/:id">
-              <CreateProject />       
+              <UpdateProject categorie = "project"/>       
             </Route>
             <Route path="/admin/inspiration/update/:id">
-              <CreateInspiration />       
+              <UpdateInspiration categorie = "inspiration" />       
+            </Route>
+
+{/* LES ROUTES POUR LE D DU CRUD */}
+            <Route exact path="/admin/article/delete/:id">
+              <DeleteArticle/>
+            </Route>
+            <Route path="/admin/:categorie/delete/:id">
+              <DeleteObject/>
             </Route>
         </Switch> 
         </div>
