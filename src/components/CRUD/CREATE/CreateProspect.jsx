@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as React from 'react';
-import InputForm from "./parts/InputForm";
-import InputSubmit from './parts/InputSubmit';
+import InputForm from '../../parts/InputForm';
+import InputSubmit from '../../parts/InputSubmit';
 
 
 const CreateProspect = () => {
@@ -73,6 +73,8 @@ const CreateProspect = () => {
         console.log(leadPosted.data);
     }
 
+
+  
 
     return (
         <div>

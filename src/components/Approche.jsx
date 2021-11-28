@@ -14,9 +14,8 @@ const Approche = () => {
             <BoutonDeroulant title="Un design qui vous ressemble"/>
             <BoutonDeroulant title="Votre partenaire business"/>
             <BoutonDeroulant title="Transparence"/>
-            <Picture imageLink="imageApproche.png" imageDescription="Une image inspirant la confiance"/>
-            <HiddenText content="Blablbla"/>
-        </div>
+{/*             <HiddenText content="Blablbla"/>
+ */}        </div>
     );
 }
  

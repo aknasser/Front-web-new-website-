@@ -1,7 +1,7 @@
 import * as React from 'react';
-import InputForm from './parts/InputForm';
-import InputSubmit from './parts/InputSubmit';
+import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
+import InputForm from '../../parts/InputForm';
 
 
 const CreateArticle = () => {
