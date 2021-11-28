@@ -10,7 +10,7 @@ const Blog = ({articles}) => {
     return (
         <div>                                 
             <PageTitle pageTitle="Le Blog"/>
-            <h3>Mes conseils pour trouver des clients et aussi quelques réflexions. Web developer ? Oui. Mais humain avant tout.</h3>
+            <h3>Mes conseils pour trouver des clients et aussi quelques réflexions.</h3>
             <div className="filter">
                 <form>
                     <InputForm id="filtre" type="text" labelValue="Filtrer par Thème" value=""/>

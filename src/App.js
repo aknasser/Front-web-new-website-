@@ -5,29 +5,30 @@ import Approche from './components/Approche';
 import Article from './components/Article';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
-import Form from './components/CreateProspect';
 import HomePage from './components/HomePage';
 import Humain from './components/Humain';
 import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import Project from './components/Project';
-import AdminMainPage from './components/AdminMainPage';
-import CategorieMenu from './components/CategorieMenu';
-import ReadProspect from './components/ReadProspect';
+import AdminMainPage from './components/CRUD/AdminMainPage';
+import CategorieMenu from './components/CRUD/CategorieMenu';
+import ReadProspect from './components/CRUD/READ/ReadProspect';
 import useFetchModel from './components/parts/customHooks/useFetchModel';
-import ReadArticle from './components/ReadArticle';
-import ReadProject from './components/ReadProject';
-import ReadInspiration from './components/ReadInspiration';
-import CreateArticle from './components/CreateArticle';
-import CreateProject from './components/CreateProject';
-import CreateInspiration from './components/CreateInspiration';
-import CreateProspect from './components/CreateProspect';
-import UpdateArticle from './components/UpdateArticle';
-import UpdateProject from './components/UpdateProject';
-import UpdateProspect from './components/UpdateProspect';
-import UpdateInspiration from './components/UpdateInspiration';
-import DeleteObject from './components/DeleteObject';
-import DeleteArticle from './components/DeleteArticle';
+import ReadArticle from './components/CRUD/READ/ReadArticle';
+import ReadProject from './components/CRUD/READ/ReadProject';
+import ReadInspiration from './components/CRUD/READ/ReadInspiration';
+import CreateArticle from './components/CRUD/CREATE/CreateArticle';
+import CreateProject from './components/CRUD/CREATE/CreateProject';
+import CreateInspiration from './components/CRUD/CREATE/CreateInspiration';
+import CreateProspect from './components/CRUD/CREATE/CreateProspect';
+import UpdateArticle from './components/CRUD/UPDATE/UpdateArticle';
+import UpdateProject from './components/CRUD/UPDATE/UpdateProject';
+import UpdateProspect from './components/CRUD/UPDATE/UpdateProspect';
+import UpdateInspiration from './components/CRUD/UPDATE/UpdateInspiration';
+import DeleteObject from './components/CRUD/DELETE/DeleteObject';
+import DeleteArticle from './components/CRUD/DELETE/DeleteArticle';
+import BlocPicture from './components/BlocPicture';
+import CustomStyle from './CustomStyle';
 
 
 
@@ -53,12 +54,20 @@ function App() {
 
   return (
     <Router>
+      <CustomStyle/>
       <div className ="App">
        <NavBar />
         <div className ="content">
         <Switch>
             <Route exact path="/">                      {/* exact path nous permet d'indiquer à React de charger cette page uniquement le page corespond exactement. Cela nous permet d'éviter de charger la homePage partout  */ }
-              <HomePage/>
+              <div>  {/* Ici on calera la background-color */}
+                <HomePage/>
+                <Approche/>
+                <Approche/>
+                <BlocPicture titleBloc ="projets"/>
+                <BlocPicture titleBloc ="blog"/>
+                <CreateProspect/>
+              </div>
             </Route>
             <Route path="/approche">
               <Approche/>
@@ -75,7 +84,7 @@ function App() {
               )}
             </Route>
             <Route path="/contact">
-              <Form/>
+                <CreateProspect/>
             </Route>
             <Route path="/who">
               <Humain/>
@@ -174,5 +183,11 @@ function App() {
     </Router>
   );
 }
+
+
+
+
+
+
 
 export default App;

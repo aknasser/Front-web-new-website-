@@ -82,15 +82,14 @@ const [content, dispatchContent] = React.useReducer(
     return ( 
         <div>
             <div className="lajauge">La Jauge</div>
-            <div>
-                <h3>{content.data.title}</h3>                                             {/* On utilisera array.forEach */}
-                <h1>{content.data.subtitle}</h1>
-                <Picture imageLink={content.data.heroPicture} imageDescription={content.data.keywords}/>
+            <div>                                       {/* Using CSS and className, we will put a backgroundImage related to the article */}
+              <h1>{content.data.keywords}</h1>                {/* We will use array.forEach to get all the array */}
+                <h1>{content.data.title}</h1>                                             
+                <h3>{content.data.subtitle}</h3>
             </div>
             <div className="articleContent">
                 {content.data.content}
             </div>
-            <div className="readingProgress"></div>
         </div>
     );
 }

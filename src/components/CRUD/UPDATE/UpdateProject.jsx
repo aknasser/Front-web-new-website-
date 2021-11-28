@@ -1,12 +1,12 @@
 import * as React from 'react';
-import InputForm from './parts/InputForm';
-import InputSubmit from './parts/InputSubmit';
+import InputForm from '../../parts/InputForm';
+import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
 import { useParams } from 'react-router';
 
 
 
-const UpdateProspect = ({categorie}) => {
+const UpdateProject = ({categorie}) => {
     const { id } = useParams();
 
     const  modelReducer = (state, action) => {
@@ -53,7 +53,7 @@ const UpdateProspect = ({categorie}) => {
             data: {},
             isLoading : false,
             isError :false
-        }       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
+        }       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList    // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
       );
     
     
@@ -63,7 +63,7 @@ const UpdateProspect = ({categorie}) => {
                 dispatchModelToUpdate({type: "FETCH_START"});
 
               
-                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}/update/${id}`, { crossdomain: true })
+                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}/${id}`, { crossdomain: true })
                 dispatchModelToUpdate({
                   type: "FETCH_SUCCESS",
                   payload : objectsFetched.data,
@@ -97,12 +97,10 @@ const UpdateProspect = ({categorie}) => {
         event.preventDefault();
         console.log("C'est parti")
         const updatedObject = {
-            prenom: modelToUpdate.data.prenom,
-            nom: modelToUpdate.data.nom,
-            demande : modelToUpdate.data.demande,
-            activite : modelToUpdate.data.activite,
-            numero : modelToUpdate.data.numero,
-            email : modelToUpdate.data.email,
+            title: modelToUpdate.data.title,
+            picture: modelToUpdate.data.picture,
+            link : modelToUpdate.data.link,
+            description : modelToUpdate.data.description,
         }
         const ObjectPosted = await axios.post(`http://localhost:1993/${categorie}/update/${id}`, updatedObject)
         console.log(ObjectPosted)
@@ -111,66 +109,49 @@ const UpdateProspect = ({categorie}) => {
     
     return (
         <>
-            {modelToUpdate.isError && <p>une erreur dans le fetch du prospect à updater</p>}
+            {modelToUpdate.isError && <p>une erreur dans le fetch de le project à updater</p>}
             {modelToUpdate.isLoading ? (
-                <p> Chargement du prospect à updater</p>
+                <p> Chargement du project à updater</p>
               ) : (
                 <div class="formUpdate">
-                <h2>{modelToUpdate.data.name}</h2>
+                <h2>{modelToUpdate.data.title}</h2>
                     <form onSubmit={submitHandler}>
                         <InputForm 
-                            id="prenom" 
+                            id="title" 
                             type="text" 
-                            labelValue="Prenom" 
-                            value={modelToUpdate.data.prenom} 
+                            labelValue="Titre" 
+                            value={modelToUpdate.data.title} 
                             inputHandler={inputHandler}
                         />   
         
                         <InputForm 
-                            id="nom" 
+                            id="picture" 
                             type="text" 
-                            labelValue="Nom" 
-                            value={modelToUpdate.data.nom} 
+                            labelValue="Picture" 
+                            value={modelToUpdate.data.picture} 
                             inputHandler={inputHandler} 
                         />
         
                         <InputForm 
-                            id="demande" 
+                            id="link" 
                             type="text" 
-                            labelValue="Demande" 
-                            value={modelToUpdate.data.demande} 
+                            labelValue="Lien" 
+                            value={modelToUpdate.data.link} 
                             inputHandler={inputHandler}
                         />
         
                         <InputForm 
-                            id="activite" 
+                            id="description" 
                             type="text" 
-                            labelValue="Activite" 
-                            value={modelToUpdate.data.activite} 
-                            inputHandler={inputHandler}
-                        />
-                        
-                        <InputForm 
-                            id="numero" 
-                            type="text" 
-                            labelValue="Numero" 
-                            value={modelToUpdate.data.numero} 
-                            inputHandler={inputHandler}
-                        />
-
-                        
-                         <InputForm 
-                            id="email" 
-                            type="email" 
-                            labelValue="Email" 
-                            value={modelToUpdate.data.email} 
+                            labelValue="Description" 
+                            value={modelToUpdate.data.description} 
                             inputHandler={inputHandler}
                         />
                         
                         
         
                         <InputSubmit
-                            cta = "Mettre à jour le prospect"
+                            cta = "Mettre à jour le project"
                         />
                     </form>
                 </div>
@@ -181,4 +162,4 @@ const UpdateProspect = ({categorie}) => {
     );
 }
  
-export default UpdateProspect;
+export default UpdateProject;

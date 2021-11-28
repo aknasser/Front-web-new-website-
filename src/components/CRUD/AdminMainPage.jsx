@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import PageTitle from "./parts/PageTitle";
+import PageTitle from "../parts/PageTitle";
 
 
 

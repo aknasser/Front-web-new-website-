@@ -1,13 +1,15 @@
 import * as React from 'react';
-import InputForm from './parts/InputForm';
-import InputSubmit from './parts/InputSubmit';
+import InputForm from '../../parts/InputForm';
+import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
 import { useParams } from 'react-router';
 
 
 
-const UpdateInspiration = ({categorie}) => {
+const UpdateArticle = ({categorie}) => {
     const { id } = useParams();
+
+
 
     const  modelReducer = (state, action) => {
         switch(action.type) {
@@ -50,9 +52,10 @@ const UpdateInspiration = ({categorie}) => {
     const [modelToUpdate, dispatchModelToUpdate] = React.useReducer(
         modelReducer,                                    // REDUCER
         {
-            data : {},
-            isLoading : false,
-            isError :false
+            data: 
+                {},
+        isLoading : false,
+        isError :false
         }       // INITIAL STATE, data, isLoading et isError sont alors des propriétés de projectList
       );
     
@@ -63,7 +66,7 @@ const UpdateInspiration = ({categorie}) => {
                 dispatchModelToUpdate({type: "FETCH_START"});
 
               
-                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}/update/${id}`, { crossdomain: true })
+                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}/${id}`, { crossdomain: true })
                 dispatchModelToUpdate({
                   type: "FETCH_SUCCESS",
                   payload : objectsFetched.data,
@@ -77,7 +80,7 @@ const UpdateInspiration = ({categorie}) => {
             }
     
             fetchExistingEntry();
-        }, [categorie, id]);
+        }, [categorie , id]);
 
 
 
@@ -97,8 +100,11 @@ const UpdateInspiration = ({categorie}) => {
         event.preventDefault();
         console.log("C'est parti")
         const updatedObject = {
-            quote: modelToUpdate.data.quote,
-            author: modelToUpdate.data.author,
+            title: modelToUpdate.data.title,
+            subtitle: modelToUpdate.data.subtitle,
+            heroPicture : modelToUpdate.data.heroPicture,
+            keywords : modelToUpdate.data.keywords,
+            content : modelToUpdate.data.content,
         }
         const ObjectPosted = await axios.post(`http://localhost:1993/${categorie}/update/${id}`, updatedObject)
         console.log(ObjectPosted)
@@ -107,33 +113,56 @@ const UpdateInspiration = ({categorie}) => {
     
     return (
         <>
-            {modelToUpdate.isError && <p>une erreur dans le fetch de la citation à updater</p>}
+            {modelToUpdate.isError && <p>une erreur dans le fetch de l'article à updater</p>}
             {modelToUpdate.isLoading ? (
-                <p> Chargement de la citation à updater</p>
+                <p> Chargement de l'article à updater</p>
               ) : (
                 <div class="formUpdate">
-                <h2>{modelToUpdate.data.author}</h2>
+                <h2>{modelToUpdate.data.title}</h2>
                     <form onSubmit={submitHandler}>
                         <InputForm 
-                            id="quote" 
+                            id="title" 
                             type="text" 
-                            labelValue="Citation" 
-                            value={modelToUpdate.data.quote} 
+                            labelValue="Titre" 
+                            value={modelToUpdate.data.title} 
                             inputHandler={inputHandler}
                         />   
         
                         <InputForm 
-                            id="author" 
+                            id="subtitle" 
                             type="text" 
-                            labelValue="Auteur" 
-                            value={modelToUpdate.data.author} 
+                            labelValue="Sous-titre" 
+                            value={modelToUpdate.data.subtitle} 
                             inputHandler={inputHandler} 
                         />
         
+                        <InputForm 
+                            id="heroPicture" 
+                            type="text" 
+                            labelValue="Hero Picture" 
+                            value={modelToUpdate.data.heroPicture} 
+                            inputHandler={inputHandler}
+                        />
+        
+                        <InputForm 
+                            id="keywords" 
+                            type="text" 
+                            labelValue="Keywords" 
+                            value={modelToUpdate.data.keywords} 
+                            inputHandler={inputHandler}
+                        />
+                        
+                        <InputForm 
+                            id="content" 
+                            type="textarea" 
+                            labelValue="Corps de Texte" 
+                            value={modelToUpdate.data.content} 
+                            inputHandler={inputHandler}
+                        />
                         
         
                         <InputSubmit
-                            cta = "Mettre à jour la citation"
+                            cta = "Mettre à jour l'article"
                         />
                     </form>
                 </div>
@@ -144,4 +173,4 @@ const UpdateInspiration = ({categorie}) => {
     );
 }
  
-export default UpdateInspiration;
+export default UpdateArticle;
