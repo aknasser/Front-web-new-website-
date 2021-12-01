@@ -28,7 +28,7 @@ import UpdateInspiration from './components/CRUD/UPDATE/UpdateInspiration';
 import DeleteObject from './components/CRUD/DELETE/DeleteObject';
 import DeleteArticle from './components/CRUD/DELETE/DeleteArticle';
 import BlocPicture from './components/BlocPicture';
-import CustomStyle from './CustomStyle';
+import { createGlobalStyle } from "styled-components";
 
 
 
@@ -62,19 +62,18 @@ function App() {
             <Route exact path="/">                      {/* exact path nous permet d'indiquer à React de charger cette page uniquement le page corespond exactement. Cela nous permet d'éviter de charger la homePage partout  */ }
               <div>  {/* Ici on calera la background-color */}
                 <HomePage/>
-                <Approche/>
-                <Approche/>
-                <BlocPicture titleBloc ="projets"/>
-                <BlocPicture titleBloc ="blog"/>
+                <Approche detailsApproche={buttonBenefits} />
+                <BlocPicture works ={dataBlocMyWork} />
                 <CreateProspect/>
               </div>
             </Route>
-            <Route path="/approche">
+            <Route path="/approche"> {/*A faire sauter, redondance des pages */}
               <Approche/>
             </Route>
-            <Route path="/article/:id">
-              <Article />
+            <Route path="/who">{/*A faire sauter, redondance des pages */}
+              <Humain/>
             </Route>
+
             <Route path="/blog">
               {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
               {articlesList.isLoading ? (
@@ -83,11 +82,8 @@ function App() {
                 <Blog articles={articlesList.data} /* setArticleId={setArticleId()} */ />
               )}
             </Route>
-            <Route path="/contact">
-                <CreateProspect/>
-            </Route>
-            <Route path="/who">
-              <Humain/>
+            <Route path="/article/:id">
+              <Article />
             </Route>
             <Route path="/projectsList">
               {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
@@ -100,6 +96,12 @@ function App() {
             <Route path="/project/:id">
               <Project/>
             </Route>
+            <Route path="/contact">
+                <CreateProspect/>
+            </Route>
+
+
+{/*MENU DE L'ADMIN */}            
             <Route exact path="/admin">
               <AdminMainPage categories = {categories}/>
             </Route>
@@ -185,6 +187,128 @@ function App() {
 }
 
 
+// CSS STYLED COMPONENT
+
+const primaryColor =  "rgba(225, 44, 75, 1)";   // LE ROUGE-ROSE
+const secundaryColor = "rgba(34, 56, 89, 1)";    // LE BLEU NABY
+const BGContent =  "rgba(235, 235, 235, 1)";   // LE BACKGROUND POUR LES CONTENUS (ARTICLES ET PROJETS)
+
+
+
+const buttonBenefits = [
+  {
+    title : "Mon Approche" ,
+    categories : [
+      {
+        intitule : "Sublimer votre image",
+        hiddenText : "Sublimen SublimenSublimenSublimenSublimenSublimen",
+        buttonColor : primaryColor
+      },
+      {
+        intitule : "Design Orienté Client",
+        hiddenText : "DesignDesignDesignDesignDesignDesign",
+        buttonColor : primaryColor
+      },
+      {
+        intitule : "Conseils Business",
+        hiddenText : "ConseilsConseilsConseilsConseilsConseilsConseils",
+        buttonColor : primaryColor
+      }
+    ],
+    bgColor : secundaryColor ,
+  },
+  
+  {
+    title : "L'humain derrière l'écran" ,
+    categories : [
+      {
+        intitule : "Il était une fois...",
+        hiddenText : "Une Fois Une FoisUne FoisUne FoisUne FoisUne Fois",
+        buttonColor : secundaryColor
+      },
+      {
+        intitule : "Pourquoi ?",
+        hiddenText : "Why WhyWhyWhyWhyWhyWhy",
+        buttonColor : secundaryColor
+      },
+      {
+        intitule : "Vous + Moi",
+        hiddenText : "VousMoiVousMoiVousMoiVousMoiVousMoiVousMoiVousMoi",
+        buttonColor : secundaryColor
+      },
+    ],
+    bgColor : primaryColor,
+  }
+];
+
+const dataBlocMyWork = [
+  {
+    title: "projets",
+    backgroundpic :"projetsPicture.jpg",
+  },
+  {
+    title : "blog",
+    backgroundpic :"blogPicture.jpg",
+  }
+];
+
+
+const CustomStyle = createGlobalStyle`
+    .content {
+      font-family : Segoe UI;
+      background-color : rgba(34, 56, 89, 1); 
+    }
+    button, input[type=submit], h3 {
+        background-color : rgba(225, 44, 75, 1);
+        border : 0rem;
+        border-radius : 0.5rem;
+        -moz-border-radius : 0.5rem;
+        -webkit-border-radius : 0.5rem;
+        font-family : Segoe UI;
+        font-weight : bold;
+        font-size : 2rem;
+        text-transform : uppercase;
+        color : rgb(255, 255, 255);
+        cursor : pointer;
+    }
+    button:hover, input[type=submit]:hover {
+        background-color : rgba(34, 56, 89, 1);
+    }
+    .body-form {
+      display : flex;
+      flex-direction: column;
+      background-color : rgba(225, 44, 75, 1);
+      border-radius : 1rem;
+      -moz-border-radius : 0.75rem;
+      -webkit-border-radius : 0.75rem;
+      padding: 2rem 0rem ;
+      margin: 1rem;
+    }
+    .form-field {
+      display : flex;
+      flex-direction : column;
+      padding: 1rem 3rem;
+    }
+    .form-field label {
+      color: white;
+      font-size: 1.5rem;
+      text-align: left;
+      font-weight: bold;
+      padding: 1rem  0rem;
+    }
+    .form-field input, .form-field textarea {
+      font-size: 1.5rem;
+      border-radius : 0.5rem;
+      -moz-border-radius : 0.5rem;
+      -webkit-border-radius : 0.5rem;
+      border : 0rem;
+    }
+    `
+
+
+
+
+// REM for the font-size, margin and padding | EM for the component that need to ,  | PX for root level element (HTML)
 
 
 
