@@ -20,10 +20,9 @@ const Footer = () => {
 
     return ( 
         <div>
-            <h3>Developed and Code by Nasser Massadimi</h3>
+            <h4>Developed and Code by Nasser Massadimi</h4>
             <Link to="">Icône Linkedin</Link>
-            <h4>Le saviez-vous ?</h4>
-            <h4>{quote}</h4>   {/*Retrieve with API Endpoint sur la collection INspiration */}
+            <h5>{quote}</h5>
         </div>
     );
 }

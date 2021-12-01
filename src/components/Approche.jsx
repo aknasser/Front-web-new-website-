@@ -1,22 +1,37 @@
+import styled from "styled-components";
 import BoutonDeroulant from "./parts/BoutonDeroulant";
-import Picture from "./parts/Picture";
-import HiddenText from "./parts/HiddenText";
+/* import HiddenText from "./parts/HiddenText";*/
 import PageTitle from "./parts/PageTitle";
 
 
 
 
-const Approche = () => {
+const Approche = ({detailsApproche}) => {
     return (
-        <div>
-            <PageTitle pageTitle="Mon Approche"/>
-            <BoutonDeroulant title="Génération de clients"/>
-            <BoutonDeroulant title="Un design qui vous ressemble"/>
-            <BoutonDeroulant title="Votre partenaire business"/>
-            <BoutonDeroulant title="Transparence"/>
-{/*             <HiddenText content="Blablbla"/>
- */}        </div>
+        <>
+            {detailsApproche.map(detail => (
+                <BlocMyStyle bgColor = {detail.bgColor}>
+                    <PageTitle pageTitle={detail.title} />
+                    {detail.categories.map(categorie => (
+                        <div>
+                            <BoutonDeroulant title={categorie.intitule} bgColorButton = {categorie.buttonColor}/>
+                            {/* <HiddenText content={categorie.hiddenText}/> */}
+                        </div>
+
+                    ))}
+
+
+                </BlocMyStyle>
+                    ))}
+
+        </>
+
     );
 }
- 
+
+const BlocMyStyle = styled.div`
+    background-color : ${(props) => props.bgColor};
+    padding : 0rem 0rem 2rem;
+` 
+
 export default Approche;

@@ -1,7 +1,10 @@
 import axios from 'axios';
 import * as React from 'react';
 import InputForm from '../../parts/InputForm';
+import InputForm_TextArea from '../../parts/InputForm_TextArea';
 import InputSubmit from '../../parts/InputSubmit';
+import PageTitle from '../../parts/PageTitle';
+
 
 
 const CreateProspect = () => {
@@ -78,57 +81,59 @@ const CreateProspect = () => {
 
     return (
         <div>
+            <PageTitle pageTitle = "On en discute ?" />
             <form onSubmit={submitHandler}>
-                <InputForm 
-                    id="prenom" 
-                    type="text" 
-                    labelValue="Prénom" 
-                    value={state.prenom} 
-                    inputHandler={inputHandlerName}
-                 />   
+                <div className="body-form">
+                    <InputForm 
+                        id="prenom" 
+                        type="text" 
+                        labelValue="Prénom" 
+                        value={state.prenom} 
+                        inputHandler={inputHandlerName}
+                    />   
 
-                <InputForm 
-                    id="nom" 
-                    type="text" 
-                    labelValue="Nom" 
-                    value={state.nom} 
-                    inputHandler={inputHandlerSurname}
-                />
+                    <InputForm 
+                        id="nom" 
+                        type="text" 
+                        labelValue="Nom" 
+                        value={state.nom} 
+                        inputHandler={inputHandlerSurname}
+                    />
 
-                <InputForm 
-                    id="demande" 
-                    type="textarea" 
-                    labelValue="Demande" 
-                    value={state.demande} 
-                    inputHandler={inputHandlerDemande}
-                />
+                    <InputForm_TextArea 
+                        id="demande" 
+                        rows = "5"
+                        labelValue="Demande" 
+                        value={state.demande} 
+                        inputHandler={inputHandlerDemande}
+                    />
 
-                <InputForm 
-                    id="activite" 
-                    type="text" 
-                    labelValue="Activité" 
-                    value={state.activite} 
-                    inputHandler={inputHandlerActivite}
-                />
-                
-                <InputForm 
-                    id="email" 
-                    type="email" 
-                    labelValue="Email" 
-                    value={state.email} 
-                    inputHandler={inputHandlerEmail}
-                />
+                    <InputForm 
+                        id="activite" 
+                        type="text" 
+                        labelValue="Activité" 
+                        value={state.activite} 
+                        inputHandler={inputHandlerActivite}
+                    />
+                    
+                    <InputForm 
+                        id="email" 
+                        type="email" 
+                        labelValue="Email" 
+                        value={state.email} 
+                        inputHandler={inputHandlerEmail}
+                    />
 
-                <InputForm 
-                    id="téléphone" 
-                    type="text" 
-                    labelValue="Téléphone" 
-                    value={state.numero} 
-                    inputHandler={inputHandlerPhone}
-                />
-
+                    <InputForm 
+                        id="téléphone" 
+                        type="text" 
+                        labelValue="Téléphone" 
+                        value={state.numero} 
+                        inputHandler={inputHandlerPhone}
+                    />
+                </div>
                 <InputSubmit
-                    cta = "C'est parti!!!"
+                    cta = "Me Contacter"
                 />
             </form>
         </div>
