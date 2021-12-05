@@ -1,4 +1,4 @@
-import Picture from "./parts/Picture";
+import PictureItem from "./parts/PictureItem";
 import PageTitle from "./parts/PageTitle";
 import BoutonDeroulant from "./parts/BoutonDeroulant";
 import HiddenText from "./parts/HiddenText";
@@ -9,7 +9,7 @@ const Humain = () => {
     return (
         <div>
             <PageTitle pageTitle="Mon Approche"/>
-            <Picture imageLink = "me.png" imageDescription = "It's me! Mario!"  />
+            <PictureItem imageLink = "me.png" imageDescription = "It's me! Mario!"  />
             <BoutonDeroulant title="Mon Histoire"/>
             <BoutonDeroulant title="Mon Approche"/>
             <BoutonDeroulant title="Sommes-nous compatibles ?"/>

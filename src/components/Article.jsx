@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useParams } from "react-router";
-import Picture from "./parts/Picture";
+import * as Style from "./parts/Esthete";
 
 
 const Article = () => {
@@ -81,15 +81,22 @@ const [content, dispatchContent] = React.useReducer(
 
     return ( 
         <div>
-            <div className="lajauge">La Jauge</div>
-            <div>                                       {/* Using CSS and className, we will put a backgroundImage related to the article */}
-              <h1>{content.data.keywords}</h1>                {/* We will use array.forEach to get all the array */}
-                <h1>{content.data.title}</h1>                                             
-                <h3>{content.data.subtitle}</h3>
-            </div>
-            <div className="articleContent">
+            <Style.ReadingProgressionBar>""</Style.ReadingProgressionBar>
+            
+            <Style.ArticlePicture>
+              <Style.FilteredPicture src={`/articles/${content.data.heroPicture}`} opacity="0.5" />
+              <Style.InfoArticle>
+                <Style.BlocKeywords>
+                  <Style.KeywordsArticle>{content.data.keywords}</Style.KeywordsArticle>                
+                </Style.BlocKeywords>
+                <Style.ArticleTitle>{content.data.title}</Style.ArticleTitle>                                             
+                <Style.Intro>{content.data.subtitle}</Style.Intro>
+              </Style.InfoArticle>
+
+            </Style.ArticlePicture>
+            <Style.ContentArticle>
                 {content.data.content}
-            </div>
+            </Style.ContentArticle>
         </div>
     );
 }

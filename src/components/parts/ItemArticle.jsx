@@ -1,12 +1,13 @@
-import Picture from "./Picture";
+import  * as Style from "./Esthete";
+import PictureItem from "./PictureItem";
 import SectionTitle from "./SectionTitle";
 
 const ItemArticle = ({title, subtitle,heroPicture}) => {
     return (
         <div>
-                <SectionTitle sectionTitle ={title}/>
-                <p>{subtitle}</p>
-                <Picture imageLink={heroPicture} imageDescription="L'image correspondant à l'article"/>
+                <Style.StyledArticleTitle>{title}</Style.StyledArticleTitle>
+                <Style.Intro>{subtitle}</Style.Intro>
+                <PictureItem imageLink={`articles/${heroPicture}`} imageDescription="L'image correspondant à l'article"/>
         </div>
     );
 }

@@ -1,7 +1,9 @@
-import  React from 'react';
-import PageTitle from "./parts/PageTitle";
-import { Link } from "react-router-dom"
+/* import { Colors } from '../App';
+ */import  React from 'react';
 import ItemProject from './parts/ItemProject';
+import  * as Style from './parts/Esthete';
+
+
 
 
 
@@ -9,10 +11,10 @@ const ProjectList = ({projets}) => {
 
 
     return ( 
-        <div>                                 {/* On utilisera array.map pour balayer l'ensemble des objects facilement */}
-            <PageTitle pageTitle="Mes Projets"/>
+        <Style.BG>                                 {/* On utilisera array.map pour balayer l'ensemble des objects facilement */}
+            <Style.TitleSection>Mes Projets</Style.TitleSection>
             {projets.map(projet => (
-            <Link to={`/project/${projet._id}`}>
+            <a href={`${projet.link}`} target="_blank">
       
                     <ItemProject
                         key={projet._id}
@@ -21,10 +23,11 @@ const ProjectList = ({projets}) => {
                         picture={projet.picture}
                         pictureAlt={projet.link}
                     />
-            </Link>
+            </a>
     ))}
-        </div>
+        </Style.BG>
     );
 }
  
+
 export default ProjectList;

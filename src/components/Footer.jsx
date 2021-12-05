@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import  React from 'react';
 import axios from "axios";
+import * as Style from "./parts/Esthete";
 
 
 const Footer = () => {
@@ -19,11 +20,11 @@ const Footer = () => {
 
 
     return ( 
-        <div>
-            <h4>Developed and Code by Nasser Massadimi</h4>
+        <Style.StyledFooter>
+            <Style.PrezFooter>Design and Code made by Nasser Massadimi</Style.PrezFooter>
+            <Style.QuoteFooter>{quote}</Style.QuoteFooter>
             <Link to="">Icône Linkedin</Link>
-            <h5>{quote}</h5>
-        </div>
+        </Style.StyledFooter>
     );
 }
  

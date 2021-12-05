@@ -82,7 +82,7 @@ const CreateProspect = () => {
     return (
         <div>
             <PageTitle pageTitle = "On en discute ?" />
-            <form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler} id="form">
                 <div className="body-form">
                     <InputForm 
                         id="prenom" 
