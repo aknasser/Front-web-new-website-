@@ -1,20 +1,20 @@
-import PageTitle from "./parts/PageTitle";
+
 import InputForm from "./parts/InputForm";
 import { Link } from "react-router-dom"
 import ItemArticle from "./parts/ItemArticle";
-
+import  * as Style from './parts/Esthete';
 
 
 const Blog = ({articles}) => {
     
     return (
-        <div>                                 
-            <PageTitle pageTitle="Le Blog"/>
-            <h3>Mes conseils pour trouver des clients et aussi quelques réflexions.</h3>
-            <div className="filter">
+        <Style.BG>                                 
+            <Style.TitleSection>Le Blog</Style.TitleSection> 
+{/*             <Style.ChapeauBlog>Mes conseils pour trouver des clients et aussi quelques réflexions.</Style.ChapeauBlog>
+ */}            <div className="filter">
                 <form>
                     <InputForm id="filtre" type="text" labelValue="Filtrer par Thème" value=""/>
-                    <input type ="submit" value = "Chercher"/>
+                    <Style.InputSearchBlog type ="submit" value = "Chercher"/>
                 </form>
             </div>
             {articles.map(article => (
@@ -28,7 +28,7 @@ const Blog = ({articles}) => {
                 </Link>
 
             ))}
-        </div>
+        </Style.BG>
     );
 }
  

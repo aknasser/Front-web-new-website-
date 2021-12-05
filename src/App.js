@@ -29,7 +29,7 @@ import DeleteObject from './components/CRUD/DELETE/DeleteObject';
 import DeleteArticle from './components/CRUD/DELETE/DeleteArticle';
 import BlocPicture from './components/BlocPicture';
 import { createGlobalStyle } from "styled-components";
-
+import Colors from './components/parts/Esthete';
 
 
 const categories = ["prospect", "article", "project", "inspiration"]; 
@@ -43,6 +43,9 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 function App() {
+
+
+
 
   const [prospectsList, dispatchProspect] = useFetchModel("prospect");
   const [articlesList, dispatchArticle] = useFetchModel("blog");
@@ -90,7 +93,7 @@ function App() {
               {projectsList.isLoading ? (
                 <p> Chargement des projets...</p>
               ) : (
-                <ProjectList projets={projectsList.data}/>
+                <ProjectList projets={projectsList.data} />
               )}
             </Route>
             <Route path="/project/:id">
@@ -115,7 +118,7 @@ function App() {
                 {prospectsList.isLoading ? (
                   <p> Chargement des projets...</p>
                 ) : (
-                  <ReadProspect prospects={prospectsList.data}/>
+                  <ReadProspect prospects={prospectsList.data} />
                   )}
             </Route>
             <Route path="/admin/article/all">
@@ -189,11 +192,6 @@ function App() {
 
 // CSS STYLED COMPONENT
 
-const primaryColor =  "rgba(225, 44, 75, 1)";   // LE ROUGE-ROSE
-const secundaryColor = "rgba(34, 56, 89, 1)";    // LE BLEU NABY
-const BGContent =  "rgba(235, 235, 235, 1)";   // LE BACKGROUND POUR LES CONTENUS (ARTICLES ET PROJETS)
-
-
 
 const buttonBenefits = [
   {
@@ -202,20 +200,20 @@ const buttonBenefits = [
       {
         intitule : "Sublimer votre image",
         hiddenText : "Sublimen SublimenSublimenSublimenSublimenSublimen",
-        buttonColor : primaryColor
+        buttonColor : Colors.primaryColor,
       },
       {
         intitule : "Design Orienté Client",
         hiddenText : "DesignDesignDesignDesignDesignDesign",
-        buttonColor : primaryColor
+        buttonColor : Colors.primaryColor
       },
       {
         intitule : "Conseils Business",
         hiddenText : "ConseilsConseilsConseilsConseilsConseilsConseils",
-        buttonColor : primaryColor
+        buttonColor : Colors.primaryColor
       }
     ],
-    bgColor : secundaryColor ,
+    bgColor : Colors.secundaryColor ,
   },
   
   {
@@ -224,20 +222,20 @@ const buttonBenefits = [
       {
         intitule : "Il était une fois...",
         hiddenText : "Une Fois Une FoisUne FoisUne FoisUne FoisUne Fois",
-        buttonColor : secundaryColor
+        buttonColor : Colors.secundaryColor
       },
       {
         intitule : "Pourquoi ?",
         hiddenText : "Why WhyWhyWhyWhyWhyWhy",
-        buttonColor : secundaryColor
+        buttonColor : Colors.secundaryColor
       },
       {
         intitule : "Vous + Moi",
         hiddenText : "VousMoiVousMoiVousMoiVousMoiVousMoiVousMoiVousMoi",
-        buttonColor : secundaryColor
+        buttonColor : Colors.secundaryColor
       },
     ],
-    bgColor : primaryColor,
+    bgColor : Colors.primaryColor,
   }
 ];
 
@@ -245,10 +243,13 @@ const dataBlocMyWork = [
   {
     title: "projets",
     backgroundpic :"projetsPicture.jpg",
+    link : "projectsList"
   },
   {
     title : "blog",
     backgroundpic :"blogPicture.jpg",
+    link : "blog"
+
   }
 ];
 
@@ -256,10 +257,13 @@ const dataBlocMyWork = [
 const CustomStyle = createGlobalStyle`
     .content {
       font-family : Segoe UI;
-      background-color : rgba(34, 56, 89, 1); 
+      background-color : ${Colors.secundaryColor}; 
     }
-    button, input[type=submit], h3 {
-        background-color : rgba(225, 44, 75, 1);
+    a {
+      text-decoration: none;
+    }
+    button, h3 {
+        background-color : ${Colors.primaryColor};
         border : 0rem;
         border-radius : 0.5rem;
         -moz-border-radius : 0.5rem;
@@ -268,16 +272,16 @@ const CustomStyle = createGlobalStyle`
         font-weight : bold;
         font-size : 2rem;
         text-transform : uppercase;
-        color : rgb(255, 255, 255);
+        color : white;
         cursor : pointer;
     }
     button:hover, input[type=submit]:hover {
-        background-color : rgba(34, 56, 89, 1);
+        background-color : ${Colors.secundaryColor};
     }
     .body-form {
       display : flex;
       flex-direction: column;
-      background-color : rgba(225, 44, 75, 1);
+      background-color : ${Colors.primaryColor};
       border-radius : 1rem;
       -moz-border-radius : 0.75rem;
       -webkit-border-radius : 0.75rem;
@@ -296,6 +300,10 @@ const CustomStyle = createGlobalStyle`
       font-weight: bold;
       padding: 1rem  0rem;
     }
+    .filter label {
+      color : ${Colors.secundaryColor};
+      text-align : center;
+    }
     .form-field input, .form-field textarea {
       font-size: 1.5rem;
       border-radius : 0.5rem;
@@ -306,11 +314,7 @@ const CustomStyle = createGlobalStyle`
     `
 
 
-
-
 // REM for the font-size, margin and padding | EM for the component that need to ,  | PX for root level element (HTML)
-
-
 
 
 

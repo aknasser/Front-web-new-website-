@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import Picture from "./parts/Picture";
+import PictureItem from "./parts/PictureItem";
 import * as React from 'react';
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -72,7 +72,7 @@ const Project = () => {
             <Link to={taf.data.link}>
                 <div>
                     <h1>{taf.data.title}</h1>
-                    <Picture imageLink={taf.picture} imageDescription="project.Pic"/>
+                    <PictureItem imageLink={taf.picture} imageDescription="project.Pic"/>
                 </div>
                 <div className="projectContent">
                     <h3>{taf.data.description}</h3>                                             
