@@ -1,21 +1,18 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components";
-
+import  * as Style from "./Esthete";
 
 const CTAButton = ({callToAction}) => {
     return (
         <div className ="CTA">
             <Link to="/contact">
-                <StyledCTAButton>{callToAction}</StyledCTAButton>
+                <Style.StyledCTAButton>{callToAction}</Style.StyledCTAButton>
             </Link>
         </div>
     );
 }
 
-const StyledCTAButton = styled.button`
-    width: 85%;
-    margin: 5rem 0rem;
-`;
+
 
  
 export default CTAButton;

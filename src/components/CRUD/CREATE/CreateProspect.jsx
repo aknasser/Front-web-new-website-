@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as React from 'react';
+import  * as Style from '../../parts/Esthete';
 import InputForm from '../../parts/InputForm';
 import InputForm_TextArea from '../../parts/InputForm_TextArea';
 import InputSubmit from '../../parts/InputSubmit';
@@ -81,9 +82,9 @@ const CreateProspect = () => {
 
     return (
         <div>
-            <PageTitle pageTitle = "On en discute ?" />
+            <Style.FormTitle id="form"> un café ensemble ? </Style.FormTitle>
             <form onSubmit={submitHandler} id="form">
-                <div className="body-form">
+                <Style.StyledForm>
                     <InputForm 
                         id="prenom" 
                         type="text" 
@@ -131,12 +132,15 @@ const CreateProspect = () => {
                         value={state.numero} 
                         inputHandler={inputHandlerPhone}
                     />
-                </div>
+                </Style.StyledForm>
+
                 <InputSubmit
                     cta = "Me Contacter"
                 />
             </form>
         </div>
+
+
     );
 }
  

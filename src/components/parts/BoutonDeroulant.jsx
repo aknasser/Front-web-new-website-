@@ -3,8 +3,8 @@ import  * as Style from "./Esthete";
 
 const BoutonDeroulant = ({title,bgColorButton}) => {
     return (
-        <div className = "boutonDeroulant">
-            <Style.StyledDropDownButton bgColorButton={bgColorButton} >{title}</Style.StyledDropDownButton>
+        <div>
+            <Style.DropDownMainPage bgColorButton={bgColorButton} >{title}</Style.DropDownMainPage>
         </div>
     );
 }

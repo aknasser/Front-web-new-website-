@@ -2,6 +2,17 @@ import styled from "styled-components";
 
 
 
+const deviceSize = {
+    mobileS :"320px",
+    mobileM :"375px",
+    mobileL :"425px",
+    tablet :"768px",
+    laptopS :"1024px",
+    laptopM :"1440px"
+};
+
+
+
 export const Colors = {
       primaryColor : "rgba(225, 44, 75, 1)",
       secundaryColor : "rgba(34, 56, 89, 1)",
@@ -63,11 +74,15 @@ export const ToggleButton = styled.div`
 
 export const TheGrid = styled.div`
     display: grid;
-    min-height: 35rem;
+    height: 100vh;
     overflow : hidden;
+    @media(min-width :${deviceSize.laptopS}) {
+        margin: 0rem auto 2rem;
+    }
+
 `;
 // overflow : hidden ==> Pour éviter que l'image déborde sur le côté
-
+// vh, cette mesure nous permet de déterminer la hauteur du en fonction d'un % du viewport. 20vh = 20% du viewport
 
 
 export const HeroPicture = styled.img`
@@ -76,12 +91,25 @@ export const HeroPicture = styled.img`
     z-index: 0;
     opacity: 0.45;
     width: 206%;
+    height: 100%;
     object-position: -12rem;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 100%;
+        object-position: 0rem -2rem;
+    }
+    @media(min-width :${deviceSize.laptopS}) {
+        width: 100%;
+        max-height: 70%;
+        object-position: 0rem -14rem;
+    }
 `;
 
 export const ContentHeroPage = styled.div`
     grid-area: 1 / 1 / 2 / 2;
-    z-index : 1; 
+    z-index : 1;
+    @media(min-width :${deviceSize.laptopS}) {
+        padding : 4rem 0rem;
+    } 
 `;                                                  
 /*
 Le contenu Textuel + CTA est calé dans une div called ContentHeroPage.Cette div est superposé à la heroPicture.
@@ -104,6 +132,14 @@ export const Activity = styled.h2`
     padding: 4.5rem;
 `;
 
+export const StyledCTAButton = styled.button`
+    width: 85%;
+    margin: 3rem 0rem;
+    @media(min-width :${deviceSize.laptopS}) {
+        width: 50%;
+        margin: 10rem auto;
+
+`;
 
 
 
@@ -113,9 +149,8 @@ export const Activity = styled.h2`
 export const StyledSectionTitle = styled.h2 `
     color : white;
     text-transform : uppercase;
-    margin : 1rem auto 2rem;
-    font-size : 2.5rem;
-    
+    margin : 0rem auto 2rem;
+    font-size : 2.25rem;    
 `;
 
 export const NavbarItem = styled(StyledSectionTitle)`
@@ -132,6 +167,20 @@ export const ArticleTitle = styled(StyledSectionTitle)`
     color :white;
 `;//1.5 REM for bigger screen 
 
+
+export const FormTitle = styled(StyledSectionTitle)`
+    margin: 7rem auto 2rem;
+        &::before {
+            display: block;
+            content: "";
+            margin-top: -3rem;
+            height: 3rem;
+            visibility: none;
+            pointer-events: none;
+        }
+`
+
+
 export const Intro = styled.p`
     font-size: 1rem;
     font-style : italic;
@@ -139,13 +188,18 @@ export const Intro = styled.p`
 `;
 
 export const ArticleSubtitle = styled(Intro)`
-
 `;
 
 export const StyledPictureItem = styled.img`
     object-fit: cover;
     width: 100%;
-    margin: 0.25rem auto 4rem
+    margin: 0.25rem auto 4rem;
+
+    @media(min-width :${deviceSize.tablet}) {
+        width: 60%;
+        border-radius: 0.5rem;
+    }
+    
 `;
 
 export const PicContainer = styled.div`
@@ -161,6 +215,7 @@ export const StyledLittleTitle = styled.button`
 
 export const StyledArticleTitle = styled(StyledLittleTitle)`
     font-size: 1rem;
+    
 `;
 
 export const StyledDropDownButton = styled.h3`
@@ -168,14 +223,21 @@ export const StyledDropDownButton = styled.h3`
     background-color: ${(props) => props.bgColorButton};
     border-radius : 0.75rem;
     text-align: center;
-    width: 75%;
-    padding : 2.5rem;
+    max-width: 75%;
+    padding: 1.5rem;
     margin : 3rem auto;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 15rem;
+        height: 15rem;
+    }
 `;
+
+
+
 
 // FORM
 export const StyledSubmitButton = styled.input`
-    width: 75%;
+    width: 90vw;
     margin: 3rem auto 5rem;
     background-color : ${Colors.primaryColor};
     border : 0rem;
@@ -184,11 +246,72 @@ export const StyledSubmitButton = styled.input`
     -webkit-border-radius : 0.5rem;
     font-family : Segoe UI;
     font-weight : bold;
-    font-size : 2rem;
+    font-size : 1.5rem;
     text-transform : uppercase;
     color : white;
     cursor : pointer;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 55vw;
+    }
 `;
+
+
+export const StyledLabelForm = styled.label`
+    color: white;
+    font-size: 1.5rem;
+    text-align: left;
+    font-weight: bold;
+    padding: 1rem;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 12%
+    }
+`;
+
+
+export const StyledInputForm = styled.input`
+    font-size: 0.75rem;
+    border-radius : 0.5rem;
+    border : 0.25rem;
+    -moz-border-radius : 0.5rem;
+    -webkit-border-radius : 0.5rem;
+    border : 0rem;
+    height: 2rem;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 60%;
+        margin: 1rem auto;
+    }
+`;
+
+export const StyledTextarea = styled(StyledInputForm)`
+    height: 8rem;
+`;
+
+export const FormField = styled.div`
+    display : flex;
+    flex-direction : column;
+    padding: 1rem;
+    @media(min-width :${deviceSize.tablet}) {
+        flex-direction : row;
+    }
+`;
+
+
+export const StyledForm = styled.div`
+    display : flex;
+    width: 90vw;
+    flex-direction: column;
+    background-color : ${Colors.primaryColor};
+    border-radius : 1rem;
+    -moz-border-radius : 0.75rem;
+    -webkit-border-radius : 0.75rem;
+    padding: 2rem 0rem ;
+    margin: 1rem;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 70vw;
+        margin: 2rem auto;
+    }
+`;
+
 
 
 // BLOG MAIN PAGE
@@ -203,29 +326,92 @@ export const InputSearchBlog = styled(StyledSubmitButton)`
     width: 60%;
     margin: 0rem auto 5rem;
     font-size: 1rem;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 33%;
+        font-size: 1.5rem;
+    }
+    
 `;
-
 
 
 //APPROCHE
 
+
 export const BlocMyStyle = styled.div`
     background-color : ${(props) => props.bgColor};
-    padding : 0rem 0rem 2rem;
+    padding : 5rem 0rem 10rem;
+    &::before {
+        display: block;
+        content: "";
+        margin-top: -3rem;
+        height: 3rem;
+        visibility: none;
+        pointer-events: none;
+    }
 ` 
 
 
 
 
+export const TrioButton = styled.div`
+    @media(min-width :${deviceSize.tablet}) {
+        display : flex;
+        flex-direction : row; 
+        justify-content : space-evenly;
+    }
+`;
 
+
+export const ContainerBenefitsMenu = styled.div`
+    display: grid;
+`;
+
+
+export const DropDownMainPage = styled(StyledDropDownButton)`
+    @media(min-width :${deviceSize.tablet}) {
+        width: 25vw;
+        height: 15rem;
+        display: flex;
+        align-items: center;  
+        justify-content: center;
+        grid-area: 1 / 1 / 2 / 2;
+`;
+
+export const DetailsApproche = styled(StyledDropDownButton)`
+    display : ${props => props.visibility};
+    background-color : ${Colors.BGContent};
+    color : ${Colors.secundaryColor};
+    font-size : 1.25rem;
+    font-style : italic;
+    font-weight: 300;
+    margin: -2rem auto 5rem;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 25vw;
+        align-items: center;
+        grid-area: 1 / 1 / 2 / 2;
+        position : absolute;
+    }
+    
+`;
 
 // BLOCPICTURE / APPROCHE - Les 2 blocs images présents sur la page d'accueil (après scroll)
 
 
+export const FlexboxBloc = styled.div`
+    @media(min-width :${deviceSize.tablet}) {
+        display : flex;
+        flex-direction : row;
+    }
+`; 
+
+
 export const BlocMyWork = styled.div`
     display : grid;
-    min-height: 20rem;
+    height: 50vh;
     overflow : hidden;
+    @media(min-width :${deviceSize.laptopS}) {
+        height: 75vh;
+    }
 `;
 
 export const ArticlePicture = styled(BlocMyWork)`
@@ -249,7 +435,7 @@ export const BlocTitle = styled.h4`
     grid-area: 1 / 1 / 2 / 2;
     color : white;
     text-transform : uppercase;
-    font-size : 5rem;
+    font-size : 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
