@@ -1,8 +1,12 @@
-const HiddenText = ({content}) => {
+import * as Style from "./Esthete";
+
+
+
+const HiddenText = ({content, displayHiddenText}) => {
     return (
-        <div>
+        <Style.DetailsApproche visibility = {displayHiddenText} >
             <p>{content}</p>
-        </div>
+        </Style.DetailsApproche>
     );
 }
  

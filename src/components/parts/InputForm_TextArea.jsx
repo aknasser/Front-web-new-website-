@@ -1,12 +1,13 @@
+import  * as Style from "./Esthete";
 
 
 const InputForm_TextArea = ({id, rows, labelValue, value, inputHandler}) => {
     return (
-        <div className="form-field">
-            <label for={id}> {labelValue}</label>
-            <textarea id={id} rows={rows} value={value} onChange={inputHandler} ></textarea>
+        <Style.FormField>
+            <Style.StyledLabelForm for={id}> {labelValue}</Style.StyledLabelForm>
+            <Style.StyledTextarea id={id} rows={rows} value={value} onChange={inputHandler} ></Style.StyledTextarea>
 
-        </div>
+        </Style.FormField>
     );
 }
 

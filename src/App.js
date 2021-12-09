@@ -67,16 +67,9 @@ function App() {
                 <HomePage/>
                 <Approche detailsApproche={buttonBenefits} />
                 <BlocPicture works ={dataBlocMyWork} />
-                <CreateProspect/>
+                <CreateProspect id="form" />
               </div>
             </Route>
-            <Route path="/approche"> {/*A faire sauter, redondance des pages */}
-              <Approche/>
-            </Route>
-            <Route path="/who">{/*A faire sauter, redondance des pages */}
-              <Humain/>
-            </Route>
-
             <Route path="/blog">
               {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
               {articlesList.isLoading ? (
@@ -195,48 +188,51 @@ function App() {
 
 const buttonBenefits = [
   {
+    title : "Pourquoi ?" ,
+    id : "why",
+    categories : [
+      {
+        intitule : "Pourquoi un site web / app ?",  // POURQUOI UN SITE WEB ?
+        hiddenText : "C'est le pillier de votre stratégie commerciale. Obtenez un site web / app qui s'aligne à 100% avec vos objectifs business...  ",
+        buttonColor : Colors.primaryColor
+      },
+      {
+        intitule : "Vous êtes au bon endroit...",    // POURQUOI MOI ?
+        hiddenText : "Nouvel entrepreneur, PMEs dynamiques, Assos ? Mon approche et mes solutions sont alignés sur vos besoins spécifiques...",
+        buttonColor : Colors.primaryColor
+      },
+      {
+        intitule : "...au bon moment",  // POURQUOI MAINTENANT ?
+        hiddenText : "Votre produit/service est bon! Donnez-lui le site qu'il mérite. Maintenant.",
+        buttonColor : Colors.primaryColor
+      },
+    ],
+    bgColor : Colors.secundaryColor,
+  },
+  {
     title : "Mon Approche" ,
+    id : "approche",
     categories : [
       {
         intitule : "Sublimer votre image",
-        hiddenText : "Sublimen SublimenSublimenSublimenSublimenSublimen",
-        buttonColor : Colors.primaryColor,
+        hiddenText : "Mettez en avant ce qui vous rend unique avec un site web / app qui véhicule vos valeurs.",
+        buttonColor : Colors.secundaryColor
       },
       {
         intitule : "Design Orienté Client",
-        hiddenText : "DesignDesignDesignDesignDesignDesign",
-        buttonColor : Colors.primaryColor
+        hiddenText : "Convertissez vos visiteurs en clients fidèles grâce à un design suscitant l'intéraction et l'acte d'achat.",
+        buttonColor : Colors.secundaryColor
       },
       {
         intitule : "Conseils Business",
-        hiddenText : "ConseilsConseilsConseilsConseilsConseilsConseils",
-        buttonColor : Colors.primaryColor
+        hiddenText : "Je vous aide à déployer une stratégie en ligne concrète grâce à mon expérience de Business Developer / Marketing Specialist.",
+        buttonColor : Colors.secundaryColor
       }
     ],
-    bgColor : Colors.secundaryColor ,
+    bgColor : Colors.primaryColor ,
   },
   
-  {
-    title : "L'humain derrière l'écran" ,
-    categories : [
-      {
-        intitule : "Il était une fois...",
-        hiddenText : "Une Fois Une FoisUne FoisUne FoisUne FoisUne Fois",
-        buttonColor : Colors.secundaryColor
-      },
-      {
-        intitule : "Pourquoi ?",
-        hiddenText : "Why WhyWhyWhyWhyWhyWhy",
-        buttonColor : Colors.secundaryColor
-      },
-      {
-        intitule : "Vous + Moi",
-        hiddenText : "VousMoiVousMoiVousMoiVousMoiVousMoiVousMoiVousMoi",
-        buttonColor : Colors.secundaryColor
-      },
-    ],
-    bgColor : Colors.primaryColor,
-  }
+
 ];
 
 const dataBlocMyWork = [
@@ -278,6 +274,9 @@ const CustomStyle = createGlobalStyle`
     button:hover, input[type=submit]:hover {
         background-color : ${Colors.secundaryColor};
     }
+
+
+
     .body-form {
       display : flex;
       flex-direction: column;
@@ -288,29 +287,13 @@ const CustomStyle = createGlobalStyle`
       padding: 2rem 0rem ;
       margin: 1rem;
     }
-    .form-field {
-      display : flex;
-      flex-direction : column;
-      padding: 1rem 3rem;
-    }
-    .form-field label {
-      color: white;
-      font-size: 1.5rem;
-      text-align: left;
-      font-weight: bold;
-      padding: 1rem  0rem;
-    }
+
+
     .filter label {
       color : ${Colors.secundaryColor};
       text-align : center;
     }
-    .form-field input, .form-field textarea {
-      font-size: 1.5rem;
-      border-radius : 0.5rem;
-      -moz-border-radius : 0.5rem;
-      -webkit-border-radius : 0.5rem;
-      border : 0rem;
-    }
+
     `
 
 

@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom"
+import { a, Link } from "react-router-dom"
 import * as Style from "./parts/Esthete"
 import * as React from 'react';
+import useRevealContent from "./parts/customHooks/useRevealContent";
 
 
 
@@ -9,47 +10,17 @@ import * as React from 'react';
 
 const NavBar = () => {
 
-
-    const navBarReducer = (state, action) => {
-        switch(action.type) {
-            case "NAVBAR_CONDENSED":
-                return {
-                    data : {
-                        visible : action.payload
-                    }
-                };
-            case "NAVBAR_EXTENDED":
-                return {
-                    data : {
-                        visible :  action.payload
-                    }
-                };
-            default :
-                throw new Error("Action non prévue");
-        }
-    };
-
-    const [visibilityNavBar, dispatchVisibility] = React.useReducer(
-        navBarReducer,
-        {
-            data : {
-                visible : "none"
-            }
-        }
-    )
-
-
-
+    const [visibilityNavBar, dispatchVisibility] = useRevealContent();
 
     const navBarHandler = () => {
         if (visibilityNavBar.data.visible === "none") {
             dispatchVisibility({
-                type :"NAVBAR_EXTENDED",
+                type :"CONTENT_EXTENDED",
                 payload : "flex"
             });
         } else {
             dispatchVisibility({
-                type :"NAVBAR_CONDENSED",
+                type :"CONTENT_CONDENSED",
                 payload : "none"
             });
         };
@@ -63,11 +34,11 @@ const NavBar = () => {
                     <img src="RectangleNavbar.svg" alt="" />
                     <img src="RectangleNavbar.svg" alt="" />
                 </Style.ToggleButton>
-                <Link to="/contact">
+                <a href="/contact">
                     <Style.CTANavbar>GO!</Style.CTANavbar>
-                </Link>
+                </a>
             </Style.Navbar>
-
+            
 
             <Style.NavBarCollapse 
                 visibility = {visibilityNavBar.data.visible}
@@ -75,21 +46,21 @@ const NavBar = () => {
                     <Link to="/" onClick = {navBarHandler}>
                         <Style.NavbarItem >Accueil</Style.NavbarItem>
                     </Link>
-                    <Link to="/#form" onClick = {navBarHandler}>
+                    <a href="/#form" onClick = {navBarHandler}>
                         <Style.NavbarItem>Un Café Ensemble</Style.NavbarItem>
-                    </Link>
-                    <Link to="/approche" onClick = {navBarHandler}>
-                        <Style.NavbarItem>Mon approche</Style.NavbarItem>
-                    </Link>
-                    <Link to="/who" onClick = {navBarHandler}>
-                        <Style.NavbarItem>Who ?</Style.NavbarItem>
-                    </Link>
-                    <Link to="/projectsList" onClick = {navBarHandler}>
+                    </a>
+                    <a href="/#why" onClick = {navBarHandler}>
+                        <Style.NavbarItem>Pourquoi ?</Style.NavbarItem>
+                    </a>
+                    <a href="/#approche" onClick = {navBarHandler}>
+                        <Style.NavbarItem>Mon Approche</Style.NavbarItem>
+                    </a>
+                    <a href="/projectsList" onClick = {navBarHandler}>
                         <Style.NavbarItem>Projets</Style.NavbarItem>
-                    </Link>
-                    <Link to="/blog" onClick = {navBarHandler}>
+                    </a>
+                    <a href="/blog" onClick = {navBarHandler}>
                     <Style.NavbarItem>Blog</Style.NavbarItem>
-                    </Link>
+                    </a>
             </Style.NavBarCollapse>
         </Style.NavBarGrid>
 
