@@ -1,9 +1,9 @@
 import * as Style from "./Esthete";
 
-const PageTitle = ({pageTitle}) => {
+const PageTitle = ({pageTitle, colorTitle}) => {
     return (
         <div>
-            <Style.StyledSectionTitle>{pageTitle}</Style.StyledSectionTitle>
+            <Style.StyledSectionTitle colorTitle = {colorTitle}>{pageTitle}</Style.StyledSectionTitle>
         </div>
       );
 }

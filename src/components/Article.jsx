@@ -1,11 +1,14 @@
 import axios from "axios";
+import Interweave from "interweave";
 import React from "react";
 import { useParams } from "react-router";
 import * as Style from "./parts/Esthete";
 
 
-const Article = () => {
 
+
+
+const Article = () => {
     const { id } = useParams();  // permet de récupérer la valeur du paramètre utilisée pour arriver surc cette page
 
 
@@ -71,20 +74,18 @@ const [content, dispatchContent] = React.useReducer(
 
     }
     contentManagement();
-
   }, [id])
 
 
-
-
+  const parser = new DOMParser();
+  const articleText = content.data.content;
 
 
     return ( 
         <div>
-            <Style.ReadingProgressionBar>""</Style.ReadingProgressionBar>
-            
+            <Style.ReadingProgressionBar>.</Style.ReadingProgressionBar>
             <Style.ArticlePicture>
-              <Style.FilteredPicture src={`/articles/${content.data.heroPicture}`} opacity="0.5" />
+              <Style.PictureArticle src={`/articles/${content.data.heroPicture}`} opacity="0.5" />
               <Style.InfoArticle>
                 <Style.BlocKeywords>
                   <Style.KeywordsArticle>{content.data.keywords}</Style.KeywordsArticle>                
@@ -95,7 +96,9 @@ const [content, dispatchContent] = React.useReducer(
 
             </Style.ArticlePicture>
             <Style.ContentArticle>
-                {content.data.content}
+              <div>
+               <Interweave content ={articleText}/>
+              </div>
             </Style.ContentArticle>
         </div>
     );

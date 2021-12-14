@@ -5,12 +5,12 @@ import HiddenText from "./HiddenText";
 
 
 
-const ContainerBoutonMenu = ({title, bgColorButton, content}) => {
+const ContainerBoutonMenu = ({title, bgColorButton, bgHiddenText, txtColor, content}) => {
     
     const [visibilityHiddenText, dispatchVisibility] = useRevealContent();
 
     const hiddenTextHandler = () => {
-        if (visibilityHiddenText.data.visible === "none") {
+        if (visibilityHiddenText.data.visible === "none") { 
             dispatchVisibility({
                 type :"CONTENT_EXTENDED",
                 payload : "flex"
@@ -27,7 +27,12 @@ const ContainerBoutonMenu = ({title, bgColorButton, content}) => {
     return ( 
         <Style.ContainerBenefitsMenu onClick = {hiddenTextHandler}>
             <BoutonDeroulant title = {title} bgColorButton ={bgColorButton} />
-            <HiddenText content = {content} displayHiddenText = {visibilityHiddenText.data.visible} />
+            <HiddenText 
+              content = {content}
+              displayHiddenText = {visibilityHiddenText.data.visible}
+              bgHiddenText={bgHiddenText}
+              txtColor = {txtColor} 
+            />
         </Style.ContainerBenefitsMenu>
      );
 }

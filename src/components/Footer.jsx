@@ -11,7 +11,6 @@ const Footer = () => {
       axios.get("http://localhost:1993/inspiration/random", { crossdomain: true } )
       .then(fancyWords => {
         setQuote(fancyWords.data.quote);
-        console.log(quote);
       })
     }
     React.useEffect(() => {
