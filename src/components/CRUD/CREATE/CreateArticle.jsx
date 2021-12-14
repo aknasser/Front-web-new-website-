@@ -1,17 +1,16 @@
-import * as React from 'react';
+import React, { useRef } from 'react';
 import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
 import InputForm from '../../parts/InputForm';
-
+import { Editor } from '@tinymce/tinymce-react';
 
 const CreateArticle = () => {
-    
     const [state, setState] = React.useState({
         title: "",
         subtitle :"",
         heroPicture :"",
         keywords : "",
-        content :""
+        content :"Nouvel article"
     });
 
     
@@ -43,10 +42,11 @@ const CreateArticle = () => {
          }))
     };
 
-    const inputHandlerContent = (event) => {
+    const inputHandlerContent = (content, editor) => {
+        console.log(content)
         setState(state => ({
             ...state,
-            content : event.target.value
+            content : content
          }))
     };
     
@@ -65,11 +65,17 @@ const CreateArticle = () => {
         const ObjectPosted = await axios.post("http://localhost:1993/blog/create", newObject)
         console.log(ObjectPosted)
     }
-    
-    
+
+
+
+
+
+
+    const editorRef = useRef(null); // We need that to make TinyMCE Work
     return (
         <>
-            <form onSubmit={submitHandler}>
+
+<form onSubmit={submitHandler}>
                 <InputForm 
                     id="title" 
                     type="text" 
@@ -102,12 +108,26 @@ const CreateArticle = () => {
                     inputHandler={inputHandlerKeywords}
                 />
                 
-                <InputForm 
-                    id="content" 
-                    type="textarea" 
-                    labelValue="Corps de Texte" 
-                    value={state.content} 
-                    inputHandler={inputHandlerContent}
+                <Editor
+                    id = "newContent"
+                    onInit={(evt, editor) => editorRef.current = editor}
+                    value= {state.content}
+                    onEditorChange = {inputHandlerContent}
+                    apiKey = "8gyjsp9hibfm2zts18s1o26nyh42lq528iufe3qt0pbd3atb"
+                    init={{
+                    height: 200,
+                    menubar: false,
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                    ],
+                    toolbar: 'undo redo | formatselect | ' +
+                    'bold italic backcolor | alignleft aligncenter ' +
+                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                    'removeformat | help',
+                    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                    }}
                 />
 
 
@@ -115,8 +135,14 @@ const CreateArticle = () => {
                     cta = "Nouvel Article"
                 />
             </form>
+
+
+        
+
         </>
-    );
+      );
+
+   
 }
  
 export default CreateArticle;

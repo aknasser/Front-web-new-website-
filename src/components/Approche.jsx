@@ -13,10 +13,19 @@ const Approche = ({detailsApproche}) => {
         <>
             {detailsApproche.map(detail => (
                 <Style.BlocMyStyle bgColor = {detail.bgColor} id={detail.id}>
-                    <PageTitle pageTitle={detail.title}/>
+                    <PageTitle 
+                        pageTitle={detail.title} 
+                        colorTitle = {detail.colorTitle}
+                    />
                     <Style.TrioButton>
                         {detail.categories.map(categorie => (
-                                <ContainerBoutonMenu title={categorie.intitule} bgColorButton = {categorie.buttonColor} content={categorie.hiddenText} />
+                                <ContainerBoutonMenu 
+                                    title={categorie.intitule} 
+                                    bgColorButton = {categorie.buttonColor}
+                                    content={categorie.hiddenText}
+                                    bgHiddenText = {categorie.bgColorHiddenText}  
+                                    txtColor = {categorie.textColor}
+                                 />
                         ))}
                     </Style.TrioButton>
                 </Style.BlocMyStyle>

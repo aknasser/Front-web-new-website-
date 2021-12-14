@@ -6,7 +6,6 @@ import Article from './components/Article';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
-import Humain from './components/Humain';
 import NavBar from './components/NavBar';
 import ProjectList from './components/ProjectList';
 import Project from './components/Project';
@@ -30,6 +29,7 @@ import DeleteArticle from './components/CRUD/DELETE/DeleteArticle';
 import BlocPicture from './components/BlocPicture';
 import { createGlobalStyle } from "styled-components";
 import Colors from './components/parts/Esthete';
+import { withTheme } from 'styled-components';
 
 
 const categories = ["prospect", "article", "project", "inspiration"]; 
@@ -75,7 +75,7 @@ function App() {
               {articlesList.isLoading ? (
                 <p> Chargement des articles...</p>
               ) : (
-                <Blog articles={articlesList.data} /* setArticleId={setArticleId()} */ />
+                <Blog articles={articlesList.data}  />
               )}
             </Route>
             <Route path="/article/:id">
@@ -189,47 +189,62 @@ function App() {
 const buttonBenefits = [
   {
     title : "Pourquoi ?" ,
+    colorTitle : "white",
     id : "why",
     categories : [
       {
         intitule : "Pourquoi un site web / app ?",  // POURQUOI UN SITE WEB ?
         hiddenText : "C'est le pillier de votre stratégie commerciale. Obtenez un site web / app qui s'aligne à 100% avec vos objectifs business...  ",
-        buttonColor : Colors.primaryColor
+        buttonColor : Colors.primaryColor,
+        bgColorHiddenText : Colors.BGContent,
+        textColor : Colors.secundaryColor
       },
       {
         intitule : "Vous êtes au bon endroit...",    // POURQUOI MOI ?
         hiddenText : "Nouvel entrepreneur, PMEs dynamiques, Assos ? Mon approche et mes solutions sont alignés sur vos besoins spécifiques...",
-        buttonColor : Colors.primaryColor
+        buttonColor : Colors.primaryColor,
+        bgColorHiddenText : Colors.BGContent,
+        textColor : Colors.secundaryColor
       },
       {
         intitule : "...au bon moment",  // POURQUOI MAINTENANT ?
         hiddenText : "Votre produit/service est bon! Donnez-lui le site qu'il mérite. Maintenant.",
-        buttonColor : Colors.primaryColor
+        buttonColor : Colors.primaryColor,
+        bgColorHiddenText : Colors.BGContent,
+        textColor : Colors.secundaryColor
       },
     ],
     bgColor : Colors.secundaryColor,
+
   },
   {
     title : "Mon Approche" ,
+    colorTitle : Colors.secundaryColor,
     id : "approche",
     categories : [
       {
         intitule : "Sublimer votre image",
         hiddenText : "Mettez en avant ce qui vous rend unique avec un site web / app qui véhicule vos valeurs.",
-        buttonColor : Colors.secundaryColor
+        buttonColor : Colors.primaryColor,
+        bgColorHiddenText : Colors.secundaryColor,
+        textColor : "white"
       },
       {
         intitule : "Design Orienté Client",
         hiddenText : "Convertissez vos visiteurs en clients fidèles grâce à un design suscitant l'intéraction et l'acte d'achat.",
-        buttonColor : Colors.secundaryColor
+        buttonColor : Colors.primaryColor,
+        bgColorHiddenText : Colors.secundaryColor,
+        textColor : "white"
       },
       {
         intitule : "Conseils Business",
         hiddenText : "Je vous aide à déployer une stratégie en ligne concrète grâce à mon expérience de Business Developer / Marketing Specialist.",
-        buttonColor : Colors.secundaryColor
+        buttonColor : Colors.primaryColor,
+        bgColorHiddenText : Colors.secundaryColor,
+        textColor : "white"
       }
     ],
-    bgColor : Colors.primaryColor ,
+    bgColor : Colors.BGContent,
   },
   
 

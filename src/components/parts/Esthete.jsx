@@ -147,7 +147,7 @@ export const StyledCTAButton = styled.button`
 
 
 export const StyledSectionTitle = styled.h2 `
-    color : white;
+    color : ${(props) => props.colorTitle || "white"};
     text-transform : uppercase;
     margin : 0rem auto 2rem;
     font-size : 2.25rem;    
@@ -268,6 +268,8 @@ export const StyledLabelForm = styled.label`
 `;
 
 
+
+
 export const StyledInputForm = styled.input`
     font-size: 0.75rem;
     border-radius : 0.5rem;
@@ -322,16 +324,44 @@ export const ChapeauBlog = styled(StyledDropDownButton)`
     margin : 2rem auto;
 `;
 
-export const InputSearchBlog = styled(StyledSubmitButton)`
-    width: 60%;
-    margin: 0rem auto 5rem;
+export const ButtonSearchBlog = styled(StyledSubmitButton)`
+    min-width: 33%;
+    padding: 0.5rem;
+    margin: 0rem 0.5rem 5rem;
     font-size: 1rem;
     @media(min-width :${deviceSize.tablet}) {
-        width: 33%;
+        max-width: 25vw;
         font-size: 1.5rem;
     }
-    
+    @media(min-width :${deviceSize.laptopS}) {
+        max-width: 20vw;
+    }
 `;
+
+export const BoxSearchButton = styled.div`
+    display : flex;
+    flex-direction : row;
+    max-width: 100%;
+`;
+
+
+
+
+export const FormSearch = styled.form`
+    display : flex;
+    flex-direction : column; 
+    align-items: center;
+`;
+
+
+export const InputFormSearch = styled(StyledInputForm)`
+    width : 50%;
+    margin: 2rem auto 1rem;
+    @media(max-width :${deviceSize.tablet}) {
+            width: 75%;
+        }
+`;
+
 
 
 //APPROCHE
@@ -379,8 +409,8 @@ export const DropDownMainPage = styled(StyledDropDownButton)`
 
 export const DetailsApproche = styled(StyledDropDownButton)`
     display : ${props => props.visibility};
-    background-color : ${Colors.BGContent};
-    color : ${Colors.secundaryColor};
+    background-color : ${(props) => props.bgColor};
+    color : ${(props) => props.txtColor};
     font-size : 1.25rem;
     font-style : italic;
     font-weight: 300;
@@ -417,6 +447,12 @@ export const BlocMyWork = styled.div`
 export const ArticlePicture = styled(BlocMyWork)`
     position: relative;
     top: 0.2rem;
+    @media(min-width :${deviceSize.mobileL}) {
+        width: 100vw;
+        height: 100%;
+        margin : 1rem auto;
+        border-radius: 0.5rem;
+    }
 `;
 
 
@@ -427,8 +463,11 @@ export const FilteredPicture = styled.img`
     background-size : cover;
     opacity :${(props) => props.opacity || 0.8};
     width : 100%;
-    height : 100%;
+    height: 100%;
     z-index: 0;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 50vw;
+    }
 `;
 
 export const BlocTitle = styled.h4`
@@ -449,7 +488,7 @@ export const InfoArticle = styled.div`
     z-index : 1;
     display : flex;
     flex-direction : column;
-    justify-content: space-between;
+    justify-content: space-around;
     color : white;
 `;
 
@@ -473,11 +512,32 @@ export const ContentArticle = styled.div`
     padding: 1rem;
     font-size: 0.8rem;
     text-align: left;
-    position: relative;`;
+    position: relative;
+    @media(min-width :${deviceSize.mobileL}) {
+        font-size : 1.25rem;
+        padding : 5rem 1.5rem;
+        margin : -2rem auto 0rem;
+    }
+    @media(min-width :${deviceSize.tablet}) {
+    }    
+    @media(min-width :${deviceSize.laptopS}) {
+        padding : 7rem 10rem;
+    }        
+`;
 
 export const ReadingProgressionBar = styled.span`
     font-size: 1rem;
+    color : ${Colors.secundaryColor};
 `;
+
+export const PictureArticle = styled(FilteredPicture)`
+    border-radius: 0.5rem;
+    @media(min-width :${deviceSize.tablet}) {
+        width: 60vw;
+        margin: 1rem auto;
+    }   
+`;
+
 
 
 // FOOTER
