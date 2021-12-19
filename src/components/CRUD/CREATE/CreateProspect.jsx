@@ -4,7 +4,6 @@ import  * as Style from '../../parts/Esthete';
 import InputForm from '../../parts/InputForm';
 import InputForm_TextArea from '../../parts/InputForm_TextArea';
 import InputSubmit from '../../parts/InputSubmit';
-import PageTitle from '../../parts/PageTitle';
 
 
 
