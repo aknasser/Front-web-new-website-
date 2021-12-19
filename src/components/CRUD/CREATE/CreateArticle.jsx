@@ -4,7 +4,7 @@ import axios from "axios";
 import InputForm from '../../parts/InputForm';
 import { Editor } from '@tinymce/tinymce-react';
 
-const CreateArticle = () => {
+const CreateArticle = ({endpoint}) => {
     const [state, setState] = React.useState({
         title: "",
         subtitle :"",
@@ -62,7 +62,7 @@ const CreateArticle = () => {
             keywords : state.keywords,
             content : state.content,
         }
-        const ObjectPosted = await axios.post("http://localhost:1993/blog/create", newObject)
+        const ObjectPosted = await axios.post(`${endpoint}/blog/create`, newObject)
         console.log(ObjectPosted)
     }
 

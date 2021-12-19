@@ -6,7 +6,7 @@ import { useParams } from 'react-router';
 
 
 
-const UpdateInspiration = ({categorie}) => {
+const UpdateInspiration = ({categorie, endpoint}) => {
     const { id } = useParams();
 
     const  modelReducer = (state, action) => {
@@ -63,7 +63,7 @@ const UpdateInspiration = ({categorie}) => {
                 dispatchModelToUpdate({type: "FETCH_START"});
 
               
-                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}/update/${id}`, { crossdomain: true })
+                const objectsFetched = await axios.get(`${endpoint}/${categorie}/update/${id}`, { crossdomain: true })
                 dispatchModelToUpdate({
                   type: "FETCH_SUCCESS",
                   payload : objectsFetched.data,

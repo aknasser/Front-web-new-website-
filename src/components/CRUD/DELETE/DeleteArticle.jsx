@@ -4,14 +4,14 @@ import { useParams } from "react-router";
 
 
 
-const DeleteObject = () => {
+const DeleteObject = ({endpoint}) => {
   const {id, categorie} = useParams();
 
 
 
   React.useEffect( () => {
   const deleteObject = async () => {
-    const objectToDelete = await axios.delete(`http://localhost:1993/blog/delete/${id}`)
+    const objectToDelete = await axios.delete(`${endpoint}/blog/delete/${id}`)
   }
   deleteObject();
 

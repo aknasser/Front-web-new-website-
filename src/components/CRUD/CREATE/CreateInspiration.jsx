@@ -4,7 +4,7 @@ import InputForm from '../../parts/InputForm';
 import InputSubmit from '../../parts/InputSubmit';
 
 
-const CreateInspiration = () => {
+const CreateInspiration = ({endpoint}) => {
 
     const [state, setState] = React.useState({
         quote: "",
@@ -35,7 +35,7 @@ const CreateInspiration = () => {
             author : state.author,
         };
         console.log("Here we go!!!")
-        const leadPosted = await axios.post("http://localhost:1993/inspiration/create", newInspiration)
+        const leadPosted = await axios.post(`${endpoint}/inspiration/create`, newInspiration)
         console.log(leadPosted.data);
     }
 

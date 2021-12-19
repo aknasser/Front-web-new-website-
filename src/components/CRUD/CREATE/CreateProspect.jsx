@@ -8,7 +8,7 @@ import PageTitle from '../../parts/PageTitle';
 
 
 
-const CreateProspect = () => {
+const CreateProspect = ({endpoint}) => {
 
     const [state, setState] = React.useState({
         prenom: "",
@@ -73,7 +73,7 @@ const CreateProspect = () => {
             email : state.email
         };
         console.log("Here we go!!!")
-        const leadPosted = await axios.post("http://localhost:1993/prospect", newProspect)
+        const leadPosted = await axios.post(`${endpoint}/prospect/create`, newProspect)
         console.log(leadPosted.data);
     }
 

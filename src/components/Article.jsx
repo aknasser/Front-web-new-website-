@@ -8,7 +8,7 @@ import * as Style from "./parts/Esthete";
 
 
 
-const Article = () => {
+const Article = ({endpoint}) => {
     const { id } = useParams();  // permet de récupérer la valeur du paramètre utilisée pour arriver surc cette page
 
 
@@ -61,7 +61,7 @@ const [content, dispatchContent] = React.useReducer(
 
 
 
-        const allArticles = await axios.get(`http://localhost:1993/blog/${id}`, { crossdomain: true })
+        const allArticles = await axios.get(`${endpoint}/blog/${id}`, { crossdomain: true })
         await console.log(allArticles);
         dispatchContent({
           type : "CONTENT_FETCH_SUCCESS",
