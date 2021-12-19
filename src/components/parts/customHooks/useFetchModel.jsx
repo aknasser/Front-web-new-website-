@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-const useFetchModel = (categorie) => {
+const useFetchModel = (categorie, endpoint) => {
 
     const modelReducer = (state, action) => {
         switch(action.type) {
@@ -47,7 +47,7 @@ const useFetchModel = (categorie) => {
                 dispatchData({type: "FETCH_START"});
       
               
-                const objectsFetched = await axios.get(`http://localhost:1993/${categorie}`, { crossdomain: true })
+                const objectsFetched = await axios.get(`${endpoint}/${categorie}`, { crossdomain: true })
                 dispatchData({
                   type: "FETCH_SUCCESS",
                   payload : objectsFetched.data,

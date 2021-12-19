@@ -46,10 +46,10 @@ const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/a
 function App() {
 
 
-  const [prospectsList, dispatchProspect] = useFetchModel("prospect");
-  const [articlesList, dispatchArticle] = useFetchModel("blog");
-  const [projectsList, dispatchProject] = useFetchModel("project");
-  const [inspirationsList, dispatchInspiration] = useFetchModel("inspiration");
+  const [prospectsList, dispatchProspect] = useFetchModel("prospect", API_ENDPOINT);
+  const [articlesList, dispatchArticle] = useFetchModel("blog", API_ENDPOINT);
+  const [projectsList, dispatchProject] = useFetchModel("project", API_ENDPOINT);
+  const [inspirationsList, dispatchInspiration] = useFetchModel("inspiration", API_ENDPOINT);
   
 
 
@@ -66,7 +66,7 @@ function App() {
                 <HomePage/>
                 <Approche detailsApproche={buttonBenefits} />
                 <BlocPicture works ={dataBlocMyWork} />
-                <CreateProspect id="form" />
+                <CreateProspect id="form" endpoint = {API_ENDPOINT} />
               </div>
             </Route>
             <Route path="/blog">
