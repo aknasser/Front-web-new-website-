@@ -37,7 +37,7 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const API_ENDPOINT = "http://localhost:1993"  
+const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/app"  
 
 // Pour la phase de développement, utiliser : http://localhost:1993
 // Pour la pase de déploiement, utiliser : https://us-central1-nassmassa-backend.cloudfunctions.net/app
@@ -66,7 +66,7 @@ function App() {
                 <HomePage/>
                 <Approche detailsApproche={buttonBenefits} />
                 <BlocPicture works ={dataBlocMyWork} />
-                <CreateProspect id="form" />
+                <CreateProspect id="form" endpoint = {API_ENDPOINT} />
               </div>
             </Route>
             <Route path="/blog">
