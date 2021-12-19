@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 
-const Project = () => {
+const Project = ({endpoint}) => {
 
     const { id } = useParams();
 
@@ -50,7 +50,7 @@ const Project = () => {
             dispatchTaf({type: "TAF_FETCH_START"});
   
           
-            const allTafs = await axios.get(`http://localhost:1993/project/${id}` , { crossdomain: true })
+            const allTafs = await axios.get(`${endpoint}/project/${id}` , { crossdomain: true })
             dispatchTaf({
               type: "TAF_FETCH_SUCCESS",
               payload : allTafs.data,

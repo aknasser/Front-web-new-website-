@@ -4,7 +4,7 @@ import InputForm from '../../parts/InputForm';
 import InputSubmit from '../../parts/InputSubmit';
 
 
-const CreateProject = () => {
+const CreateProject = ({endpoint}) => {
 
     const [state, setState] = React.useState({
         title: "",
@@ -53,7 +53,7 @@ const CreateProject = () => {
             description : state.description,
         };
         console.log("Here we go!!!")
-        const leadPosted = await axios.post("http://localhost:1993/project/create", newProject)
+        const leadPosted = await axios.post(`${endpoint}/project/create`, newProject)
         console.log(leadPosted.data);
     }
 

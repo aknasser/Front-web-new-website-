@@ -29,7 +29,6 @@ import DeleteArticle from './components/CRUD/DELETE/DeleteArticle';
 import BlocPicture from './components/BlocPicture';
 import { createGlobalStyle } from "styled-components";
 import Colors from './components/parts/Esthete';
-import { withTheme } from 'styled-components';
 
 
 const categories = ["prospect", "article", "project", "inspiration"]; 
@@ -38,7 +37,7 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-
+const API_ENDPOINT = "http://localhost:1993"
 
 
 
@@ -75,11 +74,11 @@ function App() {
               {articlesList.isLoading ? (
                 <p> Chargement des articles...</p>
               ) : (
-                <Blog articles={articlesList.data}  />
+                <Blog articles={articlesList.data} endpoint = {API_ENDPOINT}  />
               )}
             </Route>
             <Route path="/article/:id">
-              <Article />
+              <Article endpoint = {API_ENDPOINT} />
             </Route>
             <Route path="/projectsList">
               {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
@@ -90,7 +89,7 @@ function App() {
               )}
             </Route>
             <Route path="/project/:id">
-              <Project/>
+              <Project endpoint = {API_ENDPOINT} />
             </Route>
             <Route path="/contact">
                 <CreateProspect/>
@@ -141,42 +140,42 @@ function App() {
 
 {/* LES ROUTES POUR LE C DU CRUD */}
             <Route path="/admin/prospect/create">
-              <CreateProspect/>
+              <CreateProspect endpoint = {API_ENDPOINT}/>
             </Route>
             <Route path="/admin/article/create">
-              <CreateArticle />       
+              <CreateArticle endpoint = {API_ENDPOINT} />       
             </Route>
             <Route path="/admin/project/create">
-              <CreateProject />       
+              <CreateProject endpoint = {API_ENDPOINT} />       
             </Route>
             <Route path="/admin/inspiration/create">
-              <CreateInspiration />       
+              <CreateInspiration endpoint = {API_ENDPOINT} />       
             </Route>
 
 {/* LES ROUTES POUR LE U DU CRUD */}
             <Route path="/admin/prospect/update/:id">
-              <UpdateProspect categorie = "prospect"/>
+              <UpdateProspect categorie = "prospect" endpoint = {API_ENDPOINT}/>
             </Route>
             <Route path="/admin/article/update/:id">
-                   <UpdateArticle categorie = "blog" />
+                   <UpdateArticle categorie = "blog" endpoint = {API_ENDPOINT} />
             </Route>
             <Route path="/admin/project/update/:id">
-              <UpdateProject categorie = "project"/>       
+              <UpdateProject categorie = "project" endpoint = {API_ENDPOINT}/>       
             </Route>
             <Route path="/admin/inspiration/update/:id">
-              <UpdateInspiration categorie = "inspiration" />       
+              <UpdateInspiration categorie = "inspiration" endpoint = {API_ENDPOINT} />       
             </Route>
 
 {/* LES ROUTES POUR LE D DU CRUD */}
-            <Route exact path="/admin/article/delete/:id">
-              <DeleteArticle/>
+            <Route exact path="/admin/article/delete/:id" endpoint = {API_ENDPOINT}>
+              <DeleteArticle endpoint = {API_ENDPOINT}/>                 {/* A supprimer quand on passera de "blog" à "article" dans le back */}
             </Route>
-            <Route path="/admin/:categorie/delete/:id">
-              <DeleteObject/>
+            <Route path="/admin/:categorie/delete/:id" >
+              <DeleteObject endpoint = {API_ENDPOINT}/>
             </Route>
         </Switch> 
         </div>
-        <Footer/>
+        <Footer endpoint = {API_ENDPOINT} />
       </div>
     </Router>
   );

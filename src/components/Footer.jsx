@@ -4,11 +4,11 @@ import axios from "axios";
 import * as Style from "./parts/Esthete";
 
 
-const Footer = () => {
+const Footer = ({endpoint}) => {
     const [quote, setQuote] = React.useState("Wait..");
 
     const fetchInspi = () => {
-      axios.get("http://localhost:1993/inspiration/random", { crossdomain: true } )
+      axios.get(`${endpoint}/inspiration/random`, { crossdomain: true } )
       .then(fancyWords => {
         setQuote(fancyWords.data.quote);
       })

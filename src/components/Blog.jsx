@@ -39,22 +39,24 @@ const searchReducer = (state, action) => {
     }
 }
 
-const API_ENDPOINT = "http://localhost:1993/blog/search/"
 
 
 
-const Blog = ({articles}) => {
+const Blog = ({articles, endpoint}) => {
     
+    const SEARCH_ENDPOINT = `${endpoint}/blog/search/`
+
+
     const [filter, setFilter] = React.useState("")
 
-    const [url, setUrl] = React.useState(`${API_ENDPOINT}${filter}`);
+    const [url, setUrl] = React.useState(`${SEARCH_ENDPOINT}${filter}`);
 
     const searchHandler = async(event) => {
         setFilter(event.target.value);  // to update the value of searchWords when the user type something.
       };
 
     const submitHandler = (event) => {
-        setUrl(`${API_ENDPOINT}${filter}`);
+        setUrl(`${SEARCH_ENDPOINT}${filter}`);
         event.preventDefault();
     };
 
@@ -65,7 +67,7 @@ const Blog = ({articles}) => {
             payload : articles,
         })
         event.preventDefault();
-        console.log(API_ENDPOINT)
+        console.log(SEARCH_ENDPOINT)
     }
 
     const [searchedArticles, dispatchSearchArticles] = React.useReducer(
