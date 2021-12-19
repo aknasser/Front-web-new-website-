@@ -37,13 +37,13 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const API_ENDPOINT = "http://localhost:1993"
+const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/app"  
 
+// Pour la phase de développement, utiliser : http://localhost:1993
+// Pour la pase de déploiement, utiliser : https://us-central1-nassmassa-backend.cloudfunctions.net/app
 
 
 function App() {
-
-
 
 
   const [prospectsList, dispatchProspect] = useFetchModel("prospect");
