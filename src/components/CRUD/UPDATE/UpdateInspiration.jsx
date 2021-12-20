@@ -100,7 +100,7 @@ const UpdateInspiration = ({categorie, endpoint}) => {
             quote: modelToUpdate.data.quote,
             author: modelToUpdate.data.author,
         }
-        const ObjectPosted = await axios.post(`http://localhost:1993/${categorie}/update/${id}`, updatedObject)
+        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
         console.log(ObjectPosted)
     }
     

@@ -102,7 +102,7 @@ const UpdateProject = ({categorie, endpoint}) => {
             link : modelToUpdate.data.link,
             description : modelToUpdate.data.description,
         }
-        const ObjectPosted = await axios.post(`http://localhost:1993/${categorie}/update/${id}`, updatedObject)
+        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
         console.log(ObjectPosted)
     }
     

@@ -104,7 +104,7 @@ const UpdateProspect = ({categorie, endpoint}) => {
             numero : modelToUpdate.data.numero,
             email : modelToUpdate.data.email,
         }
-        const ObjectPosted = await axios.post(`http://localhost:1993/${categorie}/update/${id}`, updatedObject)
+        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
         console.log(ObjectPosted)
     }
     

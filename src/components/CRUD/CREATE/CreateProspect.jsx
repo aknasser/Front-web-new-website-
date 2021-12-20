@@ -81,7 +81,7 @@ const CreateProspect = ({endpoint}) => {
 
     return (
         <div>
-            <Style.FormTitle id="form"> un café ensemble ? </Style.FormTitle>
+            <Style.FormTitle id="form"> Un café ensemble </Style.FormTitle>
             <form onSubmit={submitHandler} id="form">
                 <Style.StyledForm>
                     <InputForm 

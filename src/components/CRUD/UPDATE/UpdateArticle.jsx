@@ -106,7 +106,7 @@ const UpdateArticle = ({categorie, endpoint}) => {
             keywords : modelToUpdate.data.keywords,
             content : modelToUpdate.data.content,
         }
-        const ObjectPosted = await axios.post(`http://localhost:1993/${categorie}/update/${id}`, updatedObject)
+        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
         console.log(ObjectPosted)
     }
     
