@@ -92,7 +92,7 @@ function App() {
               <Project endpoint = {API_ENDPOINT} />
             </Route>
             <Route path="/contact">
-                <CreateProspect/>
+                <CreateProspect endpoint = {API_ENDPOINT}/>
             </Route>
 
 
