@@ -237,8 +237,9 @@ export const StyledDropDownButton = styled.h3`
 
 // FORM
 export const StyledSubmitButton = styled.input`
-    width: 90vw;
+    width: 70vw;
     margin: 3rem auto 5rem;
+    padding : 1.5rem;
     background-color : ${Colors.primaryColor};
     border : 0rem;
     border-radius : 0.5rem;
@@ -252,6 +253,7 @@ export const StyledSubmitButton = styled.input`
     cursor : pointer;
     @media(min-width :${deviceSize.tablet}) {
         width: 55vw;
+        font-size : 2rem;
     }
 `;
 
@@ -556,6 +558,11 @@ export const PrezFooter = styled.h5`
 export const QuoteFooter = styled(Intro)`
     margin: 0rem;
     padding : 1.25rem;
+`;
+
+export const socialMediaIcon = styled.img`
+    margin: 0rem auto;
+    max-width: 5vw;
 `;
 
 
