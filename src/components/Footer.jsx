@@ -20,9 +20,10 @@ const Footer = ({endpoint}) => {
 
     return ( 
         <Style.StyledFooter>
-            <Style.PrezFooter>Design and Code made by Nasser Massadimi</Style.PrezFooter>
             <Style.QuoteFooter>{quote}</Style.QuoteFooter>
-            <Link to="">Icône Linkedin</Link>
+            <a href="https://www.linkedin.com/in/nasser-massadimi-5b963763/" target="_blank">
+              <Style.socialMediaIcon src="linkedin_icon.png" alt="Linkedin icon" />
+            </a>
         </Style.StyledFooter>
     );
 }
