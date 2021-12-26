@@ -558,12 +558,24 @@ export const PrezFooter = styled.h5`
 export const QuoteFooter = styled(Intro)`
     margin: 0rem;
     padding : 1.25rem;
+    font-weight: 600;
+`;
+
+export const AuthorFooter = styled(QuoteFooter)`
+    font-weight : lighter;
+    margin : 0rem auto 2rem
 `;
 
 export const socialMediaIcon = styled.img`
     margin: 0rem auto;
     max-width: 5vw;
 `;
+
+export const loadingMsg = styled.p`
+    color : ${Colors.BGContent};
+    font-size : 0.5rem;
+`;
+
 
 
  
