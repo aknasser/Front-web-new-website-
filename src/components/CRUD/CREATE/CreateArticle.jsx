@@ -3,6 +3,8 @@ import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
 import InputForm from '../../parts/InputForm';
 import { Editor } from '@tinymce/tinymce-react';
+import { Link } from 'react-router-dom';
+
 
 const CreateArticle = ({endpoint}) => {
     const [state, setState] = React.useState({
@@ -62,8 +64,8 @@ const CreateArticle = ({endpoint}) => {
             keywords : state.keywords,
             content : state.content,
         }
-        const ObjectPosted = await axios.post(`${endpoint}/blog/create`, newObject)
-        console.log(ObjectPosted)
+        const ObjectPosted = axios.post(`${endpoint}/blog/create`, newObject)
+        window.location.href = "/admin/article/all"   // Redirect the admin towards the page with all the entries.
     }
 
 
@@ -130,10 +132,10 @@ const CreateArticle = ({endpoint}) => {
                     }}
                 />
 
-
                 <InputSubmit
-                    cta = "Nouvel Article"
+                     cta = "Nouvel Article"
                 />
+
             </form>
 
 
