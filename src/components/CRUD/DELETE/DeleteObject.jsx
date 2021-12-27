@@ -1,6 +1,7 @@
 import * as React from 'react';
 import axios from "axios";
 import { useParams } from "react-router";
+import  * as Style from '../../parts/Esthete';
 
 
 
@@ -11,16 +12,17 @@ const DeleteObject = ({endpoint}) => {
 
   React.useEffect( () => {
   const deleteObject = async () => {
-    const objectToDelete = await axios.delete(`${endpoint}/${categorie}/delete/${id}`)
+    const objectToDelete =  axios.delete(`${endpoint}/${categorie}/delete/${id}`)
+    window.location.href = `/admin/${categorie}/all`   // Redirect the admin towards the page with all the entries.
   }
   deleteObject();
 
   }, [categorie, id]);
 
   return (
-    <div>
-      <h2>Object {id} Supprimé</h2>
-    </div>
+    <Style.Intro>
+      Suppression en cours...
+    </Style.Intro>
   )
 
 

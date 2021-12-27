@@ -35,8 +35,8 @@ const CreateInspiration = ({endpoint}) => {
             author : state.author,
         };
         console.log("Here we go!!!")
-        const leadPosted = await axios.post(`${endpoint}/inspiration/create`, newInspiration)
-        console.log(leadPosted.data);
+        const leadPosted =  axios.post(`${endpoint}/inspiration/create`, newInspiration)
+        window.location.href = "/admin/inspiration/all"   // Redirect the admin towards the page with all the entries.
     }
 
 

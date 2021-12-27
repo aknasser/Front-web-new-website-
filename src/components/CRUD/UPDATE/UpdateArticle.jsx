@@ -1,8 +1,11 @@
-import * as React from 'react';
+import React, { useRef } from 'react';
 import InputForm from '../../parts/InputForm';
 import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
 import { useParams } from 'react-router';
+import { Editor } from '@tinymce/tinymce-react';
+import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 
 
@@ -32,6 +35,14 @@ const UpdateArticle = ({categorie, endpoint}) => {
                   data : {
                       ...state.data,                     // "conserve l'ensemble de tes données  SAUF POUR...
                       [action.field] : action.payload            // ...cette propriété que update "
+                  }
+                };
+            case "UPDATE_CONTENT":
+                return {
+                  ...state,             
+                  data : {
+                      ...state.data,                     // "conserve l'ensemble de tes données  SAUF POUR...
+                      content : action.payload            // ...cette propriété que update "
                   }
                 };
             case "FETCH_ERROR":
@@ -95,7 +106,15 @@ const UpdateArticle = ({categorie, endpoint}) => {
         console.log(event.target.id)
     };
 
-    
+    const contentHandler = (content, editor) => {
+        dispatchModelToUpdate({
+            type: "UPDATE_CONTENT",
+            payload : content,
+        })
+        console.log(`content updaté : ${content}`);
+    };
+
+
     const submitHandler = async(event) => {
         event.preventDefault();
         console.log("C'est parti")
@@ -106,11 +125,12 @@ const UpdateArticle = ({categorie, endpoint}) => {
             keywords : modelToUpdate.data.keywords,
             content : modelToUpdate.data.content,
         }
-        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
-        console.log(ObjectPosted)
-    }
+        const ObjectPosted = axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
+        window.location.href = "/admin/article/all"   // Redirect the admin towards the page with all the entries.
+    };
     
-    
+    const editorRef = useRef(null); // We need that to make TinyMCE Work
+
     return (
         <>
             {modelToUpdate.isError && <p>une erreur dans le fetch de l'article à updater</p>}
@@ -152,18 +172,36 @@ const UpdateArticle = ({categorie, endpoint}) => {
                             inputHandler={inputHandler}
                         />
                         
-                        <InputForm 
-                            id="content" 
-                            type="textarea" 
-                            labelValue="Corps de Texte" 
-                            value={modelToUpdate.data.content} 
-                            inputHandler={inputHandler}
+
+                        <Editor
+                            id = "content"
+                            onInit={(evt, editor) => editorRef.current = editor}
+                            value= {modelToUpdate.data.content}
+                            onEditorChange = {contentHandler}
+                            apiKey = "8gyjsp9hibfm2zts18s1o26nyh42lq528iufe3qt0pbd3atb"
+                            init={{
+                            height: 200,
+                            menubar: false,
+                            plugins: [
+                                'advlist autolink lists link image charmap print preview anchor',
+                                'searchreplace visualblocks code fullscreen',
+                                'insertdatetime media table paste code help wordcount'
+                            ],
+                            toolbar: 'undo redo | formatselect | ' +
+                            'bold italic backcolor | alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                            'removeformat | help',
+                            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                            }}
                         />
+
                         
         
+
                         <InputSubmit
-                            cta = "Mettre à jour l'article"
+                            cta = "Mettre à Jour"
                         />
+
                     </form>
                 </div>
   

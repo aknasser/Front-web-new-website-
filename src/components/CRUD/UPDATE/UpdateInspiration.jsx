@@ -100,8 +100,8 @@ const UpdateInspiration = ({categorie, endpoint}) => {
             quote: modelToUpdate.data.quote,
             author: modelToUpdate.data.author,
         }
-        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
-        console.log(ObjectPosted)
+        const ObjectPosted =  axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
+        window.location.href = "/admin/inspiration/all"   // Redirect the admin towards the page with all the entries.
     }
     
     
