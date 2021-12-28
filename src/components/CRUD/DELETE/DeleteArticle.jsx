@@ -12,7 +12,8 @@ const DeleteObject = ({endpoint}) => {
 
   React.useEffect( () => {
   const deleteObject = async () => {
-    const objectToDelete =  axios.delete(`${endpoint}/blog/delete/${id}`)
+    const objectToDelete = await axios.delete(`${endpoint}/blog/delete/${id}`)
+    console.log("article removed from the BDD");
     window.location.href = `/admin/article/all`   // Redirect the admin towards the page with all the entries.
 
     

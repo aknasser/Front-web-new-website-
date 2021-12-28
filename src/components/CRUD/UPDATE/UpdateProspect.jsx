@@ -104,7 +104,8 @@ const UpdateProspect = ({categorie, endpoint}) => {
             numero : modelToUpdate.data.numero,
             email : modelToUpdate.data.email,
         }
-        const ObjectPosted =  axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
+        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
+        console.log("BDD updaté");
         window.location.href = "/admin/prospect/all"   // Redirect the admin towards the page with all the entries.
     }
     

@@ -35,7 +35,8 @@ const CreateInspiration = ({endpoint}) => {
             author : state.author,
         };
         console.log("Here we go!!!")
-        const leadPosted =  axios.post(`${endpoint}/inspiration/create`, newInspiration)
+        const leadPosted =  await axios.post(`${endpoint}/inspiration/create`, newInspiration)
+        console.log("new entry in the DB");
         window.location.href = "/admin/inspiration/all"   // Redirect the admin towards the page with all the entries.
     }
 

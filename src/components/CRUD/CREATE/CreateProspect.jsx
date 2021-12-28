@@ -72,7 +72,8 @@ const CreateProspect = ({endpoint}) => {
             email : state.email
         };
         console.log("Here we go!!!")
-        const leadPosted =  axios.post(`${endpoint}/prospect/create`, newProspect)
+        const leadPosted =  await axios.post(`${endpoint}/prospect/create`, newProspect)
+        console.log("new entry in the DB");
         window.location.href = "/"   // Redirect the admin towards the page with all the entries.
     }
 
