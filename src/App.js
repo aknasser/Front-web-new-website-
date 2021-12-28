@@ -37,7 +37,7 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/app"  
+const API_ENDPOINT = "http://localhost:1993"  
 
 // Pour la phase de développement, utiliser : http://localhost:1993
 // Pour la pase de déploiement, utiliser : https://us-central1-nassmassa-backend.cloudfunctions.net/app
@@ -192,7 +192,7 @@ const buttonBenefits = [
     id : "why",
     categories : [
       {
-        intitule : "Pourquoi un site web / app ?",  // POURQUOI UN SITE WEB ?
+        intitule : " site web / app = $$$",  // POURQUOI UN SITE WEB ?
         hiddenText : "C'est le pillier de votre stratégie commerciale. Obtenez un site web / app qui s'aligne à 100% avec vos objectifs business...  ",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : Colors.BGContent,
@@ -223,7 +223,7 @@ const buttonBenefits = [
     categories : [
       {
         intitule : "Sublimer votre image",
-        hiddenText : "Mettez en avant ce qui vous rend unique avec un site web / app qui véhicule vos valeurs.",
+        hiddenText : "Vous êtes unique. Prouvez-le avec un site web / app sur mesure qui véhicule vos valeurs.",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : Colors.secundaryColor,
         textColor : "white"

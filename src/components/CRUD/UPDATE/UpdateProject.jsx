@@ -102,7 +102,8 @@ const UpdateProject = ({categorie, endpoint}) => {
             link : modelToUpdate.data.link,
             description : modelToUpdate.data.description,
         }
-        const ObjectPosted =  axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
+        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
+        console.log("BDD updaté")
         window.location.href = "/admin/project/all"   // Redirect the admin towards the page with all the entries.
     }
     

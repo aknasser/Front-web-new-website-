@@ -57,15 +57,23 @@ const CreateArticle = ({endpoint}) => {
     const submitHandler = async(event) => {
         event.preventDefault();
         console.log("C'est parti")
-        const newObject = {
-            title: state.title,
-            subtitle: state.subtitle,
-            heroPicture : state.heroPicture,
-            keywords : state.keywords,
-            content : state.content,
+
+        try {
+            const newObject = {
+                title: state.title,
+                subtitle: state.subtitle,
+                heroPicture : state.heroPicture,
+                keywords : state.keywords,
+                content : state.content,
+            }
+            const ObjectPosted = await axios.post(`${endpoint}/blog/create`, newObject); // We HAVE to FIX that log error : Failed to load resource: net::ERR_EMPTY_RESPONSE
+            console.log("new entry in the DB");
+            window.location.href = "/admin/article/all"   // Redirect the admin towards the page with all the entries.
+
+        } catch (err) {
+            throw new Error('Unable to post')
         }
-        const ObjectPosted = axios.post(`${endpoint}/blog/create`, newObject)
-        window.location.href = "/admin/article/all"   // Redirect the admin towards the page with all the entries.
+
     }
 
 
@@ -76,8 +84,7 @@ const CreateArticle = ({endpoint}) => {
     const editorRef = useRef(null); // We need that to make TinyMCE Work
     return (
         <>
-
-<form onSubmit={submitHandler}>
+            <form onSubmit={submitHandler}>
                 <InputForm 
                     id="title" 
                     type="text" 

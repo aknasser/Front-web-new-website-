@@ -117,17 +117,25 @@ const UpdateArticle = ({categorie, endpoint}) => {
 
     const submitHandler = async(event) => {
         event.preventDefault();
-        console.log("C'est parti")
-        const updatedObject = {
-            title: modelToUpdate.data.title,
-            subtitle: modelToUpdate.data.subtitle,
-            heroPicture : modelToUpdate.data.heroPicture,
-            keywords : modelToUpdate.data.keywords,
-            content : modelToUpdate.data.content,
+        try {
+            console.log("C'est parti")
+            const updatedObject = {
+                title: modelToUpdate.data.title,
+                subtitle: modelToUpdate.data.subtitle,
+                heroPicture : modelToUpdate.data.heroPicture,
+                keywords : modelToUpdate.data.keywords,
+                content : modelToUpdate.data.content,
+            }
+            console.log(updatedObject);
+            const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject);
+            
+            console.log("BDD updaté");
+            window.location.href = "/admin/article/all"   // Redirect the admin towards the page with all the entries.
+     
+        } catch (err) {
+            throw new Error(`Unable to post: ${err}`)
         }
-        const ObjectPosted = axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
-        window.location.href = "/admin/article/all"   // Redirect the admin towards the page with all the entries.
-    };
+   };
     
     const editorRef = useRef(null); // We need that to make TinyMCE Work
 
