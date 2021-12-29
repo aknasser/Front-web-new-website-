@@ -23,8 +23,8 @@ const Approche = ({detailsApproche}) => {
                                     title={categorie.intitule} 
                                     bgColorButton = {categorie.buttonColor}
                                     content={categorie.hiddenText}
-                                    bgHiddenText = {categorie.bgColorHiddenText}  
                                     txtColor = {categorie.textColor}
+                                    picture = {categorie.picture}
                                  />
                         ))}
                     </Style.TrioButton>

@@ -2,10 +2,10 @@ import * as Style from "./Esthete";
 
 
 
-const HiddenText = ({content, displayHiddenText, bgHiddenText, txtColor}) => {
+const HiddenText = ({content, displayHiddenText, txtColor}) => {
     return (
-        <Style.DetailsApproche visibility = {displayHiddenText} bgColor = {bgHiddenText} txtColor = {txtColor} >
-            <p>{content}</p>
+        <Style.DetailsApproche visibility = {displayHiddenText}  txtColor = {txtColor} >
+            {content}
         </Style.DetailsApproche>
     );
 }

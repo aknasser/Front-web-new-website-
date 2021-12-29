@@ -192,25 +192,28 @@ const buttonBenefits = [
     id : "why",
     categories : [
       {
-        intitule : " site web / app = $$$",  // POURQUOI UN SITE WEB ?
-        hiddenText : "C'est le pillier de votre stratégie commerciale. Obtenez un site web / app qui s'aligne à 100% avec vos objectifs business...  ",
+        intitule : "Indispensable",  // POURQUOI UN SITE WEB ?
+        hiddenText : "un site web aligné sur votre vision = succès assurée",
         buttonColor : Colors.primaryColor,
-        bgColorHiddenText : Colors.BGContent,
-        textColor : Colors.secundaryColor
+        bgColorHiddenText : "transparent",
+        textColor : Colors.BGContent,
+        picture : "euro.png"
       },
       {
-        intitule : "Vous êtes au bon endroit...",    // POURQUOI MOI ?
-        hiddenText : "Nouvel entrepreneur, PMEs dynamiques, Assos ? Mon approche et mes solutions sont alignés sur vos besoins spécifiques...",
+        intitule : "Visibilité",    // POURQUOI MOI ?
+        hiddenText : "vos prospects ont besoin de vous mais...ils ne vous trouvent pas. Il est temps que cela change.",
         buttonColor : Colors.primaryColor,
-        bgColorHiddenText : Colors.BGContent,
-        textColor : Colors.secundaryColor
+        bgColorHiddenText : "transparent",
+        textColor : Colors.BGContent,
+        picture : "heart.png"
       },
       {
-        intitule : "...au bon moment",  // POURQUOI MAINTENANT ?
+        intitule : "Vous êtes la Star",  // POURQUOI MAINTENANT ?
         hiddenText : "Votre produit/service est bon! Donnez-lui le site qu'il mérite. Maintenant.",
         buttonColor : Colors.primaryColor,
-        bgColorHiddenText : Colors.BGContent,
-        textColor : Colors.secundaryColor
+        bgColorHiddenText : "transparent",
+        textColor : Colors.BGContent,
+        picture : "star.png"
       },
     ],
     bgColor : Colors.secundaryColor,
@@ -222,25 +225,28 @@ const buttonBenefits = [
     id : "approche",
     categories : [
       {
-        intitule : "Sublimer votre image",
-        hiddenText : "Vous êtes unique. Prouvez-le avec un site web / app sur mesure qui véhicule vos valeurs.",
+        intitule : "100% Personnalisé",
+        hiddenText : "Vous êtes unique. Montrez-le avec un site web / app sur mesure qui véhicule vos valeurs.",
         buttonColor : Colors.primaryColor,
-        bgColorHiddenText : Colors.secundaryColor,
-        textColor : "white"
+        bgColorHiddenText : "transparent",
+        textColor : Colors.secundaryColor,
+        picture : "ruler.png"
       },
       {
-        intitule : "Design Orienté Client",
-        hiddenText : "Convertissez vos visiteurs en clients fidèles grâce à un design suscitant l'intéraction et l'acte d'achat.",
+        intitule : "+ de Conversion",
+        hiddenText : "Convertissez vos visiteurs en clients fidèles grâce à un design suscitant l'intéraction.",
         buttonColor : Colors.primaryColor,
-        bgColorHiddenText : Colors.secundaryColor,
-        textColor : "white"
+        bgColorHiddenText : "transparent",
+        textColor : Colors.secundaryColor,
+        picture : "funnel.png"
       },
       {
-        intitule : "Conseils Business",
-        hiddenText : "Je vous aide à déployer une stratégie en ligne concrète grâce à mon expérience de Business Developer / Marketing Specialist.",
+        intitule : "Soutien Marketing",
+        hiddenText : "Je vous aide également à déployer une stratégie en ligne efficace et rentable.",
         buttonColor : Colors.primaryColor,
-        bgColorHiddenText : Colors.secundaryColor,
-        textColor : "white"
+        bgColorHiddenText : "transparent",
+        textColor : Colors.secundaryColor,
+        picture : "bar_chart.png"
       }
     ],
     bgColor : Colors.BGContent,
