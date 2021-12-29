@@ -584,7 +584,11 @@ export const AuthorFooter = styled(QuoteFooter)`
 
 export const socialMediaIcon = styled.img`
     margin: 0rem auto;
-    max-width: 5vw;
+    max-width: 15vw;
+    @media(min-width :${deviceSize.tablet}) {
+        max-width: 5vw;
+    }  
+
 `;
 
 export const loadingMsg = styled.p`
