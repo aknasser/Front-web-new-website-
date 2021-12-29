@@ -135,10 +135,13 @@ export const Activity = styled.h2`
 export const StyledCTAButton = styled.button`
     width: 85%;
     margin: 3rem 0rem;
-    @media(min-width :${deviceSize.laptopS}) {
+    @media(min-width :${deviceSize.tablet}) {
         width: 50%;
+    }
+    @media(min-width :${deviceSize.laptopS}) {
+        width: 30%;
         margin: 10rem auto;
-
+    }
 `;
 
 
@@ -228,7 +231,6 @@ export const StyledDropDownButton = styled.h3`
     margin : 3rem auto;
     @media(min-width :${deviceSize.tablet}) {
         width: 15rem;
-        height: 15rem;
     }
 `;
 
@@ -400,30 +402,44 @@ export const ContainerBenefitsMenu = styled.div`
 
 
 export const DropDownMainPage = styled(StyledDropDownButton)`
+    font-weight : 900;
+    border: white 0.01rem solid;
     @media(min-width :${deviceSize.tablet}) {
+        font-size : 1rem;
         width: 25vw;
-        height: 15rem;
         display: flex;
         align-items: center;  
         justify-content: center;
         grid-area: 1 / 1 / 2 / 2;
+    @media(min-width :${deviceSize.laptopS}) {
+        font-size : 1.25rem;
+    }
 `;
 
 export const DetailsApproche = styled(StyledDropDownButton)`
     display : ${props => props.visibility};
-    background-color : ${(props) => props.bgColor};
+    background-color : transparent;
     color : ${(props) => props.txtColor};
-    font-size : 1.25rem;
+    font-size : 1rem;
     font-style : italic;
-    font-weight: 300;
-    margin: -2rem auto 5rem;
+    font-weight: lighter;
+    margin: 0rem auto 5rem;
     @media(min-width :${deviceSize.tablet}) {
         width: 25vw;
+        height : 5vh;
         align-items: center;
-        grid-area: 1 / 1 / 2 / 2;
-        position : absolute;
+        grid-area: 3 / 1 / 4 / 2;
     }
     
+`;
+
+export const ImageApproche = styled.img`
+    max-width: 50vw;
+    margin: 0rem auto;
+    @media(min-width :${deviceSize.tablet}) {
+        max-width : 10vw;
+        grid-area: 2 / 1 / 3 / 2;
+    }
 `;
 
 // BLOCPICTURE / APPROCHE - Les 2 blocs images présents sur la page d'accueil (après scroll)

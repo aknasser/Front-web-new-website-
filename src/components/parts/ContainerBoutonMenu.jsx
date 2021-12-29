@@ -5,9 +5,9 @@ import HiddenText from "./HiddenText";
 
 
 
-const ContainerBoutonMenu = ({title, bgColorButton, bgHiddenText, txtColor, content}) => {
+const ContainerBoutonMenu = ({title, bgColorButton, txtColor, content, picture}) => {
     
-    const [visibilityHiddenText, dispatchVisibility] = useRevealContent();
+/*     const [visibilityHiddenText, dispatchVisibility] = useRevealContent();
 
     const hiddenTextHandler = () => {
         if (visibilityHiddenText.data.visible === "none") { 
@@ -21,16 +21,16 @@ const ContainerBoutonMenu = ({title, bgColorButton, bgHiddenText, txtColor, cont
                 payload : "none"
             });
         };
-    };
+    }; */
     
     
     return ( 
-        <Style.ContainerBenefitsMenu onClick = {hiddenTextHandler}>
+        <Style.ContainerBenefitsMenu /* onClick = {hiddenTextHandler} */>
             <BoutonDeroulant title = {title} bgColorButton ={bgColorButton} />
+            <Style.ImageApproche src={picture}/>  
             <HiddenText 
               content = {content}
-              displayHiddenText = {visibilityHiddenText.data.visible}
-              bgHiddenText={bgHiddenText}
+              /* displayHiddenText = {visibilityHiddenText.data.visible} */
               txtColor = {txtColor} 
             />
         </Style.ContainerBenefitsMenu>
