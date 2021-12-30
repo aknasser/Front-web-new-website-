@@ -13,8 +13,6 @@ const CreateProspect = ({endpoint}) => {
         prenom: "",
         nom :"",
         demande :"",
-        activite : "",
-        numero :"",
         email : ""
     });
 
@@ -39,19 +37,7 @@ const CreateProspect = ({endpoint}) => {
         }))
     };
 
-    const inputHandlerActivite = (event) => {
-        setState(state => ({
-            ...state,
-            activite : event.target.value
-        }))
-    };
 
-    const inputHandlerPhone = (event) => {
-        setState(state => ({
-            ...state,
-            numero : event.target.value
-        }))
-    };
 
     const inputHandlerEmail = (event) => {
         setState(state => ({
@@ -67,8 +53,6 @@ const CreateProspect = ({endpoint}) => {
             prenom : state.prenom,
             nom : state.nom,
             demande : state.demande,
-            activite :state.activite,
-            numero : state.numero, 
             email : state.email
         };
         console.log("Here we go!!!")
@@ -109,13 +93,6 @@ const CreateProspect = ({endpoint}) => {
                         inputHandler={inputHandlerDemande}
                     />
 
-                    <InputForm 
-                        id="activite" 
-                        type="text" 
-                        labelValue="Activité" 
-                        value={state.activite} 
-                        inputHandler={inputHandlerActivite}
-                    />
                     
                     <InputForm 
                         id="email" 
@@ -125,13 +102,6 @@ const CreateProspect = ({endpoint}) => {
                         inputHandler={inputHandlerEmail}
                     />
 
-                    <InputForm 
-                        id="téléphone" 
-                        type="text" 
-                        labelValue="Téléphone" 
-                        value={state.numero} 
-                        inputHandler={inputHandlerPhone}
-                    />
                 </Style.StyledForm>
 
                 <InputSubmit

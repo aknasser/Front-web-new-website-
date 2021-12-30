@@ -100,8 +100,6 @@ const UpdateProspect = ({categorie, endpoint}) => {
             prenom: modelToUpdate.data.prenom,
             nom: modelToUpdate.data.nom,
             demande : modelToUpdate.data.demande,
-            activite : modelToUpdate.data.activite,
-            numero : modelToUpdate.data.numero,
             email : modelToUpdate.data.email,
         }
         const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
@@ -142,25 +140,8 @@ const UpdateProspect = ({categorie, endpoint}) => {
                             value={modelToUpdate.data.demande} 
                             inputHandler={inputHandler}
                         />
-        
+               
                         <InputForm 
-                            id="activite" 
-                            type="text" 
-                            labelValue="Activite" 
-                            value={modelToUpdate.data.activite} 
-                            inputHandler={inputHandler}
-                        />
-                        
-                        <InputForm 
-                            id="numero" 
-                            type="text" 
-                            labelValue="Numero" 
-                            value={modelToUpdate.data.numero} 
-                            inputHandler={inputHandler}
-                        />
-
-                        
-                         <InputForm 
                             id="email" 
                             type="email" 
                             labelValue="Email" 

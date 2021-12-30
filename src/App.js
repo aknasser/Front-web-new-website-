@@ -28,7 +28,7 @@ import DeleteObject from './components/CRUD/DELETE/DeleteObject';
 import DeleteArticle from './components/CRUD/DELETE/DeleteArticle';
 import BlocPicture from './components/BlocPicture';
 import { createGlobalStyle } from "styled-components";
-import Colors from './components/parts/Esthete';
+import Colors, { LoadingMessage } from './components/parts/Esthete';
 
 
 const categories = ["prospect", "article", "project", "inspiration"]; 
@@ -72,7 +72,7 @@ function App() {
             <Route path="/blog">
               {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
               {articlesList.isLoading ? (
-                <p> Chargement des articles...</p>
+                <LoadingMessage> Chargement des articles...</LoadingMessage>
               ) : (
                 <Blog articles={articlesList.data} endpoint = {API_ENDPOINT}  />
               )}
@@ -83,7 +83,7 @@ function App() {
             <Route path="/projectsList">
               {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
               {projectsList.isLoading ? (
-                <p> Chargement des projets...</p>
+                <LoadingMessage> Chargement des projets...</LoadingMessage>
               ) : (
                 <ProjectList projets={projectsList.data} />
               )}
@@ -108,7 +108,7 @@ function App() {
             <Route path="/admin/prospect/all">
               {prospectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {prospectsList.isLoading ? (
-                  <p> Chargement des projets...</p>
+                  <LoadingMessage> Chargement des projets...</LoadingMessage>
                 ) : (
                   <ReadProspect prospects={prospectsList.data} />
                   )}
@@ -116,7 +116,7 @@ function App() {
             <Route path="/admin/article/all">
               {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {articlesList.isLoading ? (
-                  <p> Chargement des projets...</p>
+                  <LoadingMessage> Chargement des projets...</LoadingMessage>
                 ) : (
                   <ReadArticle articles={articlesList.data}/>
                   )}            
@@ -124,7 +124,7 @@ function App() {
             <Route path="/admin/project/all">
               {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {projectsList.isLoading ? (
-                  <p> Chargement des projets...</p>
+                  <LoadingMessage> Chargement des projets...</LoadingMessage>
                 ) : (
                   <ReadProject projects={projectsList.data}/>
                   )} 
@@ -132,7 +132,7 @@ function App() {
             <Route path="/admin/inspiration/all">
               {inspirationsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {inspirationsList.isLoading ? (
-                  <p> Chargement des projets...</p>
+                  <LoadingMessage> Chargement des projets...</LoadingMessage>
                 ) : (
                   <ReadInspiration inspirations={inspirationsList.data}/>
                   )}
