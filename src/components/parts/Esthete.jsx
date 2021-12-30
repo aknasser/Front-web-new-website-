@@ -24,6 +24,17 @@ export const BG = styled.div`
 `;
 
 
+// LOADING AND ERROR MESSAGES
+
+export const LoadingMessage = styled.p`
+    color : white;
+    text-transform: uppercase;
+    font-size : 1.5rem ;
+    font-weight : bold;
+`;
+
+
+
 // NAVBAR
 
 export const NavBarGrid = styled.nav`
