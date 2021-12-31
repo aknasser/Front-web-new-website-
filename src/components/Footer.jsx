@@ -27,6 +27,9 @@ const Footer = ({endpoint}) => {
           isLoading : false,
           isError : true,
         };
+      default :
+        throw new Error("Problème avec la citation et son reducer");
+
     }
   };
 
