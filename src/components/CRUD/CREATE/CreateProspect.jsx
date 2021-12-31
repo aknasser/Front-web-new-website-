@@ -47,6 +47,43 @@ const CreateProspect = ({endpoint}) => {
     };
 
 
+// We use this function to send notifications through EmailJS service. Check this article for more information :template_9w72q3i
+
+    const sendNotifications = async(serviceID, templateID, variables) => {
+        try {
+            console.log("We are starting to send the notifications");
+            const emailToSent = await window.emailjs.send(
+                serviceID,
+                templateID,
+                variables
+            )
+            console.log ("Notifications email sent!")
+        } catch (e) {
+            throw new Error(`Issue with Notification Email : ${e}`)
+
+        }
+    }
+
+// We use this function to send a confirmation Email to the lead through EmailJS service. Check this article for more information :template_9w72q3i
+
+    const confirmationEmail = async (serviceID, templateID, variables) => {
+        
+         try {
+            const emailToSent = await window.emailjs.send(
+                serviceID,
+                templateID,
+                variables
+            )
+            console.log ("Confirmation email sent!")
+        } catch (e) {
+            throw new Error(`Issue with confirmation Email : ${e}`)
+
+        }
+
+
+    }
+
+
     const submitHandler = async(event) => {
         event.preventDefault();                // Pour empêcher le comportement par défaut du form
         const newProspect = {                   // on définit la variable contenant les datas du prospect
@@ -58,7 +95,32 @@ const CreateProspect = ({endpoint}) => {
         console.log("Here we go!!!")
         const leadPosted =  await axios.post(`${endpoint}/prospect/create`, newProspect)
         console.log("new entry in the DB");
-        window.location.href = "/"   // Redirect the admin towards the page with all the entries.
+        const notification_serviceID =   "nassmassa_notifications";
+        const notification_templateID =  "template_9w72q3i";
+        const masterNotifications = await sendNotifications(
+            notification_serviceID,
+            notification_templateID,
+            {
+                prenom : newProspect.prenom,
+                nom : newProspect.nom,
+                demande : newProspect.demande,
+                email : newProspect.email,
+                reply_to : newProspect.email
+            });
+
+        const confirmation_serviceID =   "nassmassa_notifications";
+        const confirmation_templateID =  "template_3y0yytx";
+        const leadConfirmation = await confirmationEmail(
+            confirmation_serviceID,
+            confirmation_templateID,
+            {
+                prenom : newProspect.prenom,
+                lead_email : newProspect.email
+            });
+
+
+
+        window.location.href = "/"   // Redirect the admin towards the main page once everything is done (new entry saved in the DB, notification sent, confirmation email sent).
     }
 
 
