@@ -97,6 +97,7 @@ const Blog = ({articles, endpoint}) => {
             }
         }
         fetchSearchedWords();
+    // eslint-disable-next-line
     }, [url]);
 
 

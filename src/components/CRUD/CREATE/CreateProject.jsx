@@ -53,6 +53,7 @@ const CreateProject = ({endpoint}) => {
             description : state.description,
         };
         console.log("Here we go!!!")
+        // eslint-disable-next-line
         const leadPosted = await axios.post(`${endpoint}/project/create`, newProject)
         console.log("new entry in the DB");
         window.location.href = "/admin/project/all"   // Redirect the admin towards the page with all the entries.

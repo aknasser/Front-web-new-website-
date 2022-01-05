@@ -3,7 +3,6 @@ import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
 import InputForm from '../../parts/InputForm';
 import { Editor } from '@tinymce/tinymce-react';
-import { Link } from 'react-router-dom';
 
 
 const CreateArticle = ({endpoint}) => {
@@ -66,6 +65,7 @@ const CreateArticle = ({endpoint}) => {
                 keywords : state.keywords,
                 content : state.content,
             }
+            // eslint-disable-next-line
             const ObjectPosted = await axios.post(`${endpoint}/blog/create`, newObject); // We HAVE to FIX that log error : Failed to load resource: net::ERR_EMPTY_RESPONSE
             console.log("new entry in the DB");
             window.location.href = "/admin/article/all"   // Redirect the admin towards the page with all the entries.

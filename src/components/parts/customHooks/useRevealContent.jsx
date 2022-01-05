@@ -5,17 +5,9 @@ const useRevealContent = () => {
 
     const revealReducer = (state, action) => {
         switch(action.type) {
-            case "CONTENT_CONDENSED":
+            case "NAVBAR_SLIDE":
                 return {
-                    data : {
-                        visible : action.payload
-                    }
-                };
-            case "CONTENT_EXTENDED":
-                return {
-                    data : {
-                        visible :  action.payload
-                    }
+                    data : action.payload
                 };
             default :
                 throw new Error("Action non prévue pour le component");
@@ -26,7 +18,7 @@ const useRevealContent = () => {
         revealReducer,
         {
             data : {
-                visible : "none"
+                top : "-30rem",
             }
         }
     )

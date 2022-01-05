@@ -1,4 +1,4 @@
-import { a, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import * as Style from "./parts/Esthete"
 import * as React from 'react';
 import useRevealContent from "./parts/customHooks/useRevealContent";
@@ -13,15 +13,21 @@ const NavBar = () => {
     const [visibilityNavBar, dispatchVisibility] = useRevealContent();
 
     const navBarHandler = () => {
-        if (visibilityNavBar.data.visible === "none") {
+        if (visibilityNavBar.data.top === "-30rem") {
             dispatchVisibility({
-                type :"CONTENT_EXTENDED",
-                payload : "flex"
+                type :"NAVBAR_SLIDE",
+                payload : 
+                    {
+                        top : "0rem",
+                    }
             });
         } else {
             dispatchVisibility({
-                type :"CONTENT_CONDENSED",
-                payload : "none"
+                type :"NAVBAR_SLIDE",
+                payload : 
+                    {
+                        top : "-30rem",
+                    }
             });
         };
     };
@@ -41,7 +47,7 @@ const NavBar = () => {
             
 
             <Style.NavBarCollapse 
-                visibility = {visibilityNavBar.data.visible}
+                yposition = {visibilityNavBar.data.top} 
             >
                     <Link to="/" onClick = {navBarHandler}>
                         <Style.NavbarItem >Accueil</Style.NavbarItem>

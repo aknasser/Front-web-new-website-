@@ -4,7 +4,6 @@ import InputSubmit from '../../parts/InputSubmit';
 import axios from "axios";
 import { useParams } from 'react-router';
 import { Editor } from '@tinymce/tinymce-react';
-import { withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -91,7 +90,7 @@ const UpdateArticle = ({categorie, endpoint}) => {
             }
     
             fetchExistingEntry();
-        }, [categorie , id]);
+        }, [endpoint, categorie , id]);
 
 
 
@@ -127,6 +126,8 @@ const UpdateArticle = ({categorie, endpoint}) => {
                 content : modelToUpdate.data.content,
             }
             console.log(updatedObject);
+
+            // eslint-disable-next-line
             const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject);
             
             console.log("BDD updaté");

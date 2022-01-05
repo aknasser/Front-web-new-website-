@@ -77,7 +77,7 @@ const UpdateProspect = ({categorie, endpoint}) => {
             }
     
             fetchExistingEntry();
-        }, [categorie, id]);
+        }, [endpoint, categorie, id]);
 
 
 
@@ -102,7 +102,9 @@ const UpdateProspect = ({categorie, endpoint}) => {
             demande : modelToUpdate.data.demande,
             email : modelToUpdate.data.email,
         }
-        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
+
+        // eslint-disable-next-line
+        const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject) 
         console.log("BDD updaté");
         window.location.href = "/admin/prospect/all"   // Redirect the admin towards the page with all the entries.
     }

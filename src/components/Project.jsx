@@ -64,7 +64,7 @@ const Project = ({endpoint}) => {
         }
 
         tafMgmt();
-    }, [id]);
+    }, [endpoint, id]);
 
 
     return ( 
