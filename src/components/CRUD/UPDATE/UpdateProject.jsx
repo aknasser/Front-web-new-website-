@@ -77,7 +77,7 @@ const UpdateProject = ({categorie, endpoint}) => {
             }
     
             fetchExistingEntry();
-        }, [categorie, id]);
+        }, [endpoint, categorie, id]);
 
 
 
@@ -102,6 +102,8 @@ const UpdateProject = ({categorie, endpoint}) => {
             link : modelToUpdate.data.link,
             description : modelToUpdate.data.description,
         }
+
+        // eslint-disable-next-line
         const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
         console.log("BDD updaté")
         window.location.href = "/admin/project/all"   // Redirect the admin towards the page with all the entries.

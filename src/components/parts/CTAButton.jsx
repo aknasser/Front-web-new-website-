@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import styled from "styled-components";
 import  * as Style from "./Esthete";
 
 const CTAButton = ({callToAction}) => {

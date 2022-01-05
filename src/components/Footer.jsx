@@ -50,9 +50,12 @@ const Footer = ({endpoint}) => {
 
     }
 
+    
     React.useEffect(() => {
+      
       fetchInspi();
-    }, []);
+      // eslint-disable-next-line
+    }, [endpoint]);
 
 
     return ( 

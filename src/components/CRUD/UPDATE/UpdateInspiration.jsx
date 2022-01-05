@@ -77,7 +77,7 @@ const UpdateInspiration = ({categorie, endpoint}) => {
             }
     
             fetchExistingEntry();
-        }, [categorie, id]);
+        }, [endpoint, categorie, id]);
 
 
 
@@ -100,6 +100,8 @@ const UpdateInspiration = ({categorie, endpoint}) => {
             quote: modelToUpdate.data.quote,
             author: modelToUpdate.data.author,
         }
+
+        // eslint-disable-next-line
         const ObjectPosted = await axios.post(`${endpoint}/${categorie}/update/${id}`, updatedObject)
         console.log("BDD updaté")
         window.location.href = "/admin/inspiration/all"   // Redirect the admin towards the page with all the entries.

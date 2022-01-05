@@ -74,9 +74,9 @@ const [content, dispatchContent] = React.useReducer(
 
     }
     contentManagement();
-  }, [id])
+  }, [endpoint, id])
 
-
+  // eslint-disable-next-line
   const parser = new DOMParser();
   const articleText = content.data.content;
 

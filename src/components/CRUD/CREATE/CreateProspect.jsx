@@ -52,6 +52,7 @@ const CreateProspect = ({endpoint}) => {
     const sendNotifications = async(serviceID, templateID, variables) => {
         try {
             console.log("We are starting to send the notifications");
+            // eslint-disable-next-line
             const emailToSent = await window.emailjs.send(
                 serviceID,
                 templateID,
@@ -69,6 +70,7 @@ const CreateProspect = ({endpoint}) => {
     const confirmationEmail = async (serviceID, templateID, variables) => {
         
          try {
+             // eslint-disable-next-line
             const emailToSent = await window.emailjs.send(
                 serviceID,
                 templateID,
@@ -93,10 +95,12 @@ const CreateProspect = ({endpoint}) => {
             email : state.email
         };
         console.log("Here we go!!!")
+        // eslint-disable-next-line
         const leadPosted =  await axios.post(`${endpoint}/prospect/create`, newProspect)
         console.log("new entry in the DB");
         const notification_serviceID =   "nassmassa_notifications";
         const notification_templateID =  "template_9w72q3i";
+        // eslint-disable-next-line
         const masterNotifications = await sendNotifications(
             notification_serviceID,
             notification_templateID,
@@ -110,6 +114,7 @@ const CreateProspect = ({endpoint}) => {
 
         const confirmation_serviceID =   "nassmassa_notifications";
         const confirmation_templateID =  "template_3y0yytx";
+        // eslint-disable-next-line
         const leadConfirmation = await confirmationEmail(
             confirmation_serviceID,
             confirmation_templateID,

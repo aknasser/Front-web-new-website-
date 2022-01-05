@@ -12,6 +12,7 @@ const DeleteObject = ({endpoint}) => {
 
   React.useEffect( () => {
   const deleteObject = async () => {
+    // eslint-disable-next-line
     const objectToDelete = await axios.delete(`${endpoint}/blog/delete/${id}`)
     console.log("article removed from the BDD");
     window.location.href = `/admin/article/all`   // Redirect the admin towards the page with all the entries.
@@ -20,7 +21,7 @@ const DeleteObject = ({endpoint}) => {
   }
   deleteObject();
 
-  }, [categorie, id]);
+  }, [endpoint, categorie, id]);
 
   return (
     <Style.Intro>

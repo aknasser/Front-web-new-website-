@@ -45,10 +45,13 @@ const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/a
 
 function App() {
 
-
+// eslint-disable-next-line
   const [prospectsList, dispatchProspect] = useFetchModel("prospect", API_ENDPOINT);
+  // eslint-disable-next-line
   const [articlesList, dispatchArticle] = useFetchModel("blog", API_ENDPOINT);
+  // eslint-disable-next-line
   const [projectsList, dispatchProject] = useFetchModel("project", API_ENDPOINT);
+  // eslint-disable-next-line
   const [inspirationsList, dispatchInspiration] = useFetchModel("inspiration", API_ENDPOINT);
   
 

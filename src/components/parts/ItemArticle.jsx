@@ -1,6 +1,5 @@
 import  * as Style from "./Esthete";
 import PictureItem from "./PictureItem";
-import SectionTitle from "./SectionTitle";
 
 const ItemArticle = ({title, subtitle,heroPicture}) => {
     return (

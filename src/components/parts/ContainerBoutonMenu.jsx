@@ -1,5 +1,4 @@
 import BoutonDeroulant from "./BoutonDeroulant";
-import useRevealContent from "./customHooks/useRevealContent";
 import  * as Style from "./Esthete";
 import HiddenText from "./HiddenText";
 
@@ -7,7 +6,10 @@ import HiddenText from "./HiddenText";
 
 const ContainerBoutonMenu = ({title, bgColorButton, txtColor, content, picture}) => {
     
-/*     const [visibilityHiddenText, dispatchVisibility] = useRevealContent();
+/*     
+import useRevealContent from "./customHooks/useRevealContent";
+
+    const [visibilityHiddenText, dispatchVisibility] = useRevealContent();
 
     const hiddenTextHandler = () => {
         if (visibilityHiddenText.data.visible === "none") { 

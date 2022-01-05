@@ -61,7 +61,7 @@ const useFetchModel = (categorie, endpoint) => {
             }
     
           projectMgmt();
-        }, [categorie]);
+        }, [categorie, endpoint]);
 
     return [dataModel, dispatchData];
 }

@@ -62,15 +62,18 @@ export const CTANavbar = styled.h1`
 `;
 
 export const NavBarCollapse = styled.nav`
-    display : ${props => props.visibility};
+    display : flex;
+    visibility : visible;
     grid-area: 2 / 1 / 3 / 2;
     z-index : 3;
     position :absolute;
+    top : ${props => props.yposition};
     background-color : ${Colors.secundaryColor};
     flex-direction : column;   
     width: 100%;
+    transition : top 500ms ease-out 0s;
 `;
- 
+
 
 export const ToggleButton = styled.div`
     display: flex;
