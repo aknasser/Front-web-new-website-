@@ -117,8 +117,6 @@ const Blog = ({articles, endpoint}) => {
                         <Style.ButtonSearchBlog type ="submit" value = "Chercher" onClick={submitHandler} />
                         <Style.ButtonSearchBlog type ="submit" value = "Réinitialiser" onClick={resetHandler}  />
                     </Style.BoxSearchButton>
-
-
                 </Style.FormSearch>
         </div>
         

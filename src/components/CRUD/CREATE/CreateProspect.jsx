@@ -9,11 +9,23 @@ import InputSubmit from '../../parts/InputSubmit';
 
 const CreateProspect = ({endpoint}) => {
 
+
+    let formValid = true;   // We use this variable to check the correctness of the form
+
     const [state, setState] = React.useState({
         prenom: "",
         nom :"",
         demande :"",
-        email : ""
+        email : "",
+        cta : "Me Contacter",
+        bgButton : `${Style.Colors.primaryColor}`,
+        txtColor : "white",
+        errorMessage : {
+            firstNameError : "N'oublie pas d'indiquer ton prénom :)",
+            lastNameError : "N'oublie pas d'indiquer ton nom :)",
+            demandeError : "Ben quoi ? On dit plus bonjour ?",
+            emailError : "N'oublie pas d'indiquer ton email :)",
+        }
     });
 
     const inputHandlerName = (event) => {
@@ -88,44 +100,81 @@ const CreateProspect = ({endpoint}) => {
 
     const submitHandler = async(event) => {
         event.preventDefault();                // Pour empêcher le comportement par défaut du form
-        const newProspect = {                   // on définit la variable contenant les datas du prospect
-            prenom : state.prenom,
-            nom : state.nom,
-            demande : state.demande,
-            email : state.email
-        };
-        console.log("Here we go!!!")
-        // eslint-disable-next-line
-        const leadPosted =  await axios.post(`${endpoint}/prospect/create`, newProspect)
-        console.log("new entry in the DB");
-        const notification_serviceID =   "nassmassa_notifications";
-        const notification_templateID =  "template_9w72q3i";
-        // eslint-disable-next-line
-        const masterNotifications = await sendNotifications(
-            notification_serviceID,
-            notification_templateID,
-            {
-                prenom : newProspect.prenom,
-                nom : newProspect.nom,
-                demande : newProspect.demande,
-                email : newProspect.email,
-                reply_to : newProspect.email
-            });
+        
+        if (!state.prenom) {
+            formValid = false;
+            alert (state.errorMessage.firstNameError);
+        }
 
-        const confirmation_serviceID =   "nassmassa_notifications";
-        const confirmation_templateID =  "template_3y0yytx";
-        // eslint-disable-next-line
-        const leadConfirmation = await confirmationEmail(
-            confirmation_serviceID,
-            confirmation_templateID,
-            {
-                prenom : newProspect.prenom,
-                lead_email : newProspect.email
-            });
+        if (!state.nom) {
+            formValid = false;
+            alert (state.errorMessage.lastNameError);
+        }
 
+        if (!state.demande) {
+            formValid = false;
+            alert (state.errorMessage.demandeError);
+        }
 
+        if (!state.email) {
+            formValid = false;
+            alert (state.errorMessage.emailError);
+        }
+        
+        console.log(formValid);
+        if (formValid) {                        // If the form is valid we execute the code including the POST request and the notifications dispatch.
 
-        window.location.href = "/"   // Redirect the admin towards the main page once everything is done (new entry saved in the DB, notification sent, confirmation email sent).
+            console.log(`FORM VALID : ${formValid}`);
+            setState(state => ({                    // Enable us to change the Cta text when we submit the form
+                ...state,
+                cta : "Loading...",
+                bgButton : "white",
+                txtColor : `${Style.Colors.secundaryColor}`
+            }))
+
+    
+            const newProspect = {                   // on définit la variable contenant les datas du prospect
+                prenom : state.prenom,
+                nom : state.nom,
+                demande : state.demande,
+                email : state.email
+            };
+    
+            // eslint-disable-next-line
+            const leadPosted =  await axios.post(`${endpoint}/prospect/create`, newProspect)
+    
+    /*         const notification_serviceID =   "nassmassa_notifications";
+            const notification_templateID =  "template_9w72q3i";
+    
+            // eslint-disable-next-line
+            const masterNotifications = await sendNotifications(
+                notification_serviceID,
+                notification_templateID,
+                {
+                    prenom : newProspect.prenom,
+                    nom : newProspect.nom,
+                    demande : newProspect.demande,
+                    email : newProspect.email,
+                    reply_to : newProspect.email
+                });
+    
+            const confirmation_serviceID =   "nassmassa_notifications";
+            const confirmation_templateID =  "template_3y0yytx";
+    
+            // eslint-disable-next-line
+            const leadConfirmation = await confirmationEmail(
+                confirmation_serviceID,
+                confirmation_templateID,
+                {
+                    prenom : newProspect.prenom,
+                    lead_email : newProspect.email
+                }); */
+    
+    
+    
+            window.location.href = "/"   // Redirect the admin towards the main page once everything is done (new entry saved in the DB, notification sent, confirmation email sent).
+        }
+     
     }
 
 
@@ -134,7 +183,7 @@ const CreateProspect = ({endpoint}) => {
     return (
         <div>
             <Style.FormTitle id="form"> Un café ensemble </Style.FormTitle>
-            <form onSubmit={submitHandler} id="form">
+            <form onSubmit={submitHandler} id="form" noValidate>
                 <Style.StyledForm>
                     <InputForm 
                         id="prenom" 
@@ -142,6 +191,7 @@ const CreateProspect = ({endpoint}) => {
                         labelValue="Prénom" 
                         value={state.prenom} 
                         inputHandler={inputHandlerName}
+                        required
                     />   
 
                     <InputForm 
@@ -150,6 +200,7 @@ const CreateProspect = ({endpoint}) => {
                         labelValue="Nom" 
                         value={state.nom} 
                         inputHandler={inputHandlerSurname}
+                        required
                     />
 
                     <InputForm_TextArea 
@@ -158,6 +209,7 @@ const CreateProspect = ({endpoint}) => {
                         labelValue="Demande" 
                         value={state.demande} 
                         inputHandler={inputHandlerDemande}
+                        required
                     />
 
                     
@@ -167,12 +219,15 @@ const CreateProspect = ({endpoint}) => {
                         labelValue="Email" 
                         value={state.email} 
                         inputHandler={inputHandlerEmail}
+                        required
                     />
 
                 </Style.StyledForm>
 
                 <InputSubmit
-                    cta = "Me Contacter"
+                    cta = {state.cta}
+                    bgButton = {state.bgButton}
+                    txtColor = {state.txtColor}
                 />
             </form>
         </div>

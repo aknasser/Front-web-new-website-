@@ -59,6 +59,10 @@ export const CTANavbar = styled.h1`
     font-size: 2rem;
     color: white;
     cursor : pointer;
+    transition : color 250ms ease-out 0ms;
+    &:hover {
+        color : ${Colors.secundaryColor};
+    }
 `;
 
 export const NavBarCollapse = styled.nav`
@@ -147,13 +151,22 @@ export const Activity = styled.h2`
 `;
 
 export const StyledCTAButton = styled.button`
+    font-family: "Segoe UI";
     width: 85%;
     margin: 3rem 0rem;
+    padding : 0.5rem;
+    transition : all 250ms ease-out 0ms;
+    &:hover {
+        background-color :${Colors.BGContent};
+        color : ${Colors.secundaryColor};
+        font-weight : 900;
+        padding : 0.85rem;
+    }
     @media(min-width :${deviceSize.tablet}) {
         width: 50%;
     }
     @media(min-width :${deviceSize.laptopS}) {
-        width: 30%;
+        width: 20%;
         margin: 10rem auto;
     }
 `;
@@ -172,6 +185,10 @@ export const StyledSectionTitle = styled.h2 `
 
 export const NavbarItem = styled(StyledSectionTitle)`
     font-size: 1.5rem;
+    transition : color 250ms ease-out 0ms;
+    &:hover {
+        color : ${Colors.primaryColor};
+    }
 `;
 
 export const TitleSection = styled(StyledSectionTitle)`
@@ -228,11 +245,16 @@ export const StyledLittleTitle = styled.button`
     font-size: 1.5rem;
     background-color: ${Colors.secundaryColor};
     padding: 0.5rem;
+    transition : all 250ms ease-out 0ms;
+    &:hover {
+        padding : 1rem;
+        font-weight: 900;
+    }
+
 `;
 
 export const StyledArticleTitle = styled(StyledLittleTitle)`
     font-size: 1rem;
-    
 `;
 
 export const StyledDropDownButton = styled.h3`
@@ -256,7 +278,7 @@ export const StyledSubmitButton = styled.input`
     width: 70vw;
     margin: 3rem auto 5rem;
     padding : 1.5rem;
-    background-color : ${Colors.primaryColor};
+    background-color :${(props) => props.bgButton || Colors.primaryColor};
     border : 0rem;
     border-radius : 0.5rem;
     -moz-border-radius : 0.5rem;
@@ -265,10 +287,16 @@ export const StyledSubmitButton = styled.input`
     font-weight : bold;
     font-size : 1.5rem;
     text-transform : uppercase;
-    color : white;
+    color : ${(props) => props.txtColor || "white"};
     cursor : pointer;
+    transition : all 250ms ease-out 0ms;
+    &:hover {
+        background-color :${Colors.BGContent};
+        color : ${Colors.secundaryColor};
+        font-weight : 900; 
+    }   
     @media(min-width :${deviceSize.tablet}) {
-        width: 55vw;
+        width: 40vw;
         font-size : 2rem;
     }
 `;
@@ -347,6 +375,11 @@ export const ButtonSearchBlog = styled(StyledSubmitButton)`
     padding: 0.5rem;
     margin: 0rem 0.5rem 5rem;
     font-size: 1rem;
+    &:hover {
+        background-color :${Colors.secundaryColor};
+        color : ${Colors.BGContent};
+        font-weight : 900; 
+    }   
     @media(min-width :${deviceSize.tablet}) {
         max-width: 25vw;
         font-size: 1.5rem;
@@ -497,6 +530,8 @@ export const FilteredPicture = styled.img`
     width : 100%;
     height: 100%;
     z-index: 0;
+    transition : opacity 250ms ease-out 0ms;
+
     @media(min-width :${deviceSize.tablet}) {
         width: 50vw;
     }
@@ -564,6 +599,7 @@ export const ReadingProgressionBar = styled.span`
 
 export const PictureArticle = styled(FilteredPicture)`
     border-radius: 0.5rem;
+
     @media(min-width :${deviceSize.tablet}) {
         width: 60vw;
         margin: 1rem auto;
