@@ -4,10 +4,10 @@ import  * as Style from "./Esthete";
 
 
 
-const InputSubmit = ({cta}) => {
+const InputSubmit = ({cta, bgButton, txtColor}) => {
     return ( 
         <div>
-            <Style.StyledSubmitButton type ="submit" value={cta}/>
+            <Style.StyledSubmitButton type ="submit" value={cta} bgButton= {bgButton} txtColor={txtColor} />
         </div>
      );
 }
