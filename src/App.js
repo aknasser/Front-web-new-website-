@@ -29,6 +29,10 @@ import DeleteArticle from './components/CRUD/DELETE/DeleteArticle';
 import BlocPicture from './components/BlocPicture';
 import { createGlobalStyle } from "styled-components";
 import Colors, { LoadingMessage } from './components/parts/Esthete';
+import Signup from './components/Signup';
+import Login from './components/Login';
+
+
 
 
 const categories = ["prospect", "article", "project", "inspiration"]; 
@@ -176,6 +180,19 @@ function App() {
             <Route path="/admin/:categorie/delete/:id" >
               <DeleteObject endpoint = {API_ENDPOINT}/>
             </Route>
+
+{/* LES ROUTES POUR LE SIGNUP/LOGIN/LOGOUT */}
+            <Route exact path="/signup" >
+              <Signup />
+            </Route>
+            <Route exact path="/login" >
+              <Login />
+            </Route>
+            {/* <Route path="/logout" >
+              <DeleteObject endpoint = {API_ENDPOINT}/>
+            </Route> */}
+
+
         </Switch> 
         </div>
         <Footer endpoint = {API_ENDPOINT} />

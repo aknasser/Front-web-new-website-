@@ -496,6 +496,7 @@ export const FlexboxBloc = styled.div`
     @media(min-width :${deviceSize.tablet}) {
         display : flex;
         flex-direction : row;
+        overflow : hidden;
     }
 `; 
 
