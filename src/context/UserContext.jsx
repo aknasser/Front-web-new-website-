@@ -1,14 +1,20 @@
-import React, { useState } from "react"
+import * as React from 'react';
 
-const UserContext = React.createContext([{}, () => {}])
+// Between the parenthesis. We give the default value of the data stored in the context
+// The default value structure matches the structure of [state, setState]. We have an array with element 1 : object, element 2 : function
+// Doing that it's not mandatory. We do that to ease the testing.
 
-let initialState = {}
+// UserContext will be used with useContext() within these component : Login, Signup and App
+const UserContext = React.createContext([{}, () => {}]) ;
+
+let initialState = {};
 
 const UserProvider = props => {
-  const [state, setState] = useState(initialState)
+  const [state, setState] = React.useState(initialState);
 
   return (
-    <UserContext.Provider value={[state, setState]}>
+  /* User Provider will be wrapped around the whole App.js in index.js. It will PROVIDE the context everywhere in the app. */
+    <UserContext.Provider value={[state, setState]}>   
       {props.children}
     </UserContext.Provider>
   )

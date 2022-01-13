@@ -31,6 +31,8 @@ import { createGlobalStyle } from "styled-components";
 import Colors, { LoadingMessage } from './components/parts/Esthete';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import { UserContext } from './context/UserContext';
+import axios from 'axios';
 
 
 
@@ -41,7 +43,7 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/app"  
+const API_ENDPOINT = "http://localhost:1993"  
 
 // Pour la phase de développement, utiliser : http://localhost:1993
 // Pour la pase de déploiement, utiliser : https://us-central1-nassmassa-backend.cloudfunctions.net/app
@@ -58,6 +60,41 @@ function App() {
   // eslint-disable-next-line
   const [inspirationsList, dispatchInspiration] = useFetchModel("inspiration", API_ENDPOINT);
   
+
+
+  // START AUTH ACTION IN APP.JS
+
+
+  // We need that to check the context. Useful to access the user space
+  const [userContext, setUserContext] = React.useContext(UserContext)
+
+  const verifyUser = React.useCallback( async() => {
+    const refreshToken = await axios.post(`${API_ENDPOINT}/user/refreshtoken`);
+    if (refreshToken.ok) {
+      console.log("OKI DOKI");
+      setUserContext(oldValues => ({
+        ...oldValues,
+        token : refreshToken.data.token
+    })) 
+    } else {
+      console.log("ENFER ET DAMNATION");
+      setUserContext(oldValues => ({
+        ...oldValues,
+        token : null
+    }))   
+    }
+    // call refreshToken every 5 minutes to renew the authentication token.
+    setTimeout(verifyUser, 5 * 60 * 1000);
+  }, [setUserContext]); // THE POWER OF USECALLBACK -  useCallback will return a memoized version of the callback that only changes if one of the inputs has changed.
+
+
+// verifyUser is triggered when its value changes.
+  React.useEffect(() => {
+    verifyUser()
+  }, [verifyUser])
+
+
+  // END AUTH ACTION IN APP.JS
 
 
 
@@ -103,13 +140,33 @@ function App() {
             </Route>
 
 
-{/*MENU DE L'ADMIN */}            
-            <Route exact path="/admin">
+{/*MENU DE L'ADMIN  --- Switch AdminMainPage and Login once logout is defined*/}            
+            <Route exact path="/admin"> {userContext.token === null ? ( 
               <AdminMainPage categories = {categories}/>
+            ) : userContext.token ? (
+              <Login endpoint = {API_ENDPOINT}/>
+            ) : (
+              <Signup endpoint = {API_ENDPOINT} />   
+            )}
             </Route>
             <Route exact path="/admin/:categorie">
               <CategorieMenu/>
             </Route>
+
+{/* LES ROUTES POUR LE SIGNUP/LOGIN/LOGOUT/WELCOME */}
+            <Route exact path="/signup" >
+              <Signup endpoint = {API_ENDPOINT} />
+            </Route>
+            <Route exact path="/login" >
+              <Login endpoint = {API_ENDPOINT}/>
+            </Route>
+            {/* <Route path="/logout" >
+              <DeleteObject endpoint = {API_ENDPOINT}/>
+            </Route> */}
+
+
+
+
 
 {/* LES ROUTES POUR LE R DU CRUD */}
             <Route path="/admin/prospect/all">
@@ -181,16 +238,6 @@ function App() {
               <DeleteObject endpoint = {API_ENDPOINT}/>
             </Route>
 
-{/* LES ROUTES POUR LE SIGNUP/LOGIN/LOGOUT */}
-            <Route exact path="/signup" >
-              <Signup />
-            </Route>
-            <Route exact path="/login" >
-              <Login />
-            </Route>
-            {/* <Route path="/logout" >
-              <DeleteObject endpoint = {API_ENDPOINT}/>
-            </Route> */}
 
 
         </Switch> 
