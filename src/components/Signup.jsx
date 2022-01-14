@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as Style from "./parts/Esthete"
 import axios from "axios";
 import InputSubmit from "./parts/InputSubmit";
-import { UserContext } from "../context/UserContext"
+import UserContext from "../context/UserContext"
 
 
 const Signup = ({endpoint}) => {
@@ -24,7 +24,7 @@ const Signup = ({endpoint}) => {
 
 
 // Just like useState, we can update the context using a setFunction! Read this article as a reminder : https://dmitripavlutin.com/react-context-and-usecontext/ (number 4)
-    const [userContext, setUseContext] = React.useContext(UserContext);
+    const {userAccount, setUserAccount} = React.useContext(UserContext);
 
     const inputHandlerName = (event) => {
         setUserDetails(state => ({
@@ -52,7 +52,7 @@ const Signup = ({endpoint}) => {
     const formHandler = async(event) => {
         event.preventDefault();                // Pour empêcher le comportement par défaut du form
         
-        console.log(`UseContext : ${userContext.token}`); 
+        console.log(`UseContext : ${userAccount.token}`); 
 
         if (!userDetails.name) {
             alert("Don't forget the name")
@@ -81,15 +81,16 @@ const Signup = ({endpoint}) => {
                 username : userDetails.username,
                 password : userDetails.password
             }
-            console.log(`formerToken:  ${userContext.token}`)
+            console.log(`formerToken:  ${userAccount.token}`)
 
             const newUserPosted = await axios.post(`${endpoint}/user/signup`, newUser);
-            setUseContext(oldValues => ({
-                ...oldValues,
-                token : newUserPosted.data.token
-            })) 
             const currentToken = await newUserPosted.data.token; 
+            setUserAccount(oldDetails => ({
+                ...oldDetails,
+                token : currentToken,
+            }))    
             console.log(`currentToken:  ${currentToken}`)
+            console.log(`new token:  ${userAccount.token}`)
         }
     } 
 

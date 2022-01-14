@@ -5,22 +5,25 @@ import * as React from 'react';
 // Doing that it's not mandatory. We do that to ease the testing.
 
 // UserContext will be used with useContext() within these component : Login, Signup and App
-const UserContext = React.createContext([{}, () => {}]) ;
+const UserContext = React.createContext({
+  userAccount :"",
+  setUserAccount :() => {}
+});
 
-let initialState = {};
+export default UserContext;
+
+/* let initialState = {};
 
 const UserProvider = props => {
   const [state, setState] = React.useState(initialState);
 
   return (
-  /* User Provider will be wrapped around the whole App.js in index.js. It will PROVIDE the context everywhere in the app. */
     <UserContext.Provider value={[state, setState]}>   
       {props.children}
     </UserContext.Provider>
   )
 }
 
-export { UserContext, UserProvider }
 
 /* The provider will be added to the index.js
 It gives us access to the user information everywhere in the app

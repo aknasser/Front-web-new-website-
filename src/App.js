@@ -31,8 +31,9 @@ import { createGlobalStyle } from "styled-components";
 import Colors, { LoadingMessage } from './components/parts/Esthete';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import { UserContext } from './context/UserContext';
-import axios from 'axios';
+import UserContext from './context/UserContext';
+import Logout from './components/Logout';
+
 
 
 
@@ -43,7 +44,7 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const API_ENDPOINT = "http://localhost:1993"  
+const API_ENDPOINT = "ttps://us-central1-nassmassa-backend.cloudfunctions.net/app"  
 
 // Pour la phase de développement, utiliser : http://localhost:1993
 // Pour la pase de déploiement, utiliser : https://us-central1-nassmassa-backend.cloudfunctions.net/app
@@ -64,187 +65,201 @@ function App() {
 
   // START AUTH ACTION IN APP.JS
 
-
-  // We need that to check the context. Useful to access the user space
-  const [userContext, setUserContext] = React.useContext(UserContext)
-
-  const verifyUser = React.useCallback( async() => {
-    const refreshToken = await axios.post(`${API_ENDPOINT}/user/refreshtoken`);
-    if (refreshToken.ok) {
-      console.log("OKI DOKI");
-      setUserContext(oldValues => ({
-        ...oldValues,
-        token : refreshToken.data.token
-    })) 
-    } else {
-      console.log("ENFER ET DAMNATION");
-      setUserContext(oldValues => ({
-        ...oldValues,
-        token : null
-    }))   
-    }
-    // call refreshToken every 5 minutes to renew the authentication token.
-    setTimeout(verifyUser, 5 * 60 * 1000);
-  }, [setUserContext]); // THE POWER OF USECALLBACK -  useCallback will return a memoized version of the callback that only changes if one of the inputs has changed.
+  const [userAccount, setUserAccount] = React.useState("");
+  const [test, setTest] = React.useState("");
+  const value = { userAccount, setUserAccount };
 
 
-// verifyUser is triggered when its value changes.
-  React.useEffect(() => {
-    verifyUser()
-  }, [verifyUser])
+// CHECK IF A TOKEN  
+  const checkUser = async() => {
+      const loggedInUser = await localStorage.getItem("token");
+      console.log(loggedInUser);
+      console.log(`test : ${test}`)
+      if (loggedInUser) {
+        setUserAccount({loggedInUser}, () => console.log(userAccount) );
+        setTest("dodo", () => console.log(test));
+        console.log(userAccount);
+        console.log("GOOD SHIT!");
+      } else {
+        console.log ("ISSUE WITH LOCAL STORAGE VALUE")
+      }
+  };  
 
+
+
+React.useEffect(() => {
+  checkUser()
+}, []);
 
   // END AUTH ACTION IN APP.JS
 
 
 
   return (
-    <Router>
-      <CustomStyle/>
-      <div className ="App">
-       <NavBar />
-        <div className ="content">
-        <Switch>
-            <Route exact path="/">                      {/* exact path nous permet d'indiquer à React de charger cette page uniquement le page corespond exactement. Cela nous permet d'éviter de charger la homePage partout  */ }
-              <div>  {/* Ici on calera la background-color */}
-                <HomePage/>
-                <Approche detailsApproche={buttonBenefits} />
-                <BlocPicture works ={dataBlocMyWork} />
-                <CreateProspect id="form" endpoint = {API_ENDPOINT} />
-              </div>
-            </Route>
-            <Route path="/blog">
-              {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
-              {articlesList.isLoading ? (
-                <LoadingMessage> Chargement des articles...</LoadingMessage>
-              ) : (
-                <Blog articles={articlesList.data} endpoint = {API_ENDPOINT}  />
-              )}
-            </Route>
-            <Route path="/article/:id">
-              <Article endpoint = {API_ENDPOINT} />
-            </Route>
-            <Route path="/projectsList">
-              {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
-              {projectsList.isLoading ? (
-                <LoadingMessage> Chargement des projets...</LoadingMessage>
-              ) : (
-                <ProjectList projets={projectsList.data} />
-              )}
-            </Route>
-            <Route path="/project/:id">
-              <Project endpoint = {API_ENDPOINT} />
-            </Route>
-            <Route path="/contact">
-                <CreateProspect endpoint = {API_ENDPOINT}/>
-            </Route>
-
-
-{/*MENU DE L'ADMIN  --- Switch AdminMainPage and Login once logout is defined*/}            
-            <Route exact path="/admin"> {userContext.token === null ? ( 
-              <AdminMainPage categories = {categories}/>
-            ) : userContext.token ? (
-              <Login endpoint = {API_ENDPOINT}/>
-            ) : (
-              <Signup endpoint = {API_ENDPOINT} />   
-            )}
-            </Route>
-            <Route exact path="/admin/:categorie">
-              <CategorieMenu/>
-            </Route>
-
-{/* LES ROUTES POUR LE SIGNUP/LOGIN/LOGOUT/WELCOME */}
-            <Route exact path="/signup" >
-              <Signup endpoint = {API_ENDPOINT} />
-            </Route>
-            <Route exact path="/login" >
-              <Login endpoint = {API_ENDPOINT}/>
-            </Route>
-            {/* <Route path="/logout" >
-              <DeleteObject endpoint = {API_ENDPOINT}/>
-            </Route> */}
-
-
-
-
-
-{/* LES ROUTES POUR LE R DU CRUD */}
-            <Route path="/admin/prospect/all">
-              {prospectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
-                {prospectsList.isLoading ? (
-                  <LoadingMessage> Chargement des projets...</LoadingMessage>
-                ) : (
-                  <ReadProspect prospects={prospectsList.data} />
-                  )}
-            </Route>
-            <Route path="/admin/article/all">
-              {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+    <UserContext.Provider value={value}>
+      <Router>
+        <CustomStyle/>
+        <div className ="App">
+        <NavBar />
+          <div className ="content">
+          <Switch>
+              <Route exact path="/">                      {/* exact path nous permet d'indiquer à React de charger cette page uniquement le page corespond exactement. Cela nous permet d'éviter de charger la homePage partout  */ }
+                <div>  {/* Ici on calera la background-color */}
+                  <HomePage/>
+                  <Approche detailsApproche={buttonBenefits} />
+                  <BlocPicture works ={dataBlocMyWork} />
+                  <CreateProspect id="form" endpoint = {API_ENDPOINT} />
+                </div>
+              </Route>
+              <Route path="/blog">
+                {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {articlesList.isLoading ? (
-                  <LoadingMessage> Chargement des projets...</LoadingMessage>
+                  <LoadingMessage> Chargement des articles...</LoadingMessage>
                 ) : (
-                  <ReadArticle articles={articlesList.data}/>
-                  )}            
-            </Route>
-            <Route path="/admin/project/all">
-              {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                  <Blog articles={articlesList.data} endpoint = {API_ENDPOINT}  />
+                )}
+              </Route>
+              <Route path="/article/:id">
+                <Article endpoint = {API_ENDPOINT} />
+              </Route>
+              <Route path="/projectsList">
+                {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {projectsList.isLoading ? (
                   <LoadingMessage> Chargement des projets...</LoadingMessage>
                 ) : (
-                  <ReadProject projects={projectsList.data}/>
-                  )} 
-            </Route>
-            <Route path="/admin/inspiration/all">
-              {inspirationsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
-                {inspirationsList.isLoading ? (
-                  <LoadingMessage> Chargement des projets...</LoadingMessage>
-                ) : (
-                  <ReadInspiration inspirations={inspirationsList.data}/>
-                  )}
-            </Route>
+                  <ProjectList projets={projectsList.data} />
+                )}
+              </Route>
+              <Route path="/project/:id">
+                <Project endpoint = {API_ENDPOINT} />
+              </Route>
+              <Route path="/contact">
+                  <CreateProspect endpoint = {API_ENDPOINT}/>
+              </Route>
 
-{/* LES ROUTES POUR LE C DU CRUD */}
-            <Route path="/admin/prospect/create">
-              <CreateProspect endpoint = {API_ENDPOINT}/>
-            </Route>
-            <Route path="/admin/article/create">
-              <CreateArticle endpoint = {API_ENDPOINT} />       
-            </Route>
-            <Route path="/admin/project/create">
-              <CreateProject endpoint = {API_ENDPOINT} />       
-            </Route>
-            <Route path="/admin/inspiration/create">
-              <CreateInspiration endpoint = {API_ENDPOINT} />       
-            </Route>
 
-{/* LES ROUTES POUR LE U DU CRUD */}
-            <Route path="/admin/prospect/update/:id">
-              <UpdateProspect categorie = "prospect" endpoint = {API_ENDPOINT}/>
-            </Route>
-            <Route path="/admin/article/update/:id">
-                   <UpdateArticle categorie = "blog" endpoint = {API_ENDPOINT} />
-            </Route>
-            <Route path="/admin/project/update/:id">
-              <UpdateProject categorie = "project" endpoint = {API_ENDPOINT}/>       
-            </Route>
-            <Route path="/admin/inspiration/update/:id">
-              <UpdateInspiration categorie = "inspiration" endpoint = {API_ENDPOINT} />       
-            </Route>
+  {/*MENU DE L'ADMIN */}            
+              {userAccount ? (
+                <Route exact path="/admin"> 
+                  <>
+                    <AdminMainPage categories = {categories}/>
+                    <Logout/>
+                  </>
+                </Route>
+                  ) : (
+                <Route  path="/admin"> 
+                  <Login endpoint = {API_ENDPOINT}/>
+                </Route>
+              )}
 
-{/* LES ROUTES POUR LE D DU CRUD */}
-            <Route exact path="/admin/article/delete/:id" endpoint = {API_ENDPOINT}>
-              <DeleteArticle endpoint = {API_ENDPOINT}/>                 {/* A supprimer quand on passera de "blog" à "article" dans le back */}
-            </Route>
-            <Route path="/admin/:categorie/delete/:id" >
-              <DeleteObject endpoint = {API_ENDPOINT}/>
-            </Route>
+              <Route exact path="/admin/:categorie">
+                <CategorieMenu/>
+                <Logout/>
+              </Route>
+
+  {/* LES ROUTES POUR LE SIGNUP/LOGIN/LOGOUT/WELCOME */}
+              <Route exact path="/signup" >
+                <Signup endpoint = {API_ENDPOINT} />
+              </Route>
+              <Route exact path="/login" >
+                <Login endpoint = {API_ENDPOINT}/>
+              </Route>
 
 
 
-        </Switch> 
+
+
+  {/* LES ROUTES POUR LE R DU CRUD */}                  
+              <Route path="/admin/prospect/all"> 
+                {prospectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                  {prospectsList.isLoading ? (
+                    <LoadingMessage> Chargement des projets...</LoadingMessage>
+                  ) : (
+                    <>
+                      <ReadProspect prospects={prospectsList.data} />
+                      <Logout/>
+                    </>
+                    )}
+              </Route>
+              <Route path="/admin/article/all">
+                {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                  {articlesList.isLoading ? (
+                    <LoadingMessage> Chargement des projets...</LoadingMessage>
+                  ) : (
+                    <>
+                      <ReadArticle articles={articlesList.data}/>
+                      <Logout/>
+                    </>
+                    )}            
+              </Route>
+              <Route path="/admin/project/all">
+                {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                  {projectsList.isLoading ? (
+                    <LoadingMessage> Chargement des projets...</LoadingMessage>
+                  ) : (
+                    <>
+                      <ReadProject projects={projectsList.data}/>
+                      <Logout/>
+                    </>
+                    )} 
+              </Route>
+              <Route path="/admin/inspiration/all">
+                {inspirationsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
+                  {inspirationsList.isLoading ? (
+                    <LoadingMessage> Chargement des projets...</LoadingMessage>
+                  ) : (
+                    <>
+                      <ReadInspiration inspirations={inspirationsList.data}/>
+                      <Logout/>
+                    </>
+                    )}
+              </Route>
+
+  {/* LES ROUTES POUR LE C DU CRUD */}
+              <Route path="/admin/prospect/create">
+                <CreateProspect endpoint = {API_ENDPOINT}/>
+              </Route>
+              <Route path="/admin/article/create">
+                <CreateArticle endpoint = {API_ENDPOINT} />       
+              </Route>
+              <Route path="/admin/project/create">
+                <CreateProject endpoint = {API_ENDPOINT} />       
+              </Route>
+              <Route path="/admin/inspiration/create">
+                <CreateInspiration endpoint = {API_ENDPOINT} />       
+              </Route>
+
+  {/* LES ROUTES POUR LE U DU CRUD */}
+              <Route path="/admin/prospect/update/:id">
+                <UpdateProspect categorie = "prospect" endpoint = {API_ENDPOINT}/>
+              </Route>
+              <Route path="/admin/article/update/:id">
+                    <UpdateArticle categorie = "blog" endpoint = {API_ENDPOINT} />
+              </Route>
+              <Route path="/admin/project/update/:id">
+                <UpdateProject categorie = "project" endpoint = {API_ENDPOINT}/>       
+              </Route>
+              <Route path="/admin/inspiration/update/:id">
+                <UpdateInspiration categorie = "inspiration" endpoint = {API_ENDPOINT} />       
+              </Route>
+
+  {/* LES ROUTES POUR LE D DU CRUD */}
+              <Route exact path="/admin/article/delete/:id" endpoint = {API_ENDPOINT}>
+                <DeleteArticle endpoint = {API_ENDPOINT}/>                 {/* A supprimer quand on passera de "blog" à "article" dans le back */}
+              </Route>
+              <Route path="/admin/:categorie/delete/:id" >
+                <DeleteObject endpoint = {API_ENDPOINT}/>
+              </Route>
+
+
+
+          </Switch> 
+          </div>
+          <Footer endpoint = {API_ENDPOINT} />
         </div>
-        <Footer endpoint = {API_ENDPOINT} />
-      </div>
-    </Router>
+      </Router>
+    </UserContext.Provider>
+
   );
 }
 
