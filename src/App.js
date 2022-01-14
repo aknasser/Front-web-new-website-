@@ -44,7 +44,7 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const API_ENDPOINT = "ttps://us-central1-nassmassa-backend.cloudfunctions.net/app"  
+const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/app"  
 
 // Pour la phase de développement, utiliser : http://localhost:1993
 // Pour la pase de déploiement, utiliser : https://us-central1-nassmassa-backend.cloudfunctions.net/app
