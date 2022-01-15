@@ -1,7 +1,7 @@
 import  * as Style from "./Esthete";
 
 
-const InputForm_TextArea = ({id, rows, labelValue, value, inputHandler}) => {
+const InputFormTextArea = ({id, rows, labelValue, value, inputHandler}) => {
     return (
         <Style.FormField>
             <Style.StyledLabelForm for={id}> {labelValue}</Style.StyledLabelForm>
@@ -12,4 +12,4 @@ const InputForm_TextArea = ({id, rows, labelValue, value, inputHandler}) => {
 }
 
 
-export default InputForm_TextArea;
+export default InputFormTextArea;
