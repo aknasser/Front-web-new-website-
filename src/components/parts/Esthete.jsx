@@ -633,7 +633,7 @@ export const AuthorFooter = styled(QuoteFooter)`
     margin : 0rem auto 2rem
 `;
 
-export const socialMediaIcon = styled.img`
+export const SocialMediaIcon = styled.img`
     margin: 0rem auto;
     max-width: 15vw;
     @media(min-width :${deviceSize.tablet}) {

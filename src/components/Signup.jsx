@@ -17,7 +17,7 @@ const Signup = ({endpoint}) => {
     const [formValid, setFormValid] = React.useState(true);
 
     const [cta, setCta] = React.useState({
-        txt: "Créer master Compte",
+        txt: "Créer Compte",
         bgButton: `${Style.Colors.primaryColor}`,
         txtColor :"white"
     })
@@ -63,7 +63,7 @@ const Signup = ({endpoint}) => {
             alert("Don't forget the email :)")
             setFormValid(false);
         }
-        if (!userDetails.username) {
+        if (!userDetails.password) {
             alert("Don't forget to set a password")
             setFormValid(false);
         }
@@ -85,12 +85,11 @@ const Signup = ({endpoint}) => {
 
             const newUserPosted = await axios.post(`${endpoint}/user/signup`, newUser);
             const currentToken = await newUserPosted.data.token; 
-            setUserAccount(oldDetails => ({
-                ...oldDetails,
-                token : currentToken,
-            }))    
+            setUserAccount({currentToken},  () => console.log(userAccount));
+            localStorage.setItem("token", currentToken);   // To store the currentToken in the local Storage. We will fetch it later.
             console.log(`currentToken:  ${currentToken}`)
             console.log(`new token:  ${userAccount.token}`)
+            window.location.href = "/admin"   // To redirect towards the user page once the account is created.
         }
     } 
 

@@ -12,18 +12,6 @@ const UserContext = React.createContext({
 
 export default UserContext;
 
-/* let initialState = {};
-
-const UserProvider = props => {
-  const [state, setState] = React.useState(initialState);
-
-  return (
-    <UserContext.Provider value={[state, setState]}>   
-      {props.children}
-    </UserContext.Provider>
-  )
-}
-
 
 /* The provider will be added to the index.js
 It gives us access to the user information everywhere in the app

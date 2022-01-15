@@ -14,7 +14,7 @@ const ProjectList = ({projets}) => {
         <Style.BG>                                 {/* On utilisera array.map pour balayer l'ensemble des objects facilement */}
             <Style.TitleSection>Mes Projets</Style.TitleSection>
             {projets.map(projet => (
-            <a href={`${projet.link}`} target="_blank">
+            <a href={`${projet.link}`} target="_blank" rel="noreferrer">
       
                     <ItemProject
                         key={projet._id}

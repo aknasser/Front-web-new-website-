@@ -89,7 +89,7 @@ function App() {
 
 React.useEffect(() => {
   checkUser()
-}, []);
+}, []);   // To trigger use effect only for the first render of a given page(no need to invoke it more often)
 
   // END AUTH ACTION IN APP.JS
 

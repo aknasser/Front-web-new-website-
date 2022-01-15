@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as React from 'react';
 import  * as Style from '../../parts/Esthete';
 import InputForm from '../../parts/InputForm';
-import InputForm_TextArea from '../../parts/InputForm_TextArea';
+import InputFormTextArea from '../../parts/InputFormTextArea';
 import InputSubmit from '../../parts/InputSubmit';
 
 
@@ -143,7 +143,7 @@ const CreateProspect = ({endpoint}) => {
             // eslint-disable-next-line
             const leadPosted =  await axios.post(`${endpoint}/prospect/create`, newProspect)
     
-    /*         const notification_serviceID =   "nassmassa_notifications";
+            const notification_serviceID =   "nassmassa_notifications";
             const notification_templateID =  "template_9w72q3i";
     
             // eslint-disable-next-line
@@ -168,7 +168,7 @@ const CreateProspect = ({endpoint}) => {
                 {
                     prenom : newProspect.prenom,
                     lead_email : newProspect.email
-                }); */
+                }); 
     
     
     
@@ -203,7 +203,7 @@ const CreateProspect = ({endpoint}) => {
                         required
                     />
 
-                    <InputForm_TextArea 
+                    <InputFormTextArea 
                         id="demande" 
                         rows = "5"
                         labelValue="Demande" 

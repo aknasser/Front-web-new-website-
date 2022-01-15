@@ -1,7 +1,7 @@
 import UserContext  from "../context/UserContext";
 import * as React from 'react';
-import * as Style from "./parts/Esthete";
-
+/* import * as Style from "./parts/Esthete";
+ */
 
 const Logout = () => {
 

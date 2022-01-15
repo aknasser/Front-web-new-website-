@@ -71,8 +71,8 @@ const Footer = ({endpoint}) => {
             </div>
             }
             {inspiration.isError && <p>Un erreur dans le chargement des quote</p>}
-            <a href="https://www.linkedin.com/in/nasser-massadimi-5b963763/" target="_blank">
-              <Style.socialMediaIcon src="linkedin_icon.png" alt="Linkedin icon" />
+            <a href="https://www.linkedin.com/in/nasser-massadimi-5b963763/" rel="noreferrer" target="_blank" >
+              <Style.SocialMediaIcon src="linkedin_icon.png" alt="Linkedin icon" />
             </a>
         </Style.StyledFooter>
     );

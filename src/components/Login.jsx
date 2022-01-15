@@ -16,7 +16,6 @@ const Login = ({endpoint}) => {
         password :""
     })
 
-    const [formValid, setFormValid] = React.useState(true)
 
     const [cta, setCta] = React.useState({
         txt: "Login",
@@ -66,7 +65,6 @@ const Login = ({endpoint}) => {
             const loginRequest = await axios.post(`${endpoint}/user/login`,userToCheck) 
             if (loginRequest.status !== 200) {
                 console.log("gfkdl");
-                setFormValid(false)
                 if (loginRequest.status === 400) {
                     console.log("Please fill all the fields correctly!")
                 } else if (loginRequest.status === 401) {
