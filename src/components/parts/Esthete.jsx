@@ -136,7 +136,7 @@ z-index laissé mais pas nécessaire. Dans la grille, quand les éléments sont 
 */
 export const Uvp = styled.h1`
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     text-transform: uppercase;
     font-weight: 900;
     padding: 0rem 1rem;
@@ -153,7 +153,7 @@ export const Activity = styled.h2`
 export const StyledCTAButton = styled.button`
     font-family: "Segoe UI";
     width: 85%;
-    margin: 3rem 0rem;
+    margin: 2rem 0rem;
     padding : 0.5rem;
     transition : all 250ms ease-out 0ms;
     &:hover {
@@ -424,7 +424,7 @@ export const BlocMyStyle = styled.div`
     &::before {
         display: block;
         content: "";
-        margin-top: -3rem;
+        margin-top: ${(props) => props.marginTop || "-3rem"};;
         height: 3rem;
         visibility: none;
         pointer-events: none;
@@ -647,6 +647,33 @@ export const loadingMsg = styled.p`
     font-size : 0.5rem;
 `;
 
+
+// ERROR PAGE
+
+export const ErrorLayout = styled.div`
+    display :flex;
+    flex-direction : column;
+`;
+
+export const ErrorPic = styled.img`
+    max-width : 85vw;
+    margin : 1rem auto;
+    border-radius: 1rem;
+    @media(min-width :${deviceSize.tablet}) {
+        max-width: 33vw;
+    }  
+`;
+
+export const ErrorMessage404 = styled.h2`
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 300;
+`;
+
+export const ErrorWayBack = styled(StyledLittleTitle)`
+    background-color: rgba(225,44,75,1);
+    margin: 0.5rem;
+`;
 
 
  
