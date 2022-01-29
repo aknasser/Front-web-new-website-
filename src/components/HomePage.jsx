@@ -11,7 +11,7 @@ const homePage = () => {
             <Style.ContentHeroPage>
                 <Style.Uvp>Des sites web qui vous ressemblent pour attirer les bons clients</Style.Uvp>
                 <Style.Activity>Conception de sites web et apps pour PMEs et entrepreneurs</Style.Activity>
-                <CTAButton callToAction = "Let's Go !" />   
+                <CTAButton callToAction = "C'est parti !" />   
             </Style.ContentHeroPage>
         </Style.TheGrid>
      );

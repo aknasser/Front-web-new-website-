@@ -33,6 +33,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import UserContext from './context/UserContext';
 import Logout from './components/Logout';
+import NotFound from './components/NotFound';
 
 
 
@@ -44,7 +45,7 @@ const categories = ["prospect", "article", "project", "inspiration"];
 
 
 
-const API_ENDPOINT = "https://us-central1-nassmassa-backend.cloudfunctions.net/app"  
+const API_ENDPOINT = "http://localhost:1993"  
 
 // Pour la phase de développement, utiliser : http://localhost:1993
 // Pour la pase de déploiement, utiliser : https://us-central1-nassmassa-backend.cloudfunctions.net/app
@@ -251,8 +252,9 @@ React.useEffect(() => {
                 <DeleteObject endpoint = {API_ENDPOINT}/>
               </Route>
 
-
-
+              <Route>
+                <NotFound/>
+              </Route>
           </Switch> 
           </div>
           <Footer endpoint = {API_ENDPOINT} />
@@ -272,6 +274,7 @@ const buttonBenefits = [
     title : "Pourquoi ?" ,
     colorTitle : "white",
     id : "why",
+    marginTop : "-7rem",
     categories : [
       {
         intitule : "Indispensable",  // POURQUOI UN SITE WEB ?
@@ -279,7 +282,7 @@ const buttonBenefits = [
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.BGContent,
-        picture : "euro.png"
+        picture : "euro.png",
       },
       {
         intitule : "Visibilité",    // POURQUOI MOI ?
@@ -287,7 +290,8 @@ const buttonBenefits = [
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.BGContent,
-        picture : "heart.png"
+        picture : "heart.png",
+
       },
       {
         intitule : "Vous êtes la Star",  // POURQUOI MAINTENANT ?
@@ -305,6 +309,7 @@ const buttonBenefits = [
     title : "Mon Approche" ,
     colorTitle : Colors.secundaryColor,
     id : "approche",
+    marginTop : "",
     categories : [
       {
         intitule : "100% Personnalisé",

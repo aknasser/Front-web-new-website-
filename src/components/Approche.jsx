@@ -12,7 +12,7 @@ const Approche = ({detailsApproche}) => {
     return (
         <>
             {detailsApproche.map(detail => (
-                <Style.BlocMyStyle bgColor = {detail.bgColor} id={detail.id}>
+                <Style.BlocMyStyle bgColor = {detail.bgColor} id={detail.id} marginTop = {detail.marginTop}>
                     <PageTitle 
                         pageTitle={detail.title} 
                         colorTitle = {detail.colorTitle}
