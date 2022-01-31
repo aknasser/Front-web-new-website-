@@ -36,9 +36,9 @@ const NavBar = () => {
         <Style.NavBarGrid>
             <Style.Navbar>
                 <Style.ToggleButton onClick = {navBarHandler} >
-                    <img src="/RectangleNavbarRed.svg" alt="whiteRect" />
-                    <img src="/RectangleNavbarRed.svg" alt="whiteRect" />
-                    <img src="/RectangleNavbarRed.svg" alt="whiteRect" />
+                    <img src="/RectangleNavbar.svg" alt="whiteRect" />
+                    <img src="/RectangleNavbar.svg" alt="whiteRect" />
+                    <img src="/RectangleNavbar.svg" alt="whiteRect" />
                 </Style.ToggleButton>
                 <a href="/contact">
                     <Style.CTANavbar>GO!</Style.CTANavbar>

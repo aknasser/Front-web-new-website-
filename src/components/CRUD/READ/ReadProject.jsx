@@ -8,7 +8,7 @@ const ReadProject = ({projects}) => {
     return (
         <>
             {projects.map(project => (
-            <div class="list-categorie">
+            <div  key={project._id}>
                 <span>{project.title}</span>
                 <span>{project.picture}</span>
                 <span>{project.link}</span>

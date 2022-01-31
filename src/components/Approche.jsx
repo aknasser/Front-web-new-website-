@@ -12,7 +12,7 @@ const Approche = ({detailsApproche}) => {
     return (
         <>
             {detailsApproche.map(detail => (
-                <Style.BlocMyStyle bgColor = {detail.bgColor} id={detail.id} marginTop = {detail.marginTop}>
+                <Style.BlocMyStyle bgColor = {detail.bgColor} id={detail.id} marginTop = {detail.marginTop} key= {detail.id}>
                     <PageTitle 
                         pageTitle={detail.title} 
                         colorTitle = {detail.colorTitle}
@@ -25,6 +25,7 @@ const Approche = ({detailsApproche}) => {
                                     content={categorie.hiddenText}
                                     txtColor = {categorie.textColor}
                                     picture = {categorie.picture}
+                                    key = {categorie.intitule}
                                  />
                         ))}
                     </Style.TrioButton>

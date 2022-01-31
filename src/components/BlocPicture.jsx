@@ -14,10 +14,9 @@ const BlocPicture = ({works}) => {
         <>
             <Style.FlexboxBloc >
                 {works.map(work => (
-                    <Link to={work.link}>
+                    <Link to={work.link} key={work.title}>
                             <SquaredPicture
                                 blocInfo={work}
-                                key={work.title}
                             />
                     </Link>
                 ))}

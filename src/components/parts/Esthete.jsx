@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { keyframes } from "styled-components";
 
 
 const deviceSize = {
@@ -647,6 +647,32 @@ export const loadingMsg = styled.p`
     font-size : 0.5rem;
 `;
 
+const  loadingPicSpin =  keyframes`
+    0% { 
+        transform: rotate(0deg);
+        transform-origin: center;
+    }
+    100% { 
+        transform: rotate(360deg);
+    }` 
+
+
+export const LoadingPic = styled.img`
+    max-height: 20vh;
+    margin: 2rem;
+    animation-name : ${loadingPicSpin};
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-direction : normal;
+    animation-fill-mode: none;
+    animation-play-state; running;
+ `;
+
+
+
+
 
 // ERROR PAGE
 
@@ -675,6 +701,14 @@ export const ErrorWayBack = styled(StyledLittleTitle)`
     margin: 0.5rem;
 `;
 
+
+// START ANIMATIONS 
+
+
+
+
+
+// END ANIMATIONS
 
  
 export default Colors;

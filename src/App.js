@@ -34,6 +34,7 @@ import Login from './components/Login';
 import UserContext from './context/UserContext';
 import Logout from './components/Logout';
 import NotFound from './components/NotFound';
+import LoadingCircle from './components/parts/LoadingCircle';
 
 
 
@@ -67,7 +68,6 @@ function App() {
   // START AUTH ACTION IN APP.JS
 
   const [userAccount, setUserAccount] = React.useState("");
-  const [test, setTest] = React.useState("");
   const value = { userAccount, setUserAccount };
 
 
@@ -75,10 +75,8 @@ function App() {
   const checkUser = async() => {
       const loggedInUser = await localStorage.getItem("token");
       console.log(loggedInUser);
-      console.log(`test : ${test}`)
       if (loggedInUser) {
-        setUserAccount({loggedInUser}, () => console.log(userAccount) );
-        setTest("dodo", () => console.log(test));
+        setUserAccount(loggedInUser);
         console.log(userAccount);
         console.log("GOOD SHIT!");
       } else {
@@ -115,7 +113,10 @@ React.useEffect(() => {
               <Route path="/blog">
                 {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {articlesList.isLoading ? (
-                  <LoadingMessage> Chargement des articles...</LoadingMessage>
+                  <>
+                    <LoadingMessage> Chargement des articles...</LoadingMessage>
+                    <LoadingCircle/>
+                  </>
                 ) : (
                   <Blog articles={articlesList.data} endpoint = {API_ENDPOINT}  />
                 )}
@@ -126,7 +127,10 @@ React.useEffect(() => {
               <Route path="/projectsList">
                 {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                 {projectsList.isLoading ? (
-                  <LoadingMessage> Chargement des projets...</LoadingMessage>
+                <>
+                    <LoadingMessage> Chargement des projets...</LoadingMessage>
+                    <LoadingCircle/>
+                </>
                 ) : (
                   <ProjectList projets={projectsList.data} />
                 )}
@@ -174,8 +178,11 @@ React.useEffect(() => {
               <Route path="/admin/prospect/all"> 
                 {prospectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                   {prospectsList.isLoading ? (
-                    <LoadingMessage> Chargement des projets...</LoadingMessage>
-                  ) : (
+                <>
+                    <LoadingMessage> Chargement des contacts...</LoadingMessage>
+                    <LoadingCircle/>
+                </>
+                ) : (
                     <>
                       <ReadProspect prospects={prospectsList.data} />
                       <Logout/>
@@ -185,8 +192,11 @@ React.useEffect(() => {
               <Route path="/admin/article/all">
                 {articlesList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                   {articlesList.isLoading ? (
-                    <LoadingMessage> Chargement des projets...</LoadingMessage>
-                  ) : (
+                <>
+                    <LoadingMessage> Chargement des articles...</LoadingMessage>
+                    <LoadingCircle/>
+                </>                  
+                ) : (
                     <>
                       <ReadArticle articles={articlesList.data}/>
                       <Logout/>
@@ -196,8 +206,11 @@ React.useEffect(() => {
               <Route path="/admin/project/all">
                 {projectsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                   {projectsList.isLoading ? (
+                <>
                     <LoadingMessage> Chargement des projets...</LoadingMessage>
-                  ) : (
+                    <LoadingCircle/>
+                </>                  
+                ) : (
                     <>
                       <ReadProject projects={projectsList.data}/>
                       <Logout/>
@@ -207,8 +220,11 @@ React.useEffect(() => {
               <Route path="/admin/inspiration/all">
                 {inspirationsList.error && <p>Une couille dans le pâte, scheissss !!! </p>}
                   {inspirationsList.isLoading ? (
-                    <LoadingMessage> Chargement des projets...</LoadingMessage>
-                  ) : (
+                <>
+                    <LoadingMessage> Chargement des citations...</LoadingMessage>
+                    <LoadingCircle/>
+                </>                  
+                ) : (
                     <>
                       <ReadInspiration inspirations={inspirationsList.data}/>
                       <Logout/>
@@ -253,7 +269,9 @@ React.useEffect(() => {
               </Route>
 
               <Route>
-                <NotFound/>
+{/*                 <LoadingMessage> Chargement des citations...</LoadingMessage>
+                <LoadingCircle/> * ONLY TO TEST THE LOADING PICTURE */}
+                 <NotFound/>
               </Route>
           </Switch> 
           </div>
@@ -278,7 +296,7 @@ const buttonBenefits = [
     categories : [
       {
         intitule : "Indispensable",  // POURQUOI UN SITE WEB ?
-        hiddenText : "un site web aligné sur votre vision = succès assurée",
+        hiddenText : "un site web aligné sur votre vision = succès garanti",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.BGContent,
