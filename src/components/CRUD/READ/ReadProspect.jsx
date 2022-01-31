@@ -7,7 +7,7 @@ const ReadProspect = ({prospects}) => {
     return (
         <>
             {prospects.map(prospect => (
-            <div class="list-categorie">
+            <div key={prospect._id}>
                 <span>{prospect.prenom}</span>
                 <span>{prospect.nom}</span>
                 <span>{prospect.demande}</span>

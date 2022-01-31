@@ -10,7 +10,7 @@ const searchReducer = (state, action) => {
     switch (action.type) {
         case ("FETCH_START") :
             return {
-                ...state, // CORRECTION DONE (13/12/21 vers midi. Depuis cela fonctionne)
+                ...state,
                 isLoading: true,
                 isError: false,
             };
@@ -44,21 +44,25 @@ const searchReducer = (state, action) => {
 
 const Blog = ({articles, endpoint}) => {
     
-    const SEARCH_ENDPOINT = `${endpoint}/blog/search/`
-
 
     const [filter, setFilter] = React.useState("")
+    const [url, setUrl] = React.useState("");
+ 
 
-    const [url, setUrl] = React.useState(`${SEARCH_ENDPOINT}${filter}`);
+
+    const ALL_ARTICLES_ENDPOINT = `${endpoint}/blog`
+    const SEARCH_ENDPOINT = `${endpoint}/blog/search`
+
+
 
     const searchHandler = async(event) => {
         setFilter(event.target.value);  // to update the value of searchWords when the user type something.
       };
 
-    const submitHandler = (event) => {
-        setUrl(`${SEARCH_ENDPOINT}${filter}`);
+     const submitHandler = (event) => {
+        setUrl(`${SEARCH_ENDPOINT}/${filter}`);
         event.preventDefault();
-    };
+    }; 
 
     const resetHandler = (event) => {
         setFilter("");
@@ -77,28 +81,56 @@ const Blog = ({articles, endpoint}) => {
 
 
 
+// This useEffect, GET all the articles, it's triggered when the component is mounted, at the beginning.
+
+React.useEffect (() => {
+    const fetchAllArticles = async() => {
+        try {
+            console.log("bonjour la Terre!")
+            dispatchSearchArticles({type : "FETCH_START"});
+            const Allarticles =  await axios.get(ALL_ARTICLES_ENDPOINT, { crossdomain: true } )
+            console.log("All articles, let's go!");
+            dispatchSearchArticles({
+                type : "FETCH_SUCCESS",
+                payload: Allarticles.data,
+            })
+
+        } catch {
+            console.log("OH SHIIIIIIIIIIIIIIIIIIIIIT!!!!!!!!!!!!!")
+            dispatchSearchArticles({type : "FETCH_ERROR"})
+                
+        }
+    }
+    fetchAllArticles();
+// eslint-disable-next-line
+}, []);
 
 
+// This useEffect, GET the searched articles, it'striggered when the value of filter changes.
 
-    React.useEffect (() => {
+
+     React.useEffect (() => {
         const fetchSearchedWords = async() => {
             try {
+                console.log("bonjour la Terre!")
                 dispatchSearchArticles({type : "FETCH_START"});
-                const articlesToFetch =  await axios.get(url, { crossdomain: true } )
-                console.log(articlesToFetch.data);
-                await dispatchSearchArticles({
+                const articlesToSearch =  await axios.get(url, { crossdomain: true } )
+                console.log("fetch searched articles");
+                dispatchSearchArticles({
                     type : "FETCH_SUCCESS",
-                    payload: articlesToFetch.data,
+                    payload: articlesToSearch.data,
                 })
                 console.log(searchedArticles.data);
 
             } catch {
+                console.log("OH SHIIIIIIIIIIIIIIIIIIIIIT!!!!!!!!!!!!!")
                 dispatchSearchArticles({type : "FETCH_ERROR"})
+                
             }
         }
         fetchSearchedWords();
     // eslint-disable-next-line
-    }, [url]);
+    }, [url]); 
 
 
 
@@ -111,19 +143,18 @@ const Blog = ({articles, endpoint}) => {
  */}
         <div className="filter">
                 <Style.FormSearch >
-                    <label for="filtre">Filtrer par thème</label>
+                    <label htmlFor="filtre">Filtrer par thème</label>
                     <Style.InputFormSearch id="filtre" type="text"value={filter} onChange={searchHandler}/>
                     <Style.BoxSearchButton>
-                        <Style.ButtonSearchBlog type ="submit" value = "Chercher" onClick={submitHandler} />
+                        <Style.ButtonSearchBlog type ="submit" value = "Chercher"  onClick={submitHandler}  />
                         <Style.ButtonSearchBlog type ="submit" value = "Réinitialiser" onClick={resetHandler}  />
                     </Style.BoxSearchButton>
                 </Style.FormSearch>
         </div>
         
             {searchedArticles.data.map(article => (
-                <Link to={`/article/${article._id}`}>
-                    <ItemArticle
-                        key = {article._id}
+                <Link to={`/article/${article._id}`} key = {article._id}>
+                    <ItemArticle    
                         title = {article.title}
                         subtitle = {article.subtitle}
                         heroPicture = {article.heroPicture}

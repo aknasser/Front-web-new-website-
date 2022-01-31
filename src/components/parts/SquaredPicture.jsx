@@ -3,7 +3,7 @@ import  * as Style from "./Esthete";
 
 
 const SquaredPicture = (blocInfo) => {
-    const [blocOpacity, setBlocOpacity] = React.useState(false);
+    const [blocOpacity, setBlocOpacity] = React.useState("");
 
 
     const darkOpacityHandler = () => {

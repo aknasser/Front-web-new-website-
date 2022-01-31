@@ -10,7 +10,7 @@ const ReadInspiration = ({inspirations}) => {
     return (
         <>
             {inspirations.map(inspiration => (
-            <div class="list-categorie">
+            <div  key={inspiration._id}>
                 <span>{inspiration.quote}</span>
                 <span>{inspiration.author}</span>
                 <Link to={`/admin/inspiration/update/${inspiration._id}`}>
