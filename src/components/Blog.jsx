@@ -44,15 +44,12 @@ const searchReducer = (state, action) => {
 
 const Blog = ({articles, endpoint}) => {
     
-
-    const [filter, setFilter] = React.useState("")
-    const [url, setUrl] = React.useState("");
- 
-
-
     const ALL_ARTICLES_ENDPOINT = `${endpoint}/blog`
     const SEARCH_ENDPOINT = `${endpoint}/blog/search`
 
+    const [filter, setFilter] = React.useState("")
+    const [url, setUrl] = React.useState(SEARCH_ENDPOINT);
+ 
 
 
     const searchHandler = async(event) => {
@@ -76,61 +73,74 @@ const Blog = ({articles, endpoint}) => {
 
     const [searchedArticles, dispatchSearchArticles] = React.useReducer(
         searchReducer,
-        { data: articles, isLoading: false, isError: false }
+        { data: [], isLoading: false, isError: false }
         );
+
+
+// This useEffect, GET the searched articles, it'striggered when the value of filter changes.
+
+
+ React.useEffect (() => {
+    let isMounted = true;
+    console.log(isMounted)
+
+    const fetchSearchedWords = async() => {
+            dispatchSearchArticles({type : "FETCH_START"});
+            const articlesToSearch =  await axios.get(url, { crossdomain: true } ).catch(err => console.log(`AXIOS ERROR : ${err}`))
+            if (isMounted) {
+                try {
+                    dispatchSearchArticles({
+                        type : "FETCH_SUCCESS",
+                        payload: articlesToSearch.data,
+                    })
+                } catch {
+                    dispatchSearchArticles({type : "FETCH_ERROR"})
+
+                }
+            }
+    }
+    fetchSearchedWords();
+
+    return () => {
+        isMounted = false;
+        console.log("Component not Mounted yet" );
+    };
+
+}, [url]);  
+
 
 
 
 // This useEffect, GET all the articles, it's triggered when the component is mounted, at the beginning.
 
 React.useEffect (() => {
-    const fetchAllArticles = async() => {
-        try {
-            console.log("bonjour la Terre!")
-            dispatchSearchArticles({type : "FETCH_START"});
-            const Allarticles =  await axios.get(ALL_ARTICLES_ENDPOINT, { crossdomain: true } )
-            console.log("All articles, let's go!");
-            dispatchSearchArticles({
-                type : "FETCH_SUCCESS",
-                payload: Allarticles.data,
-            })
+    let isMounted = true;
 
-        } catch {
-            console.log("OH SHIIIIIIIIIIIIIIIIIIIIIT!!!!!!!!!!!!!")
-            dispatchSearchArticles({type : "FETCH_ERROR"})
-                
-        }
-    }
-    fetchAllArticles();
-// eslint-disable-next-line
-}, []);
-
-
-// This useEffect, GET the searched articles, it'striggered when the value of filter changes.
-
-
-     React.useEffect (() => {
-        const fetchSearchedWords = async() => {
-            try {
-                console.log("bonjour la Terre!")
+        const fetchAllArticles = async() => {
                 dispatchSearchArticles({type : "FETCH_START"});
-                const articlesToSearch =  await axios.get(url, { crossdomain: true } )
-                console.log("fetch searched articles");
-                dispatchSearchArticles({
-                    type : "FETCH_SUCCESS",
-                    payload: articlesToSearch.data,
-                })
-                console.log(searchedArticles.data);
-
-            } catch {
-                console.log("OH SHIIIIIIIIIIIIIIIIIIIIIT!!!!!!!!!!!!!")
-                dispatchSearchArticles({type : "FETCH_ERROR"})
-                
-            }
+                const Allarticles =  await axios.get(ALL_ARTICLES_ENDPOINT, { crossdomain: true } )
+                if (isMounted) {
+                    try {
+                        console.log("Component enfin montée!")
+                        dispatchSearchArticles({
+                            type : "FETCH_SUCCESS",
+                            payload: Allarticles.data,
+                        })
+                    } catch {
+                        dispatchSearchArticles({type : "FETCH_ERROR"})
+                    }
+                }
         }
-        fetchSearchedWords();
-    // eslint-disable-next-line
-    }, [url]); 
+        fetchAllArticles();
+
+    return () => {
+        isMounted = false;
+    };
+
+}, [ALL_ARTICLES_ENDPOINT]);
+
+
+
 
 
 

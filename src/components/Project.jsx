@@ -48,8 +48,6 @@ const Project = ({endpoint}) => {
         const tafMgmt = async() => {
           try {
             dispatchTaf({type: "TAF_FETCH_START"});
-  
-          
             const allTafs = await axios.get(`${endpoint}/project/${id}` , { crossdomain: true })
             dispatchTaf({
               type: "TAF_FETCH_SUCCESS",
