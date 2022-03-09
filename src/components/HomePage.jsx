@@ -9,8 +9,8 @@ const homePage = () => {
             <Style.HeroPicture src="heroPicture.jpg">
             </Style.HeroPicture>
             <Style.ContentHeroPage>
-                <Style.Uvp>Des sites web qui vous ressemblent pour attirer les bons clients</Style.Uvp>
-                <Style.Activity>Conception de sites web et apps pour PMEs et entrepreneurs</Style.Activity>
+                <Style.Uvp>Conception d'applications web et mobile pour neo-entrepreneurs et PMEs</Style.Uvp>
+                <Style.Activity>Donne vie à ton projet avec une app bâtie sur mesure</Style.Activity>
                 <CTAButton callToAction = "C'est parti !" />   
             </Style.ContentHeroPage>
         </Style.TheGrid>
