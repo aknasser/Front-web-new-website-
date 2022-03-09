@@ -289,22 +289,22 @@ React.useEffect(() => {
 
 const buttonBenefits = [
   {
-    title : "Pourquoi ?" ,
+    title : "Comment ?" ,
     colorTitle : "white",
     id : "why",
     marginTop : "-7rem",
     categories : [
       {
-        intitule : "Indispensable",  // POURQUOI UN SITE WEB ?
-        hiddenText : "un site web aligné sur votre vision = succès garanti",
+        intitule : "Economique",  // POURQUOI UN SITE WEB ?
+        hiddenText : "Lancer rapidement et à moindre coût la 1ere version de votre app. Idéal pour valider la viabilité de votre idée.",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.BGContent,
         picture : "euro.png",
       },
       {
-        intitule : "Visibilité",    // POURQUOI MOI ?
-        hiddenText : "vos prospects ont besoin de vous mais...ils ne vous trouvent pas. Il est temps que cela change.",
+        intitule : "de bout en bout",
+        hiddenText : "Back-end, front-end et déploiement, un seul interlocuteur pour chaque étape du développement de votre app.",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.BGContent,
@@ -312,13 +312,13 @@ const buttonBenefits = [
 
       },
       {
-        intitule : "Vous êtes la Star",  // POURQUOI MAINTENANT ?
-        hiddenText : "Votre produit/service est bon! Donnez-lui le site qu'il mérite. Maintenant.",
+        intitule : "Suivi",
+        hiddenText : "Je vous accompagne dans l'amélioration / montée de version de votre app.",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.BGContent,
-        picture : "star.png"
-      },
+        picture : "ruler.png"
+      }, 
     ],
     bgColor : Colors.secundaryColor,
 
@@ -330,24 +330,24 @@ const buttonBenefits = [
     marginTop : "",
     categories : [
       {
-        intitule : "100% Personnalisé",
-        hiddenText : "Vous êtes unique. Montrez-le avec un site web / app sur mesure qui véhicule vos valeurs.",
-        buttonColor : Colors.primaryColor,
-        bgColorHiddenText : "transparent",
-        textColor : Colors.secundaryColor,
-        picture : "ruler.png"
-      },
-      {
         intitule : "+ de Conversion",
-        hiddenText : "Convertissez vos visiteurs en clients fidèles grâce à un design suscitant l'intéraction.",
+        hiddenText : "Convertissez vos visiteurs en clients fidèles grâce à un design / UX favorisant l'usage de votre app.",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.secundaryColor,
         picture : "funnel.png"
       },
       {
-        intitule : "Soutien Marketing",
-        hiddenText : "Je vous aide également à déployer une stratégie en ligne efficace et rentable.",
+        intitule : "Idéation",
+        hiddenText : "Nous brainstormons ensemble régulièrement pour identifier de nouvelles features à ajouter à votre app.",
+        buttonColor : Colors.primaryColor,
+        bgColorHiddenText : "transparent",
+        textColor : Colors.secundaryColor,
+        picture : "star.png"
+      },
+      {
+        intitule : "Conseil Marketing",
+        hiddenText : "Je vous aide également à déployer une stratégie marketing adaptée à votre app.",
         buttonColor : Colors.primaryColor,
         bgColorHiddenText : "transparent",
         textColor : Colors.secundaryColor,
