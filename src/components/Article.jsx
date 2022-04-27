@@ -1,5 +1,5 @@
 import axios from "axios";
-import Interweave from "interweave";
+import { Interweave } from "interweave";
 import React from "react";
 import { useParams } from "react-router";
 import * as Style from "./parts/Esthete";
